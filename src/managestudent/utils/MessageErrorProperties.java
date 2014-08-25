@@ -1,7 +1,7 @@
 /**
- * Copyright(C) 2014 Luvina
+ * Copyright(C) K16SE 2014
  *
- * MessageErrorProperties.java, Jun 26, 2014 LA-PM
+ * MessageErrorProperties.java, Aug 26, 2014 HaVH
  *
  */
 package managestudent.utils;
@@ -15,7 +15,7 @@ import java.util.Properties;
 /**
  * MessageErrorProperties
  *
- * @author LA-PM
+ * @author HaVH
  *
  */
 public class MessageErrorProperties {

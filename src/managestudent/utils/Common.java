@@ -1,7 +1,7 @@
 /**
- * Copyright(C) 2014 Luvina
+ * Copyright(C) K16SE Luvina
  *
- * Common.java, Jun 25, 2014 LA-PM
+ * Common.java, Aug 26, 2014 HaVH
  *
  */
 package managestudent.utils;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Common
  *
- * @author LA-PM
+ * @author HaVH
  *
  */
 public class Common {
@@ -244,7 +244,7 @@ public class Common {
 	public static String checkLogin(HttpSession session) {
 		String template = "";
 		if (session.getAttribute("loginId") == null) {
-			template = Constant.ADM001;
+			//template = Constant.ADM001;
 		}
 		return template;
 

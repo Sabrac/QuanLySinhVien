@@ -1,7 +1,7 @@
 /**
- * Copyright(C) 2014 Luvina
+ * Copyright(C) K16SE 2014
  *
- * DatabaseProperties.java, Jun 25, 2014 LA-PM
+ * DatabaseProperties.java, Aug 26, 2014 HaVH
  *
  */
 package managestudent.utils;
@@ -14,7 +14,7 @@ import java.util.Properties;
 
 /**
  * DatabaseProperties
- * @author LA-PM
+ * @author HaVH
  *
  */
 @SuppressWarnings("unchecked")
