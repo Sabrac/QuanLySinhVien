@@ -7,7 +7,7 @@
 package managestudent.dao;
 
 /**
- * 
+ *
  * @author HaVH
  *
  */

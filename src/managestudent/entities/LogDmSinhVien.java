@@ -1,7 +1,7 @@
 /**
  * Copyright(C) K16SE 2014
  *
- * DmSinhVien.java, Aug 26, 2014 HaVH
+ * LogDmSinhVien.java, Sep 4, 2014 HaVH
  *
  */
 package managestudent.entities;
@@ -13,13 +13,14 @@ import java.util.Date;
  * @author HaVH
  *
  */
-public class DmSinhVien {
+public class LogDmSinhVien {
+	private int logId;
 	private int sinhVienId;
 	private String maSinhVien;
 	private String hoDem;
 	private String ten;
 	private Date ngaySinh;
-	private boolean gioiTinh; //true: Nam / false: Nu
+	private boolean gioiTinh;
 	private String cmtnd;
 	private String soDienThoai;
 	private String noiSinh;
@@ -34,26 +35,28 @@ public class DmSinhVien {
 	private String ngheNghiepBo;
 	private String hoTenMe;
 	private String ngheNghiepMe;
-	private int heDtId;
+	private int heDaoTaoId;
 	private int lopId;
 	private int khoaHocId;
 	private Date ngayNhapHoc;
-	private String diemDauVao1;
-	private String diemDauVao2;
-	private String diemDauVao3;
+	private float diemDauVao1;
+	private float diemDauVao2;
+	private float diemDauVao3;
 	private String anhSinhVien;
+	private String action;
+	private Date time;
 
 	/**
-	 * @return the anhSinhVien
+	 * @return the logId
 	 */
-	public String getAnhSinhVien() {
-		return anhSinhVien;
+	public int getLogId() {
+		return logId;
 	}
 	/**
-	 * @param anhSinhVien the anhSinhVien to set
+	 * @param logId the logId to set
 	 */
-	public void setAnhSinhVien(String anhSinhVien) {
-		this.anhSinhVien = anhSinhVien;
+	public void setLogId(int logId) {
+		this.logId = logId;
 	}
 	/**
 	 * @return the sinhVienId
@@ -296,16 +299,16 @@ public class DmSinhVien {
 		this.ngheNghiepMe = ngheNghiepMe;
 	}
 	/**
-	 * @return the heDtId
+	 * @return the heDaoTaoId
 	 */
-	public int getHeDtId() {
-		return heDtId;
+	public int getHeDaoTaoId() {
+		return heDaoTaoId;
 	}
 	/**
-	 * @param heDtId the heDtId to set
+	 * @param heDaoTaoId the heDaoTaoId to set
 	 */
-	public void setHeDtId(int heDtId) {
-		this.heDtId = heDtId;
+	public void setHeDaoTaoId(int heDaoTaoId) {
+		this.heDaoTaoId = heDaoTaoId;
 	}
 	/**
 	 * @return the lopId
@@ -346,37 +349,73 @@ public class DmSinhVien {
 	/**
 	 * @return the diemDauVao1
 	 */
-	public String getDiemDauVao1() {
+	public float getDiemDauVao1() {
 		return diemDauVao1;
 	}
 	/**
 	 * @param diemDauVao1 the diemDauVao1 to set
 	 */
-	public void setDiemDauVao1(String diemDauVao1) {
+	public void setDiemDauVao1(float diemDauVao1) {
 		this.diemDauVao1 = diemDauVao1;
 	}
 	/**
 	 * @return the diemDauVao2
 	 */
-	public String getDiemDauVao2() {
+	public float getDiemDauVao2() {
 		return diemDauVao2;
 	}
 	/**
 	 * @param diemDauVao2 the diemDauVao2 to set
 	 */
-	public void setDiemDauVao2(String diemDauVao2) {
+	public void setDiemDauVao2(float diemDauVao2) {
 		this.diemDauVao2 = diemDauVao2;
 	}
 	/**
 	 * @return the diemDauVao3
 	 */
-	public String getDiemDauVao3() {
+	public float getDiemDauVao3() {
 		return diemDauVao3;
 	}
 	/**
 	 * @param diemDauVao3 the diemDauVao3 to set
 	 */
-	public void setDiemDauVao3(String diemDauVao3) {
+	public void setDiemDauVao3(float diemDauVao3) {
 		this.diemDauVao3 = diemDauVao3;
+	}
+	/**
+	 * @return the anhSinhVien
+	 */
+	public String getAnhSinhVien() {
+		return anhSinhVien;
+	}
+	/**
+	 * @param anhSinhVien the anhSinhVien to set
+	 */
+	public void setAnhSinhVien(String anhSinhVien) {
+		this.anhSinhVien = anhSinhVien;
+	}
+	/**
+	 * @return the action
+	 */
+	public String getAction() {
+		return action;
+	}
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(String action) {
+		this.action = action;
+	}
+	/**
+	 * @return the time
+	 */
+	public Date getTime() {
+		return time;
+	}
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }

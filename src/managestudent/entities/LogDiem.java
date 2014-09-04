@@ -1,17 +1,20 @@
 /**
  * Copyright(C) K16SE 2014
  *
- * Diem.java, Aug 26, 2014 HaVH
+ * LogDiem.java, Sep 4, 2014 HaVH
  *
  */
 package managestudent.entities;
+
+import java.util.Date;
 
 /**
  *
  * @author HaVH
  *
  */
-public class Diem {
+public class LogDiem {
+	private int logId;
 	private int diemId;
 	private int monHocId;
 	private String lanThi;
@@ -20,18 +23,20 @@ public class Diem {
 	private float diemGiuaKy;
 	private int hocKyId;
 	private int sinhVienId;
+	private String action;
+	private Date time;
 
 	/**
-	 * @return the sinhVienId
+	 * @return the logId
 	 */
-	public int getSinhVienId() {
-		return sinhVienId;
+	public int getLogId() {
+		return logId;
 	}
 	/**
-	 * @param sinhVienId the sinhVienId to set
+	 * @param logId the logId to set
 	 */
-	public void setSinhVienId(int sinhVienId) {
-		this.sinhVienId = sinhVienId;
+	public void setLogId(int logId) {
+		this.logId = logId;
 	}
 	/**
 	 * @return the diemId
@@ -116,5 +121,41 @@ public class Diem {
 	 */
 	public void setHocKyId(int hocKyId) {
 		this.hocKyId = hocKyId;
+	}
+	/**
+	 * @return the sinhVienId
+	 */
+	public int getSinhVienId() {
+		return sinhVienId;
+	}
+	/**
+	 * @param sinhVienId the sinhVienId to set
+	 */
+	public void setSinhVienId(int sinhVienId) {
+		this.sinhVienId = sinhVienId;
+	}
+	/**
+	 * @return the action
+	 */
+	public String getAction() {
+		return action;
+	}
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(String action) {
+		this.action = action;
+	}
+	/**
+	 * @return the time
+	 */
+	public Date getTime() {
+		return time;
+	}
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }

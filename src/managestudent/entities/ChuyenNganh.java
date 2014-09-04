@@ -14,8 +14,34 @@ package managestudent.entities;
 public class ChuyenNganh {
 	private int chuyenNganhId;
 	private String maChuyenNganh;
-	private String TenChuyenNganh;
+	private String tenChuyenNganh;
 	private int nganhId;
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param chuyenNganhId int id chuyên ngành
+	 * @param maChuyenNganh String mã chuyên ngành
+	 * @param tenChuyenNganh String tên chuyên ngành
+	 * @param nganhId int id ngành
+	 */
+	public ChuyenNganh(int chuyenNganhId, String maChuyenNganh, String tenChuyenNganh, int nganhId) {
+		this.chuyenNganhId = chuyenNganhId;
+		this.maChuyenNganh = maChuyenNganh;
+		this.tenChuyenNganh = tenChuyenNganh;
+		this.nganhId = nganhId;
+	}
+
+	/**
+	 * Constructor không tham số
+	 *
+	 */
+	public ChuyenNganh() {
+		this.chuyenNganhId = -1;
+		this.maChuyenNganh = "";
+		this.tenChuyenNganh = "";
+		this.nganhId = -1;
+	}
 
 	/**
 	 * @return the chuyenNganhId
@@ -45,13 +71,13 @@ public class ChuyenNganh {
 	 * @return the tenChuyenNganh
 	 */
 	public String getTenChuyenNganh() {
-		return TenChuyenNganh;
+		return tenChuyenNganh;
 	}
 	/**
 	 * @param tenChuyenNganh the tenChuyenNganh to set
 	 */
 	public void setTenChuyenNganh(String tenChuyenNganh) {
-		TenChuyenNganh = tenChuyenNganh;
+		tenChuyenNganh = tenChuyenNganh;
 	}
 	/**
 	 * @return the nganhId

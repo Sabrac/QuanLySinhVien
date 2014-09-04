@@ -15,11 +15,37 @@ public class MonHoc {
 	private int monHocId;
 	private String tenMonHoc;
 	private String soTrinh;
-	private String heSoChuyenCan;
-	private String heSoGiuaKy;
-	private String heSoHocKy;
-	private String tinhTrang;
+	private float heSoChuyenCan;
+	private float heSoGiuaKy;
+	private float heSoHocKy;
+	private int tinhTrang;
+	private int chuyenNganhId;
+	private int soNgayNghi;
 
+	/**
+	 * @return the soNgayNghi
+	 */
+	public int getSoNgayNghi() {
+		return soNgayNghi;
+	}
+	/**
+	 * @param soNgayNghi the soNgayNghi to set
+	 */
+	public void setSoNgayNghi(int soNgayNghi) {
+		this.soNgayNghi = soNgayNghi;
+	}
+	/**
+	 * @return the chuyenNganhId
+	 */
+	public int getChuyenNganhId() {
+		return chuyenNganhId;
+	}
+	/**
+	 * @param chuyenNganhId the chuyenNganhId to set
+	 */
+	public void setChuyenNganhId(int chuyenNganhId) {
+		this.chuyenNganhId = chuyenNganhId;
+	}
 	/**
 	 * @return the monHocId
 	 */
@@ -59,49 +85,49 @@ public class MonHoc {
 	/**
 	 * @return the heSoChuyenCan
 	 */
-	public String getHeSoChuyenCan() {
+	public float getHeSoChuyenCan() {
 		return heSoChuyenCan;
 	}
 	/**
 	 * @param heSoChuyenCan the heSoChuyenCan to set
 	 */
-	public void setHeSoChuyenCan(String heSoChuyenCan) {
+	public void setHeSoChuyenCan(float heSoChuyenCan) {
 		this.heSoChuyenCan = heSoChuyenCan;
 	}
 	/**
 	 * @return the heSoGiuaKy
 	 */
-	public String getHeSoGiuaKy() {
+	public float getHeSoGiuaKy() {
 		return heSoGiuaKy;
 	}
 	/**
 	 * @param heSoGiuaKy the heSoGiuaKy to set
 	 */
-	public void setHeSoGiuaKy(String heSoGiuaKy) {
+	public void setHeSoGiuaKy(float heSoGiuaKy) {
 		this.heSoGiuaKy = heSoGiuaKy;
 	}
 	/**
 	 * @return the heSoHocKy
 	 */
-	public String getHeSoHocKy() {
+	public float getHeSoHocKy() {
 		return heSoHocKy;
 	}
 	/**
 	 * @param heSoHocKy the heSoHocKy to set
 	 */
-	public void setHeSoHocKy(String heSoHocKy) {
+	public void setHeSoHocKy(float heSoHocKy) {
 		this.heSoHocKy = heSoHocKy;
 	}
 	/**
 	 * @return the tinhTrang
 	 */
-	public String getTinhTrang() {
+	public int getTinhTrang() {
 		return tinhTrang;
 	}
 	/**
 	 * @param tinhTrang the tinhTrang to set
 	 */
-	public void setTinhTrang(String tinhTrang) {
+	public void setTinhTrang(int tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
 }
