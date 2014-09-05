@@ -38,10 +38,112 @@ public class DmSinhVien {
 	private int lopId;
 	private int khoaHocId;
 	private Date ngayNhapHoc;
-	private String diemDauVao1;
-	private String diemDauVao2;
-	private String diemDauVao3;
+	private float diemDauVao1;
+	private float diemDauVao2;
+	private float diemDauVao3;
 	private String anhSinhVien;
+
+	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public DmSinhVien() {
+		sinhVienId = -1;
+		maSinhVien = "";
+		hoDem = "";
+		ten = "";
+		ngaySinh = new Date();
+		gioiTinh = true;
+		cmtnd = "";
+		soDienThoai = "";
+		noiSinh = "";
+		queQuan = "";
+		hoKhauThuongTru = "";
+		noiOHienTai = "";
+		cheDoUuDai = "";
+		danTocId = -1;
+		tonGiaoId = -1;
+		quocTichId = -1;
+		hoTenBo = "";
+		ngheNghiepBo = "";
+		hoTenMe = "";
+		ngheNghiepMe = "";
+		heDtId = -1;
+		lopId = -1;
+		khoaHocId = -1;
+		ngayNhapHoc = new Date();
+		diemDauVao1 = -1;
+		diemDauVao2 = -1;
+		diemDauVao3 = -1;
+		anhSinhVien = "";
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param sinhVienId int sinh viên id
+	 * @param maSinhVien String mã sinh viên
+	 * @param hoDem String họ đệm
+	 * @param ten String tên
+	 * @param ngaySinh Date ngày sinh
+	 * @param gioiTinh boolean giới tính (true:nam / false:nữ)
+	 * @param cmtnd String chứng minh thư
+	 * @param soDienThoai String số điện thoại
+	 * @param noiSinh String nơi sinh
+	 * @param queQuan String quê quán
+	 * @param hoKhauThuongTru String hộ khẩu thường trú
+	 * @param noiOHienTai String nơi ở hiện tại
+	 * @param cheDoUuDai String chế độ ưu đãi
+	 * @param danTocId int dân tộc id
+	 * @param tonGiaoId int tôn giáo id
+	 * @param quocTichId int quốc tịch id
+	 * @param hoTenBo String họ tên bố
+	 * @param ngheNghiepBo String nghề nghiệp bố
+	 * @param hoTenMe String họ tên mẹ
+	 * @param ngheNghiepMe String nghề nghiệp mẹ
+	 * @param heDtId int hệ đào tạo id
+	 * @param lopId int lớp id
+	 * @param khoaHocId int khóa học id
+	 * @param ngayNhapHoc Date ngày nhập học
+	 * @param diemDauVao1 float điểm đầu vào môn 1
+	 * @param diemDauVao2 float điểm đầu vào môn 2
+	 * @param diemDauVao3 float điểm đầu vào môn 3
+	 * @param anhSinhVien String đường dẫn ảnh sinh viên
+	 */
+	public DmSinhVien(int sinhVienId, String maSinhVien, String hoDem, String ten, Date ngaySinh, boolean gioiTinh, String cmtnd, String soDienThoai,
+			String noiSinh, String queQuan, String hoKhauThuongTru, String noiOHienTai, String cheDoUuDai, int danTocId, int tonGiaoId, int quocTichId,
+			String hoTenBo, String ngheNghiepBo, String hoTenMe, String ngheNghiepMe, int heDtId, int lopId, int khoaHocId, Date ngayNhapHoc,
+			float diemDauVao1, float diemDauVao2, float diemDauVao3, String anhSinhVien) {
+		this.sinhVienId = sinhVienId;
+		this.maSinhVien = maSinhVien;
+		this.hoDem = hoDem;
+		this.ten = ten;
+		this.ngaySinh = ngaySinh;
+		this.gioiTinh = gioiTinh;
+		this.cmtnd = cmtnd;
+		this.soDienThoai = soDienThoai;
+		this.noiSinh = noiSinh;
+		this.queQuan = queQuan;
+		this.hoKhauThuongTru = hoKhauThuongTru;
+		this.noiOHienTai = noiOHienTai;
+		this.cheDoUuDai = cheDoUuDai;
+		this.danTocId = danTocId;
+		this.tonGiaoId = tonGiaoId;
+		this.quocTichId = quocTichId;
+		this.hoTenBo = hoTenBo;
+		this.ngheNghiepBo = ngheNghiepBo;
+		this.hoTenMe = hoTenMe;
+		this.ngheNghiepMe = ngheNghiepMe;
+		this.heDtId = heDtId;
+		this.lopId = lopId;
+		this.khoaHocId = khoaHocId;
+		this.ngayNhapHoc = ngayNhapHoc;
+		this.diemDauVao1 = diemDauVao1;
+		this.diemDauVao2 = diemDauVao2;
+		this.diemDauVao3 = diemDauVao3;
+		this.anhSinhVien = anhSinhVien;
+	}
 
 	/**
 	 * @return the anhSinhVien
@@ -346,37 +448,37 @@ public class DmSinhVien {
 	/**
 	 * @return the diemDauVao1
 	 */
-	public String getDiemDauVao1() {
+	public float getDiemDauVao1() {
 		return diemDauVao1;
 	}
 	/**
 	 * @param diemDauVao1 the diemDauVao1 to set
 	 */
-	public void setDiemDauVao1(String diemDauVao1) {
+	public void setDiemDauVao1(float diemDauVao1) {
 		this.diemDauVao1 = diemDauVao1;
 	}
 	/**
 	 * @return the diemDauVao2
 	 */
-	public String getDiemDauVao2() {
+	public float getDiemDauVao2() {
 		return diemDauVao2;
 	}
 	/**
 	 * @param diemDauVao2 the diemDauVao2 to set
 	 */
-	public void setDiemDauVao2(String diemDauVao2) {
+	public void setDiemDauVao2(float diemDauVao2) {
 		this.diemDauVao2 = diemDauVao2;
 	}
 	/**
 	 * @return the diemDauVao3
 	 */
-	public String getDiemDauVao3() {
+	public float getDiemDauVao3() {
 		return diemDauVao3;
 	}
 	/**
 	 * @param diemDauVao3 the diemDauVao3 to set
 	 */
-	public void setDiemDauVao3(String diemDauVao3) {
+	public void setDiemDauVao3(float diemDauVao3) {
 		this.diemDauVao3 = diemDauVao3;
 	}
 }

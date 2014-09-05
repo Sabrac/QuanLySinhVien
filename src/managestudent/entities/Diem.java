@@ -22,6 +22,66 @@ public class Diem {
 	private int sinhVienId;
 
 	/**
+	 * Constructor không tham số
+	 *
+	 */
+	public Diem() {
+		diemId = -1;
+		monHocId = -1;
+		lanThi = "";
+		diemThi = -1;
+		diemChuyenCan = -1;
+		diemGiuaKy = -1;
+		hocKyId = -1;
+		sinhVienId = -1;
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param diemId int điểm id
+	 * @param monHocId int môn học id
+	 * @param lanThi String lần thi
+	 * @param diemThi float điểm thi
+	 * @param diemChuyenCan float điểm chuyên cần
+	 * @param diemGiuaKy float điểm giữa kỳ
+	 * @param hocKyId int học kỳ id
+	 * @param sinhVienId int sinh viên id
+	 */
+	public Diem(int diemId, int monHocId, String lanThi, float diemThi, float diemChuyenCan, float diemGiuaKy, int hocKyId, int sinhVienId) {
+		this.diemId = diemId;
+		this.monHocId = monHocId;
+		this.lanThi = lanThi;
+		this.diemThi = diemThi;
+		this.diemChuyenCan = diemChuyenCan;
+		this.diemGiuaKy = diemGiuaKy;
+		this.hocKyId = hocKyId;
+		this.sinhVienId = sinhVienId;
+	}
+
+	/**
+	 * Constructor không có điểm id
+	 *
+	 * @param monHocId int môn học id
+	 * @param lanThi String lần thi
+	 * @param diemThi float điểm thi
+	 * @param diemChuyenCan float điểm chuyên cần
+	 * @param diemGiuaKy float điểm giữa kỳ
+	 * @param hocKyId int học kỳ id
+	 * @param sinhVienId int sinh viên id
+	 */
+	public Diem(int monHocId, String lanThi, float diemThi, float diemChuyenCan, float diemGiuaKy, int hocKyId, int sinhVienId) {
+		this.diemId = -1;
+		this.monHocId = monHocId;
+		this.lanThi = lanThi;
+		this.diemThi = diemThi;
+		this.diemChuyenCan = diemChuyenCan;
+		this.diemGiuaKy = diemGiuaKy;
+		this.hocKyId = hocKyId;
+		this.sinhVienId = sinhVienId;
+	}
+
+	/**
 	 * @return the sinhVienId
 	 */
 	public int getSinhVienId() {

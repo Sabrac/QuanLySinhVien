@@ -149,4 +149,103 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 		return lsChuyenNganh;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.dao.ChuyenNganhDao#addChuyenNganh(managestudent.entities.ChuyenNganh)
+	 */
+	@Override
+	public boolean addChuyenNganh(ChuyenNganh cn) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("INSERT INTO chuyennganh ");
+				sqlCommand.append("(ma_cn, ten_cn, nganh_id) VALUES ");
+				sqlCommand.append("(?, ?, ?)");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setString(1, cn.getMaChuyenNganh());
+				preparedStatement.setString(2, cn.getTenChuyenNganh());
+				preparedStatement.setInt(3, cn.getNganhId());
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.ChuyenNganhDao#deleteChuyenNganhByMaChuyenNganh(managestudent.entities.ChuyenNganh)
+	 */
+	@Override
+	public boolean deleteChuyenNganhByMaChuyenNganh(String maChuyenNganh) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM chuyennganh ");
+				sqlCommand.append("WHERE ma_cn = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setString(1, maChuyenNganh);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.ChuyenNganhDao#updateChuyenNganhByMaChuyenNganh(managestudent.entities.ChuyenNganh)
+	 */
+	@Override
+	public boolean updateChuyenNganhByMaChuyenNganh(ChuyenNganh cn) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("UPDATE chuyennganh SET ");
+				sqlCommand.append("ten_cn = ?, nganh_id = ? ");
+				sqlCommand.append("WHERE ma_cn = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setString(1, cn.getTenChuyenNganh());
+				preparedStatement.setInt(2, cn.getNganhId());
+				preparedStatement.setString(3, cn.getMaChuyenNganh());
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
 }

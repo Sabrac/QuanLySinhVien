@@ -27,6 +27,16 @@ public class DanToc {
 	}
 
 	/**
+	 * Constructor không có dân tộc id
+	 *
+	 * @param tenDanToc String tên dân tộc
+	 */
+	public DanToc(String tenDanToc) {
+		this.danTocId = -1;
+		this.tenDanToc = tenDanToc;
+	}
+
+	/**
 	 * Constructor không tham số
 	 *
 	 */

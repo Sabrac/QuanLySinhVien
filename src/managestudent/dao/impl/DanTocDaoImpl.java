@@ -94,4 +94,100 @@ public class DanTocDaoImpl extends BaseDaoImpl implements DanTocDao {
 		return dt;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DanTocDao#addDanToc(managestudent.entities.DanToc)
+	 */
+	@Override
+	public boolean addDanToc(DanToc dt) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("INSERT INTO dantoc ");
+				sqlCommand.append("(tendantoc) ");
+				sqlCommand.append("VALUES ");
+				sqlCommand.append("(?)");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setString(1, dt.getTenDanToc());
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DanTocDao#deleteDanTocById(int)
+	 */
+	@Override
+	public boolean deleteDanTocById(int danTocId) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM dantoc WHERE ");
+				sqlCommand.append("dantoc_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, danTocId);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DanTocDao#updateDanTocById(managestudent.entities.DanToc)
+	 */
+	@Override
+	public boolean updateDanTocById(DanToc dt) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("UPDATE dantoc SET ");
+				sqlCommand.append("tendantoc = ? ");
+				sqlCommand.append("WHERE dantoc_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setString(1, dt.getTenDanToc());
+				preparedStatement.setInt(2, dt.getDanTocId());
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
 }

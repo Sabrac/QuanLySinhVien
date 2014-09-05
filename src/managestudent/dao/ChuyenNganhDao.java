@@ -35,4 +35,28 @@ public interface ChuyenNganhDao extends BaseDao {
 	 * @return List<ChuyenNganh> Danh sách các chuyên ngành thuộc ngành id
 	 */
 	List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId);
+
+	/**
+	 * Thêm chuyên ngành
+	 *
+	 * @param cn ChuyenNganh đối tượng chuyên ngành (chuyenNganhId = -1)
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean addChuyenNganh(ChuyenNganh cn);
+
+	/**
+	 * Cập nhật chuyên ngành bằng mã chuyên ngành
+	 *
+	 * @param cn ChuyenNganh đối tượng chuyên ngành (maChuyenNganh: điều kiện update)
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateChuyenNganhByMaChuyenNganh(ChuyenNganh cn);
+
+	/**
+	 * Xóa chuyên ngành bằng mã chuyên ngành
+	 *
+	 * @param maChuyenNganh String mã chuyên ngành
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteChuyenNganhByMaChuyenNganh(String maChuyenNganh);
 }

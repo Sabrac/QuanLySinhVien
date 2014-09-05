@@ -33,6 +33,20 @@ public class ChuyenNganh {
 	}
 
 	/**
+	 * Constructor không có chuyenNganhId
+	 *
+	 * @param maChuyenNganh String mã chuyên ngành
+	 * @param tenChuyenNganh String tên chuyên ngành
+	 * @param nganhId int id ngành
+	 */
+	public ChuyenNganh(String maChuyenNganh, String tenChuyenNganh, int nganhId) {
+		this.chuyenNganhId = -1;
+		this.maChuyenNganh = maChuyenNganh;
+		this.tenChuyenNganh = tenChuyenNganh;
+		this.nganhId = nganhId;
+	}
+
+	/**
 	 * Constructor không tham số
 	 *
 	 */

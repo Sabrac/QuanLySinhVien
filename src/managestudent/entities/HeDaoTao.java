@@ -17,6 +17,42 @@ public class HeDaoTao {
 	private String tenHeDt;
 
 	/**
+	 * Constructor không có hệ đào tạo id
+	 *
+	 * @param maHeDt String mã hệ đào tạo
+	 * @param tenHeDt String tên hệ đào tạo
+	 */
+	public HeDaoTao(String maHeDt, String tenHeDt) {
+		this.heDtId = -1;
+		this.maHeDt = maHeDt;
+		this.tenHeDt = tenHeDt;
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param heDtId int hệ đào tạo id
+	 * @param maHeDt String mã hệ đào tạo
+	 * @param tenHeDt String tên hệ đào tạo
+	 */
+	public HeDaoTao(int heDtId, String maHeDt, String tenHeDt) {
+		this.heDtId = heDtId;
+		this.maHeDt = maHeDt;
+		this.tenHeDt = tenHeDt;
+	}
+
+	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public HeDaoTao() {
+		heDtId = -1;
+		maHeDt = "";
+		tenHeDt = "";
+	}
+
+	/**
 	 * @return the heDtId
 	 */
 	public int getHeDtId() {
