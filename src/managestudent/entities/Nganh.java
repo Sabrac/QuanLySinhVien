@@ -18,6 +18,47 @@ public class Nganh {
 	private String ghiChu;
 
 	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public Nganh() {
+		nganhId = -1;
+		maNganh = "";
+		tenNganh = "";
+		ghiChu = "";
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param nganhId int ngành id
+	 * @param maNganh String mã ngành
+	 * @param tenNganh String tên ngành
+	 * @param ghiChu String ghi chú
+	 */
+	public Nganh(int nganhId, String maNganh, String tenNganh, String ghiChu) {
+		this.nganhId = nganhId;
+		this.maNganh = maNganh;
+		this.tenNganh = tenNganh;
+		this.ghiChu = ghiChu;
+	}
+
+	/**
+	 * Constructor không có ngành id
+	 *
+	 * @param maNganh String mã ngành
+	 * @param tenNganh String tên ngành
+	 * @param ghiChu String ghi chú
+	 */
+	public Nganh(String maNganh, String tenNganh, String ghiChu) {
+		this.nganhId = -1;
+		this.maNganh = maNganh;
+		this.tenNganh = tenNganh;
+		this.ghiChu = ghiChu;
+	}
+
+	/**
 	 * @return the nganhId
 	 */
 	public int getNganhId() {

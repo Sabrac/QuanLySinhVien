@@ -6,11 +6,53 @@
  */
 package managestudent.dao;
 
+import java.util.List;
+
+import managestudent.entities.KhoaHoc;
+
 /**
- * 
+ *
  * @author HaVH
  *
  */
 public interface KhoaHocDao extends BaseDao {
+	/**
+	 * Lấy danh sách tất cả khóa học
+	 *
+	 * @return List<KhoaHoc> Danh sách đối tượng khóa học
+	 */
+	List<KhoaHoc> getAllKhoaHoc();
 
+	/**
+	 * Lấy thông tin khóa học bằng khóa học id
+	 *
+	 * @param khoaHocId int khóa học id
+	 * @return KhoaHoc đối tượng khóa học
+	 */
+	KhoaHoc getKhoaHocById(int khoaHocId);
+
+	/**
+	 * Thêm khóa học
+	 *
+	 * @param khoaHoc KhoaHoc đối tượng khóa học
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean addKhoaHoc(KhoaHoc khoaHoc);
+
+	/**
+	 * Cập nhật thông tin khóa học
+	 *
+	 * @param khoaHocId int khóa học id
+	 * @param khoaHoc KhoaHoc đối tượng khóa học
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateKhoaHocById(int khoaHocId, KhoaHoc khoaHoc);
+
+	/**
+	 * Xóa thông tin khóa học
+	 *
+	 * @param khoaHocId int khóa học id
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteKhoaHocById(int khoaHocId);
 }

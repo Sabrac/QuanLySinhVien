@@ -16,6 +16,37 @@ public class KhoaHoc {
 	private String tenKhoaHoc;
 
 	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public KhoaHoc() {
+		khoaHocId = -1;
+		tenKhoaHoc = "";
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param khoaHocId int khóa học id
+	 * @param tenKhoaHoc String tên khóa học
+	 */
+	public KhoaHoc(int khoaHocId, String tenKhoaHoc) {
+		this.khoaHocId = khoaHocId;
+		this.tenKhoaHoc = tenKhoaHoc;
+	}
+
+	/**
+	 * Constructor không có khóa học id
+	 *
+	 * @param tenKhoaHoc String tên khóa học
+	 */
+	public KhoaHoc(String tenKhoaHoc) {
+		this.khoaHocId = -1;
+		this.tenKhoaHoc = tenKhoaHoc;
+	}
+
+	/**
 	 * @return the khoaHocId
 	 */
 	public int getKhoaHocId() {

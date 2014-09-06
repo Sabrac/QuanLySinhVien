@@ -16,6 +16,37 @@ public class LopHoc {
 	private String tenLopHoc;
 
 	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public LopHoc() {
+		lopHocId = -1;
+		tenLopHoc = "";
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param lopHocId int lớp học id
+	 * @param tenLopHoc String tên lớp học
+	 */
+	public LopHoc(int lopHocId, String tenLopHoc) {
+		this.lopHocId = lopHocId;
+		this.tenLopHoc = tenLopHoc;
+	}
+
+	/**
+	 * Constructor không có lớp học id
+	 *
+	 * @param tenLopHoc String tên lớp học
+	 */
+	public LopHoc(String tenLopHoc) {
+		this.lopHocId = -1;
+		this.tenLopHoc = tenLopHoc;
+	}
+
+	/**
 	 * @return the lopHocId
 	 */
 	public int getLopHocId() {

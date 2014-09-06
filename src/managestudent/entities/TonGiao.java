@@ -12,20 +12,51 @@ package managestudent.entities;
  *
  */
 public class TonGiao {
-	private int tonGIaoId;
+	private int tonGiaoId;
 	private String tenTonGiao;
+
+	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public TonGiao() {
+		this.tonGiaoId = -1;
+		this.tenTonGiao = "";
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param tonGiaoId int tôn giáo id
+	 * @param tenTonGiao String tên tôn giáo
+	 */
+	public TonGiao(int tonGiaoId, String tenTonGiao) {
+		this.tonGiaoId = tonGiaoId;
+		this.tenTonGiao = tenTonGiao;
+	}
+
+	/**
+	 * Constructor không có tôn giáo id
+	 *
+	 * @param tenTonGiao String tên tôn giáo
+	 */
+	public TonGiao(String tenTonGiao) {
+		this.tonGiaoId = -1;
+		this.tenTonGiao = tenTonGiao;
+	}
 
 	/**
 	 * @return the tonGIaoId
 	 */
-	public int getTonGIaoId() {
-		return tonGIaoId;
+	public int getTonGiaoId() {
+		return tonGiaoId;
 	}
 	/**
 	 * @param tonGIaoId the tonGIaoId to set
 	 */
-	public void setTonGIaoId(int tonGIaoId) {
-		this.tonGIaoId = tonGIaoId;
+	public void setTonGiaoId(int tonGiaoId) {
+		this.tonGiaoId = tonGiaoId;
 	}
 	/**
 	 * @return the tenTonGiao

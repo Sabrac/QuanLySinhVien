@@ -16,6 +16,37 @@ public class HocKy {
 	private String tenHocKy;
 
 	/**
+	 * Constructor không tham số
+	 *
+	 *
+	 */
+	public HocKy() {
+		hocKyId = -1;
+		tenHocKy = "";
+	}
+
+	/**
+	 * Constructor đầy đủ tham số
+	 *
+	 * @param hocKyId int học kỳ id
+	 * @param tenHocKy String tên học kỳ
+	 */
+	public HocKy(int hocKyId, String tenHocKy) {
+		this.hocKyId = hocKyId;
+		this.tenHocKy = tenHocKy;
+	}
+
+	/**
+	 * Constructor không có học kỳ id
+	 *
+	 * @param tenHocKy String tên học kỳ
+	 */
+	public HocKy(String tenHocKy) {
+		this.hocKyId = -1;
+		this.tenHocKy = tenHocKy;
+	}
+
+	/**
 	 * @return the hocKyId
 	 */
 	public int getHocKyId() {
