@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.TonGiaoDao;
@@ -88,7 +89,7 @@ public class TonGiaoDaoImpl extends BaseDaoImpl implements TonGiaoDao {
 	 */
 	@Override
 	public List<TonGiao> getAllTonGiao() {
-		List<TonGiao> lsTonGiao = null;
+		List<TonGiao> lsTonGiao = new ArrayList<TonGiao>();
 
 		if(connectToDB()) {
 			try {

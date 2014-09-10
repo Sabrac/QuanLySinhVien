@@ -243,7 +243,7 @@ public class Common {
 	public static boolean checkLogin(HttpSession session) {
 		boolean result = false;
 
-		if (session.getAttribute("loginId") == null) {
+		if (session.getAttribute("loginId") != null) {
 			result = true;
 		}
 

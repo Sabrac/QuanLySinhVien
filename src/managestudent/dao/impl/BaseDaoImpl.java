@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.utils.DatabaseProperties;
@@ -66,7 +67,7 @@ public class BaseDaoImpl implements BaseDao {
 	 */
 	@Override
 	public List<String> getAllColumnName(String tableName) {
-		List<String> lsColumn = null;
+		List<String> lsColumn = new ArrayList<String>();
 
 		if(connectToDB()) {
 			try {

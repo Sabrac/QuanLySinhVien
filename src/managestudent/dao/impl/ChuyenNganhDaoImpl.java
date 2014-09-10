@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.ChuyenNganhDao;
@@ -26,7 +27,7 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 	 */
 	@Override
 	public List<ChuyenNganh> getAllChuyenNganh() {
-		List<ChuyenNganh> lsChuyenNganh = null;
+		List<ChuyenNganh> lsChuyenNganh = new ArrayList<ChuyenNganh>();
 
 		if (connectToDB()) {
 			try {
@@ -112,7 +113,7 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 	 */
 	@Override
 	public List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId) {
-		List<ChuyenNganh> lsChuyenNganh = null;
+		List<ChuyenNganh> lsChuyenNganh = new ArrayList<ChuyenNganh>();
 
 		if(connectToDB()) {
 			try {

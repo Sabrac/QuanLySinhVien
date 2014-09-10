@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.KhoaHocDao;
@@ -88,7 +89,7 @@ public class KhoaHocDaoImpl extends BaseDaoImpl implements KhoaHocDao {
 	 */
 	@Override
 	public List<KhoaHoc> getAllKhoaHoc() {
-		List<KhoaHoc> lsKhoaHoc = null;
+		List<KhoaHoc> lsKhoaHoc = new ArrayList<KhoaHoc>();
 
 		if(connectToDB()) {
 			try {

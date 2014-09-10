@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.DanTocDao;
@@ -24,7 +25,7 @@ public class DanTocDaoImpl extends BaseDaoImpl implements DanTocDao {
 	 */
 	@Override
 	public List<DanToc> getAllDanToc() {
-		List<DanToc> lsDanToc = null;
+		List<DanToc> lsDanToc = new ArrayList<DanToc>();
 
 		if(connectToDB()) {
 			try {

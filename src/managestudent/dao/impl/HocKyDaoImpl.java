@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.HocKyDao;
@@ -88,7 +89,7 @@ public class HocKyDaoImpl extends BaseDaoImpl implements HocKyDao {
 	 */
 	@Override
 	public List<HocKy> getAllHocKy() {
-		List<HocKy> lsHocKy = null;
+		List<HocKy> lsHocKy = new ArrayList<HocKy>();
 
 		if(connectToDB()) {
 			try {

@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.HeDaoTaoDao;
@@ -89,7 +90,7 @@ public class HeDaoTaoDaoImpl extends BaseDaoImpl implements HeDaoTaoDao {
 	 */
 	@Override
 	public List<HeDaoTao> getAllHeDaoTao() {
-		List<HeDaoTao> lsHdt = null;
+		List<HeDaoTao> lsHdt = new ArrayList<HeDaoTao>();
 
 		if(connectToDB()) {
 			try {

@@ -8,6 +8,7 @@ package managestudent.dao.impl;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.DmSinhVienDao;
@@ -25,7 +26,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 	 */
 	@Override
 	public List<DmSinhVien> getAllSinhVien() {
-		List<DmSinhVien> lsSinhVien = null;
+		List<DmSinhVien> lsSinhVien = new ArrayList<DmSinhVien>();
 
 		if(connectToDB()) {
 			try {
@@ -70,7 +71,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 	 */
 	@Override
 	public List<DmSinhVien> getListSinhVienByHeDaoTaoId(int heDaoTaoId) {
-		List<DmSinhVien> lsSinhVien = null;
+		List<DmSinhVien> lsSinhVien = new ArrayList<DmSinhVien>();
 
 		if(connectToDB()) {
 			try {
@@ -117,7 +118,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 	 */
 	@Override
 	public List<DmSinhVien> getListSinhVienByKhoaHocId(int khoaHocId) {
-		List<DmSinhVien> lsSinhVien = null;
+		List<DmSinhVien> lsSinhVien = new ArrayList<DmSinhVien>();
 
 		if(connectToDB()) {
 			try {
@@ -164,7 +165,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 	 */
 	@Override
 	public List<DmSinhVien> getListSinhVienByLopId(int lopId) {
-		List<DmSinhVien> lsSinhVien = null;
+		List<DmSinhVien> lsSinhVien = new ArrayList<DmSinhVien>();
 
 		if(connectToDB()) {
 			try {

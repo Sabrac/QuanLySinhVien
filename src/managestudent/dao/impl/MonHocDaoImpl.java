@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.MonHocDao;
@@ -95,7 +96,7 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 	 */
 	@Override
 	public List<MonHoc> getAllMonHoc() {
-		List<MonHoc> lsMonHoc = null;
+		List<MonHoc> lsMonHoc = new ArrayList<MonHoc>();
 
 		if(connectToDB()) {
 			try {
@@ -132,7 +133,7 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 	 */
 	@Override
 	public List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId) {
-		List<MonHoc> lsMonHoc = null;
+		List<MonHoc> lsMonHoc = new ArrayList<MonHoc>();
 
 		if(connectToDB()) {
 			try {

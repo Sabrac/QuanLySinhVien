@@ -7,10 +7,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Retina Dashboard</title>
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="" />
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="stylesheet" href="css/style.css" media="all" />
 	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 </head>
@@ -20,8 +16,8 @@
 
 		<!-- Start list thông báo lỗi (nếu có) -->
 			<%
-			if(request.getAttribute("lsErrMessage") != null) {
-				List<String> lsErrMessage = (ArrayList<String>)request.getAttribute("lsErrMessage");
+			if(request.getAttribute("lsMessage") != null) {
+				List<String> lsErrMessage = (ArrayList<String>)request.getAttribute("lsMessage");
 				for (String errMessage : lsErrMessage) {
 			%>
 			<a style="font: bold; color: red"> <%= errMessage %> </a><br />

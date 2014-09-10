@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.NganhDao;
@@ -90,7 +91,7 @@ public class NganhDaoImpl extends BaseDaoImpl implements NganhDao {
 	 */
 	@Override
 	public List<Nganh> getAllNganh() {
-		List<Nganh> lsNganh = null;
+		List<Nganh> lsNganh = new ArrayList<Nganh>();
 
 		if(connectToDB()) {
 			try {

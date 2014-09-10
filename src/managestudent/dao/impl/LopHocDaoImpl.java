@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.LopHocDao;
@@ -88,7 +89,7 @@ public class LopHocDaoImpl extends BaseDaoImpl implements LopHocDao {
 	 */
 	@Override
 	public List<LopHoc> getAllLopHoc() {
-		List<LopHoc> lsLop = null;
+		List<LopHoc> lsLop = new ArrayList<LopHoc>();
 
 		if(connectToDB()) {
 			try {

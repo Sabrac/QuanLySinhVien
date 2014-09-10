@@ -6,13 +6,15 @@
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
 	<meta charset="utf-8">
 	<title>Retina Dashboard</title>
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="robots" content="" />
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="../css/style.css" media="all" />
+	<link rel="stylesheet" href="css/style.css" media="all" />
+	<script>
+		function redirect(dmName) {
+			window.location.href = "ListDM.do?name=" + dmName;
+		}
+	</script>
 	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
@@ -27,69 +29,6 @@
 		<p><img src="../images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
 	</div>
 	<div class="buttons">
-		<button class="ico-font">&#9206;</button>
-		<span class="button dropdown">
-			<a href="#">Notifications <span class="pip">4</span></a>
-			<ul class="notice">
-				<li>
-					<hgroup>
-						<h1>You have a new task</h1>
-						<h2>Report web statistics week by week.</h2>
-					</hgroup>
-					<p><span>14:24</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1>New comment</h1>
-						<h2>Comment on <em>About page</em> by Darren.</h2>
-					</hgroup>
-					<p><span>11:04</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1>Broken link</h1>
-						<h2>We've spotted a broken link on the <em>Blog page</em>.</h2>
-					</hgroup>
-					<p><span>10:46</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1>User report</h1>
-						<h2><em>Lee Grant</em> has been promoted to admin.</h2>
-					</hgroup>
-					<p><span>09:57</span></p>
-				</li>
-			</ul>
-		</span>
-		<span class="button dropdown">
-			<a href="#">Inbox <span class="pip">6</span></a>
-			<ul class="notice">
-				<li>
-					<hgroup>
-						<h1>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-			</ul>
-		</span>
 		<span class="button">Live</span>
 		<span class="button">Help</span>
 		<span class="button blue"><a href="/QuanLySinhVien/Logout.do">Đăng xuất</a></span>
@@ -98,31 +37,66 @@
 </div>
 <jsp:include page="left-menu.jsp"></jsp:include>
 
-<section class="alert">
-	<div class="green">
-		<p>Hi Lee, you have <a href="#">3 new pages</a> and <a href="#">16 comments</a> to approve, better get going!</p>
-		<span class="close">&#10006;</span>
-	</div>
-</section>
 <section class="content">
 	<section class="widget">
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>Website Statistics</h1>
-				<h2>An insiders view</h2>
+				<h1>QUẢN LÝ DANH MỤC</h1>
+				<h2>Danh sách các danh mục</h2>
 			</hgroup>
-			<aside>
-				<button class="left-btn">&#59229;</button><button class="right-btn">&#59230;</button>
-			</aside>
 		</header>
 		<div class="content cycle">
-			<div id="flot-example-2" class="graph-area"></div>
-			<div id="flot-example-1" class="graph-area"></div>
+
+
+			<table align="center">
+				<tr>
+					<td>
+						<input type="button" name="btnQLSV" value="Quản Lý Hồ Sơ Sinh Viên" onclick="redirect('sinhvien')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLCN" value="Quản Lý Chuyên Ngành" onclick="redirect('chuyennganh')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLDT" value="Quản Lý Dân Tộc" onclick="redirect('dantoc')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLHDT" value="Quản Lý Hệ Đào Tạo" onclick="redirect('hedaotao')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLHK" value="Quản Lý Học Kỳ" onclick="redirect('hocky')" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" name="btnQLKH" value="Quản Lý Khóa Học" onclick="redirect('khoahoc')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLLH" value="Quản Lý Lớp Học" onclick="redirect('lophoc')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLMH" value="Quản Lý Môn Học" onclick="redirect('monhoc')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLN" value="Quản Lý Ngành" onclick="redirect('nganh')" />
+					</td>
+					<td>
+						<input type="button" name="btnQLQT" value="Quản Lý Quốc Tịch" onclick="redirect('quoctich')" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" name="btnQLTG" value="Quản Lý Tôn Giáo" onclick="redirect('tongiao')" />
+					</td>
+				</tr>
+			</table>
+
+
 		</div>
 		</div>
 	</section>
 
+	<!--
 	<div class="widget-container">
 		<section class="widget small">
 			<header>
@@ -273,6 +247,7 @@
 			</div>
 		</section>
 	</div>
+	-->
 </section>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="../js/jquery.wysiwyg.js"></script>

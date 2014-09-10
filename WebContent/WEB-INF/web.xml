@@ -37,6 +37,46 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ListDanhMucController</servlet-name>
-    <url-pattern>/ListDanhMucController</url-pattern>
+    <url-pattern>/ListDM.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DashBoardController</display-name>
+    <servlet-name>DashBoardController</servlet-name>
+    <servlet-class>managestudent.controller.DashBoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DashBoardController</servlet-name>
+    <url-pattern>/DashBoard.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ChuyenNganhController</display-name>
+    <servlet-name>ChuyenNganhController</servlet-name>
+    <servlet-class>managestudent.controller.ChuyenNganhController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChuyenNganhController</servlet-name>
+    <url-pattern>/ChuyenNganh.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DanTocController</display-name>
+    <servlet-name>DanTocController</servlet-name>
+    <servlet-class>managestudent.controller.DanTocController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DanTocController</servlet-name>
+    <url-pattern>/DanToc.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SinhVienController</display-name>
+    <servlet-name>SinhVienController</servlet-name>
+    <servlet-class>managestudent.controller.SinhVienController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SinhVienController</servlet-name>
+    <url-pattern>/SinhVien.do</url-pattern>
   </servlet-mapping>
 </web-app>

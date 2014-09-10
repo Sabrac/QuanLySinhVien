@@ -8,6 +8,7 @@ package managestudent.dao.impl;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.UserDao;
@@ -94,7 +95,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	 */
 	@Override
 	public List<User> getAllUsers() {
-		List<User> lsUser = null;
+		List<User> lsUser = new ArrayList<User>();
 
 		if(connectToDB()) {
 			try {

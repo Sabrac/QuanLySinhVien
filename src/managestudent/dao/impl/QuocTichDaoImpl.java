@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.QuocTichDao;
@@ -88,7 +89,7 @@ public class QuocTichDaoImpl extends BaseDaoImpl implements QuocTichDao {
 	 */
 	@Override
 	public List<QuocTich> getAllQuocTich() {
-		List<QuocTich> lsQuocTich = null;
+		List<QuocTich> lsQuocTich = new ArrayList<QuocTich>();
 
 		if(connectToDB()) {
 			try {

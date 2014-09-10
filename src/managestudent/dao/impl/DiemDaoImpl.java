@@ -7,6 +7,7 @@
 package managestudent.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import managestudent.dao.DiemDao;
@@ -64,7 +65,7 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 	 */
 	@Override
 	public List<Diem> getDiemBySinhVienId(int sinhVienId) {
-		List<Diem> lsDiem = null;
+		List<Diem> lsDiem = new ArrayList<Diem>();
 
 		if(connectToDB()) {
 			try {

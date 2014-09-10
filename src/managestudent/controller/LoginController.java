@@ -1,7 +1,7 @@
 /**
  * Copyright(C) K16SE 2014
  *
- * BaseDaoImpl.java, Aug 26, 2014 HaVH
+ * LoginController.java, Aug 26, 2014 HaVH
  *
  */
 package managestudent.controller;
@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher req = request.getRequestDispatcher(Constant.DASHBOARD);
+		RequestDispatcher req = request.getRequestDispatcher(Constant.LOGIN);
 		req.forward(request, response);
 	}
 
@@ -45,6 +45,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 		String contextPath = request.getContextPath();
         HttpSession session = request.getSession();
         List<String> lsErrMessage = new ArrayList<String>();
@@ -67,14 +68,12 @@ public class LoginController extends HttpServlet {
         if (lsErrMessage.size() > 0) { // go to page login case error
             template = Constant.LOGIN;
         } else {
-        	//response.sendRedirect(contextPath + "/ListUser.do");
-        	response.sendRedirect(contextPath + "/html/dashboard.jsp");
-            return;
+        	response.sendRedirect("DashBoard.do");
+        	return;
         }
         // Set lsErrMessage to request
-        request.setAttribute("lsErrMessage", lsErrMessage);
+        request.setAttribute("lsMessage", lsErrMessage);
 
-        // forward ADM001
         RequestDispatcher req = request.getRequestDispatcher(template);
         req.forward(request, response);
 	}

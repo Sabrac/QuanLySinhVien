@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,10 +13,28 @@
 	</c:forEach>
 	<br />
 
-	<table>
-		<tr>
+	<c:if test="${showTable == null}">
+		<table>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					TÊN DÂN TỘC
+				</th>
+			</tr>
+			<c:forEach items="${lsData}" var="danToc">
+				<tr>
+					<td align="right">
+						<c:out value="${danToc.danTocId}" />
+					</td>
+					<td align="left">
+						<c:out value="${danToc.tenDanToc}" />
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
 
-		</tr>
-	</table>
 </body>
 </html>
