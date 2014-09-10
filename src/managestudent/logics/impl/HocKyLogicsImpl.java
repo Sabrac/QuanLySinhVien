@@ -74,4 +74,15 @@ public class HocKyLogicsImpl implements HocKyLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HocKyLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		HocKyDaoImpl hocKyDao = new HocKyDaoImpl();
+		List<String> lsColumn = hocKyDao.getAllColumnName("hocky");
+
+		return lsColumn;
+	}
+
 }

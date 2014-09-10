@@ -74,4 +74,15 @@ public class KhoaHocLogicsImpl implements KhoaHocLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.KhoaHocLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		KhoaHocDaoImpl khoaHocDao = new KhoaHocDaoImpl();
+		List<String> lsColumn = khoaHocDao.getAllColumnName("khoahoc");
+
+		return lsColumn;
+	}
+
 }

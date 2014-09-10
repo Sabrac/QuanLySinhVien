@@ -85,4 +85,15 @@ public class MonHocLogicsImpl implements MonHocLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.MonHocLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		MonHocDaoImpl monHocDao = new MonHocDaoImpl();
+		List<String> lsColumn = monHocDao.getAllColumnName("monhoc");
+
+		return lsColumn;
+	}
+
 }

@@ -108,4 +108,15 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		List<String> lsColumn = sinhVienDao.getAllColumnName("dmsinhvien");
+
+		return lsColumn;
+	}
+
 }

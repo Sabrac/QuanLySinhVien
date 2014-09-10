@@ -74,4 +74,15 @@ public class TonGIaoLogicsImpl implements TonGiaoLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.TonGiaoLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		TonGiaoDaoImpl tonGiaoDao = new TonGiaoDaoImpl();
+		List<String> lsColumn = tonGiaoDao.getAllColumnName("tongiao");
+
+		return lsColumn;
+	}
+
 }

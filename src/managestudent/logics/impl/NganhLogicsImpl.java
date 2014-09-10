@@ -74,4 +74,15 @@ public class NganhLogicsImpl implements NganhLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.NganhLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		NganhDaoImpl nganhDao = new NganhDaoImpl();
+		List<String> lsColumn = nganhDao.getAllColumnName("nganh");
+
+		return lsColumn;
+	}
+
 }

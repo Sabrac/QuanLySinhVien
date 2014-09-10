@@ -74,4 +74,15 @@ public class DanTocLogicsImpl implements DanTocLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DanTocLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		DanTocDaoImpl danTocDao = new DanTocDaoImpl();
+		List<String> lsColumn = danTocDao.getAllColumnName("dantoc");
+
+		return lsColumn;
+	}
+
 }

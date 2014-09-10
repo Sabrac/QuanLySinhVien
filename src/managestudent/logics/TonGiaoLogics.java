@@ -55,4 +55,11 @@ public interface TonGiaoLogics {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteTonGiaoById(int tonGiaoId);
+
+	/**
+	 * Lấy danh sách tên các column có trong table
+	 *
+	 * @return List<String> Danh sách tên các column có trong table
+	 */
+	List<String> getAllColumnName();
 }

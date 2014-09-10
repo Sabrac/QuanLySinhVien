@@ -235,19 +235,19 @@ public class Common {
 	}
 
 	/**
-	 * checkLogin
+	 * Kiểm tra user đã đăng nhập chưa
 	 *
-	 * @param session
-	 *            HttpSession
-	 * @return ADM001
+	 * @param session HttpSession
+	 * @return true: đã đăng nhập / false: chưa đăng nhập
 	 */
-	public static String checkLogin(HttpSession session) {
-		String template = "";
-		if (session.getAttribute("loginId") == null) {
-			template = Constant.DASHBOARD;
-		}
-		return template;
+	public static boolean checkLogin(HttpSession session) {
+		boolean result = false;
 
+		if (session.getAttribute("loginId") == null) {
+			result = true;
+		}
+
+		return result;
 	}
 
 	/**

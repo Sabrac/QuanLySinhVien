@@ -79,4 +79,11 @@ public interface DmSinhVienLogics {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteSinhVienByMaSinhVien(String maSinhVien);
+
+	/**
+	 * Lấy danh sách tên các column có trong table
+	 *
+	 * @return List<String> Danh sách tên các column có trong table
+	 */
+	List<String> getAllColumnName();
 }

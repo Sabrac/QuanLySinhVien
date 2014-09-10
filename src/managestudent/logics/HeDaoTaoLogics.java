@@ -55,4 +55,11 @@ public interface HeDaoTaoLogics {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteHeDaoTaoByMaHe(String maHeDaoTao);
+
+	/**
+	 * Lấy danh sách tên các column có trong table
+	 *
+	 * @return List<String> Danh sách tên các column có trong table
+	 */
+	List<String> getAllColumnName();
 }

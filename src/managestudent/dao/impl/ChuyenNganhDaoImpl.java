@@ -247,5 +247,4 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 
 		return result;
 	}
-
 }

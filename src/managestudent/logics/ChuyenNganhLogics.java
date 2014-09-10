@@ -59,4 +59,11 @@ public interface ChuyenNganhLogics {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteChuyenNganhByMaChuyenNganh(String maChuyenNganh);
+
+	/**
+	 * Lấy danh sách tên các column có trong table
+	 *
+	 * @return List<String> Danh sách tên các column có trong table
+	 */
+	List<String> getAllColumnName();
 }

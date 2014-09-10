@@ -29,4 +29,14 @@
     <servlet-name>LogoutController</servlet-name>
     <url-pattern>/Logout.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListDanhMucController</display-name>
+    <servlet-name>ListDanhMucController</servlet-name>
+    <servlet-class>managestudent.controller.ListDanhMucController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListDanhMucController</servlet-name>
+    <url-pattern>/ListDanhMucController</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -74,4 +74,15 @@ public class QuocTichLogicsImpl implements QuocTichLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.QuocTichLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		QuocTichDaoImpl quocTichDao = new QuocTichDaoImpl();
+		List<String> lsColumn = quocTichDao.getAllColumnName("quoctich");
+
+		return lsColumn;
+	}
+
 }

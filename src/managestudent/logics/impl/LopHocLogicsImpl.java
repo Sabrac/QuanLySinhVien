@@ -74,4 +74,15 @@ public class LopHocLogicsImpl implements LopHocLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.LopHocLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		LopHocDaoImpl lopHocDao = new LopHocDaoImpl();
+		List<String> lsColumn = lopHocDao.getAllColumnName("lophoc");
+
+		return lsColumn;
+	}
+
 }

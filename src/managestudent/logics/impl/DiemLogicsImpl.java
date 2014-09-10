@@ -63,4 +63,15 @@ public class DiemLogicsImpl implements DiemLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DiemLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		DiemDaoImpl diemDao = new DiemDaoImpl();
+		List<String> lsColumn = diemDao.getAllColumnName("diem");
+
+		return lsColumn;
+	}
+
 }

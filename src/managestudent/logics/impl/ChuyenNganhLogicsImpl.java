@@ -86,4 +86,15 @@ public class ChuyenNganhLogicsImpl implements ChuyenNganhLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.ChuyenNganhLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
+		List<String> lsColumn = chuyenNganhDao.getAllColumnName("chuyennganh");
+
+		return lsColumn;
+	}
+
 }

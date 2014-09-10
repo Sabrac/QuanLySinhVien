@@ -74,4 +74,15 @@ public class HeDaoTaoLogicsImpl implements HeDaoTaoLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HeDaoTaoLogics#getAllColumnName()
+	 */
+	@Override
+	public List<String> getAllColumnName() {
+		HeDaoTaoDaoImpl hdtDao = new HeDaoTaoDaoImpl();
+		List<String> lsColumn = hdtDao.getAllColumnName("hedaotao");
+
+		return lsColumn;
+	}
+
 }

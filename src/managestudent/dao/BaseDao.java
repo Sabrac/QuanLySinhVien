@@ -6,6 +6,8 @@
  */
 package managestudent.dao;
 
+import java.util.List;
+
 /**
  *
  * @author HaVH
@@ -23,4 +25,12 @@ public interface BaseDao {
 	 *
 	 */
 	public void closeConnect();
+
+	/**
+	 * Lấy danh sách tên các column có trong bảng
+	 *
+	 * @param tableName String tên bảng
+	 * @return List<String> Danh sách tên các column trong bảng
+	 */
+	List<String> getAllColumnName(String tableName);
 }

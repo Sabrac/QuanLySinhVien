@@ -52,4 +52,11 @@ public interface DanTocLogics {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteDanTocById(int danTocId);
+
+	/**
+	 * Lấy danh sách tên các column có trong table
+	 *
+	 * @return List<String> Danh sách tên các column có trong table
+	 */
+	List<String> getAllColumnName();
 }
