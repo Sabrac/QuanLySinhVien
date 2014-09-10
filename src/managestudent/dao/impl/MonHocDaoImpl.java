@@ -131,8 +131,8 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 	 * @see managestudent.dao.MonHocDao#getMonHocByChuyenNganh(int)
 	 */
 	@Override
-	public MonHoc getMonHocByChuyenNganh(int chuyenNganhId) {
-		MonHoc monHoc = null;
+	public List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId) {
+		List<MonHoc> lsMonHoc = null;
 
 		if(connectToDB()) {
 			try {
@@ -149,19 +149,21 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 
 				if(rs != null) {
 					while(rs.next()) {
-						monHoc = new MonHoc(rs.getInt("monhoc_id"), rs.getString("tenmonhoc"), rs.getString("sotrinh"), rs.getFloat("hesochuyencan"),
+						MonHoc monHoc = new MonHoc(rs.getInt("monhoc_id"), rs.getString("tenmonhoc"), rs.getString("sotrinh"), rs.getFloat("hesochuyencan"),
 								rs.getFloat("hesogiuaky"), rs.getFloat("hesohocky"), rs.getInt("tinhtrang"), rs.getInt("chuyennganh_id"), rs.getInt("songaynghi"));
+
+						lsMonHoc.add(monHoc);
 					}
 					rs.close();
 				}
 			} catch (SQLException e) {
 				System.out.println("An error occur: " + e.getMessage());
-				monHoc = null;
+				lsMonHoc = null;
 			}
 			closeConnect();
 		}
 
-		return monHoc;
+		return lsMonHoc;
 	}
 
 	/* (non-Javadoc)

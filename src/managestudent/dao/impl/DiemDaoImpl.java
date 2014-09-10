@@ -99,4 +99,74 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 		return lsDiem;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DiemDao#deleteDiemById(int)
+	 */
+	@Override
+	public boolean deleteDiemById(int diemId) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM diem ");
+				sqlCommand.append("WHERE diem_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, diemId);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DiemDao#updateDiemById(int, managestudent.entities.Diem)
+	 */
+	@Override
+	public boolean updateDiemById(int diemId, Diem diem) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("UPDATE diem ");
+				sqlCommand.append("SET monhoc_id = ?, lanthi = ?, diemthi = ?, diemchuyencan = ?, diemgiuaky = ?, hocky_id = ?, sinhvien_id = ? ");
+				sqlCommand.append("WHERE diem_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, diem.getMonHocId());
+				preparedStatement.setString(2, diem.getLanThi());
+				preparedStatement.setFloat(3, diem.getDiemThi());
+				preparedStatement.setFloat(4, diem.getDiemChuyenCan());
+				preparedStatement.setFloat(5, diem.getDiemGiuaKy());
+				preparedStatement.setFloat(6, diem.getHocKyId());
+				preparedStatement.setFloat(7, diem.getSinhVienId());
+				preparedStatement.setInt(8, diem.getDiemId());
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
 }

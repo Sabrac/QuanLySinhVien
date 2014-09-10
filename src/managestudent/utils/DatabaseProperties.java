@@ -24,7 +24,7 @@ public class DatabaseProperties {
     static {
         Properties prop = new Properties();
         try {
-            prop.load(DatabaseProperties.class.getResourceAsStream(("/database.properties")));
+            prop.load(DatabaseProperties.class.getResourceAsStream(("../database.properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }

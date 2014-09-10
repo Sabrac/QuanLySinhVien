@@ -15,11 +15,6 @@ import managestudent.entities.MonHoc;
  * @author HaVH
  *
  */
-/**
- *
- * @author HaVH
- *
- */
 public interface MonHocDao extends BaseDao {
 	/**
 	 * Lấy danh sách tất cả môn học
@@ -40,9 +35,9 @@ public interface MonHocDao extends BaseDao {
 	 * Lấy thông tin môn học bằng chuyên ngành id
 	 *
 	 * @param chuyenNganhId int chuyên ngành id
-	 * @return MonHoc đối tượng môn học
+	 * @return List<MonHoc> Danh sách đối tượng môn học
 	 */
-	MonHoc getMonHocByChuyenNganh(int chuyenNganhId);
+	List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId);
 
 	/**
 	 * Thêm môn học

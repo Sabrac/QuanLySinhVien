@@ -27,7 +27,7 @@ public class MessageProperties {
     static {
         Properties prop = new Properties();
         try {
-            prop.load(MessageProperties.class.getResourceAsStream(("/message_ja.properties")));
+            prop.load(MessageProperties.class.getResourceAsStream(("../message.properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }

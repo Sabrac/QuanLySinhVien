@@ -12,5 +12,6 @@ package managestudent.utils;
  *
  */
 public class Constant {
-
+	public static final String DASHBOARD = "html/dashboard.jsp";
+	public static final String LOGIN = "html/index.jsp";
 }

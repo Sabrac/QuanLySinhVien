@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>manage_user_vuhongha</display-name>
-  <filter>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>net.luvina.manageuser.utils.CharacterEncodingFilter</filter-class>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  <display-name>QuanLySinhVien</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -23,72 +11,22 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>ListUser</display-name>
-    <servlet-name>ListUser</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.ListUserController</servlet-class>
+    <display-name>LoginController</display-name>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>managestudent.controller.LoginController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ListUser</servlet-name>
-    <url-pattern>/ListUser.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Login</display-name>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.LoginController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
+    <servlet-name>LoginController</servlet-name>
     <url-pattern>/Login.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Logout</display-name>
-    <servlet-name>Logout</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.LogoutController</servlet-class>
+    <display-name>LogoutController</display-name>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>managestudent.controller.LogoutController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Logout</servlet-name>
+    <servlet-name>LogoutController</servlet-name>
     <url-pattern>/Logout.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddUserInputController</display-name>
-    <servlet-name>AddUserInputController</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.AddUserInputController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddUserInputController</servlet-name>
-    <url-pattern>/AddUser.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddUserConfirmController</display-name>
-    <servlet-name>AddUserConfirmController</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.AddUserConfirmController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddUserConfirmController</servlet-name>
-    <url-pattern>/AddUserConfirm.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SuccessController</display-name>
-    <servlet-name>SuccessController</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.SuccessController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SuccessController</servlet-name>
-    <url-pattern>/Success.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DeatailUserController</display-name>
-    <servlet-name>DeatailUserController</servlet-name>
-    <servlet-class>net.luvina.manageuser.controllers.DeatailUserController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeatailUserController</servlet-name>
-    <url-pattern>/Detail.do</url-pattern>
   </servlet-mapping>
 </web-app>

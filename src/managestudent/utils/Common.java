@@ -244,7 +244,7 @@ public class Common {
 	public static String checkLogin(HttpSession session) {
 		String template = "";
 		if (session.getAttribute("loginId") == null) {
-			//template = Constant.ADM001;
+			template = Constant.DASHBOARD;
 		}
 		return template;
 

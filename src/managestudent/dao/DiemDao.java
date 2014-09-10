@@ -31,4 +31,21 @@ public interface DiemDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean addDiem(Diem diem);
+
+	/**
+	 * Cập nhật thông tin điểm bằng điểm id
+	 *
+	 * @param diemId int điểm id
+	 * @param diem Diem đối tượng điểm
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateDiemById(int diemId, Diem diem);
+
+	/**
+	 * Xóa thông tin điểm
+	 *
+	 * @param diemId int điểm id
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteDiemById(int diemId);
 }

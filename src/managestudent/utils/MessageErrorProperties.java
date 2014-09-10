@@ -27,7 +27,7 @@ public class MessageErrorProperties {
     static {
         Properties prop = new Properties();
         try {
-            prop.load(MessageProperties.class.getResourceAsStream(("/message_error_ja.properties")));
+            prop.load(MessageProperties.class.getResourceAsStream(("../message_error.properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }
