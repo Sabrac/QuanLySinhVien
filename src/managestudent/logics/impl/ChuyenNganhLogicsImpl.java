@@ -6,6 +6,7 @@
  */
 package managestudent.logics.impl;
 
+import java.net.ConnectException;
 import java.util.List;
 
 import managestudent.dao.impl.ChuyenNganhDaoImpl;
@@ -95,6 +96,17 @@ public class ChuyenNganhLogicsImpl implements ChuyenNganhLogics {
 		List<String> lsColumn = chuyenNganhDao.getAllColumnName("chuyennganh");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.ChuyenNganhLogics#getChuyenNganhById(int)
+	 */
+	@Override
+	public ChuyenNganh getChuyenNganhById(int chuyenNganhId) {
+		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
+		ChuyenNganh cn = chuyenNganhDao.getChuyenNganhById(chuyenNganhId);
+
+		return cn;
 	}
 
 }

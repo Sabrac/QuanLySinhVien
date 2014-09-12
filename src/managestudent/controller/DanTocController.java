@@ -44,6 +44,7 @@ public class DanTocController extends HttpServlet {
 
 			if (lsDanToc == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));
+				request.setAttribute("showTable", false);
 			} else if (lsDanToc.size() <= 0) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_001_table"));
 				request.setAttribute("showTable", false);

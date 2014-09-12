@@ -14,23 +14,23 @@
 	<br />
 
 	<c:if test="${showTable == null}">
-	<form action="DanTocForm.do" method="get">
+	<form action="HeDaoTaoForm.do" method="get">
 		<table align="center">
 			<tr>
 				<th>
-					ID
+					MÃ HỆ ĐÀO TẠO
 				</th>
 				<th>
-					TÊN DÂN TỘC
+					TÊN HỆ ĐÀO TẠO
 				</th>
 			</tr>
-			<c:forEach items="${lsData}" var="danToc">
+			<c:forEach items="${lsData}" var="hdt">
 				<tr>
-					<td align="right">
-						<c:out value="${danToc.danTocId}" />
+					<td>
+						<c:out value="${hdt.maHeDt}" />
 					</td>
-					<td align="left">
-						<c:out value="${danToc.tenDanToc}" />
+					<td>
+						<c:out value="${hdt.tenHeDt}" />
 					</td>
 				</tr>
 			</c:forEach>
@@ -41,14 +41,13 @@
 					<td>
 						<input type="submit" name="btnAdd" value="Thêm" />
 					</td>
-	</c:if>
 	</form>
+	</c:if>
 					<td>
 						<input type="button" name="btnBack" value="Trở Về" onclick="window.history.back()" />
 					</td>
 				</tr>
 			</table>
 		</div>
-
 </body>
 </html>

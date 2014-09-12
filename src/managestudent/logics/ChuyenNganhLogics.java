@@ -66,4 +66,12 @@ public interface ChuyenNganhLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy thông tin chuyên ngành bằng id chuyên ngành
+	 *
+	 * @param chuyenNganhId int chuyên ngành id
+	 * @return ChuyenNganh đối tượng chuyên ngành
+	 */
+	ChuyenNganh getChuyenNganhById(int chuyenNganhId);
 }

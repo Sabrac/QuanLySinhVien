@@ -33,13 +33,11 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand
-						.append("SELECT chuyennganh_id, ma_cn, ten_cn, nganh_id ");
+				sqlCommand.append("SELECT chuyennganh_id, ma_cn, ten_cn, nganh_id ");
 				sqlCommand.append("FROM chuyennganh ");
 				sqlCommand.append("ORDER BY ma_cn ASC");
 
-				preparedStatement = connection.prepareStatement(sqlCommand
-						.toString());
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
 				rs = preparedStatement.executeQuery();
 
 				if (rs != null) {
@@ -247,5 +245,40 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.ChuyenNganhDao#getChuyenNganhById(int)
+	 */
+	@Override
+	public ChuyenNganh getChuyenNganhById(int chuyenNganhId) {
+		ChuyenNganh cn = null;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("SELECT chuyennganh_id, ma_cn, ten_cn, nganh_id ");
+				sqlCommand.append("FROM chuyennganh ");
+				sqlCommand.append("WHERE chuyennganh_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, chuyenNganhId);
+				rs = preparedStatement.executeQuery();
+
+				if(rs != null) {
+					while(rs.next()) {
+						cn = new ChuyenNganh(rs.getInt("chuyennganh_id"), rs.getString("ma_cn"), rs.getString("ten_cn"), rs.getInt("nganh_id"));
+					}
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				cn = null;
+			}
+			closeConnect();
+		}
+
+		return cn;
 	}
 }

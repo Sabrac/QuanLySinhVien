@@ -1,9 +1,3 @@
-/**
- * Copyright(C) K16SE 2014
- *
- * ChuyenNganhController.java, Aug 26, 2014 HaVH
- *
- */
 package managestudent.controller;
 
 import java.io.IOException;
@@ -17,23 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import managestudent.entities.ChuyenNganh;
-import managestudent.entities.Nganh;
+import managestudent.entities.MonHoc;
 import managestudent.logics.impl.ChuyenNganhLogicsImpl;
-import managestudent.logics.impl.NganhLogicsImpl;
+import managestudent.logics.impl.MonHocLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
 
 /**
- * Servlet implementation class ChuyenNganhController
+ * Servlet implementation class MonHocController
  */
-public class ChuyenNganhController extends HttpServlet {
+public class MonHocController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChuyenNganhController() {
+    public MonHocController() {
         super();
     }
 
@@ -45,24 +39,24 @@ public class ChuyenNganhController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.MONHOC;
+			MonHocLogicsImpl monHocLogics = new MonHocLogicsImpl();
 			ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
-			template = Constant.CHUYENNGANH;
-			NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
+			List<MonHoc> lsMonHoc = new ArrayList<MonHoc>();
 			List<ChuyenNganh> lsChuyenNganh = new ArrayList<ChuyenNganh>();
-			List<Nganh> lsNganh = new ArrayList<Nganh>();
 
+			lsMonHoc = monHocLogics.getAllMonHoc();
 			lsChuyenNganh = chuyenNganhLogics.getAllChuyenNganh();
-			lsNganh = nganhLogics.getAllNganh();
 
-			if (lsChuyenNganh == null) {
+			if (lsMonHoc == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));
 				request.setAttribute("showTable", false);
-			} else if (lsChuyenNganh.size() <= 0) {
+			} else if (lsMonHoc.size() <= 0) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_001_table"));
 				request.setAttribute("showTable", false);
 			} else {
-				request.setAttribute("lsData", lsChuyenNganh);
-				request.setAttribute("lsNganh", lsNganh);
+				request.setAttribute("lsData", lsMonHoc);
+				request.setAttribute("lsChuyenNganh", lsChuyenNganh);
 			}
 		} else {
 			template = Constant.LOGIN;

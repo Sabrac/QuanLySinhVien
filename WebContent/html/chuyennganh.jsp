@@ -15,7 +15,8 @@
 	<br />
 
 	<c:if test="${showTable == null}">
-		<table>
+	<form action="ChuyenNganhForm.do" method="get">
+		<table align="center">
 			<tr>
 				<th>
 					MÃ CHUYÊN NGÀNH
@@ -48,7 +49,20 @@
 			</c:forEach>
 
 		</table>
+		<div class="btn">
+			<table align="center">
+				<tr>
+					<td>
+						<input type="submit" name="btnAdd" value="Thêm" />
+					</td>
+	</form>
 	</c:if>
+					<td>
+						<input type="button" name="btnBack" value="Trở Về" onclick="window.history.back()" />
+					</td>
+				</tr>
+			</table>
+		</div>
 
 </body>
 </html>

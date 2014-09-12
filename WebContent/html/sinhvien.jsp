@@ -14,8 +14,9 @@
 	</c:forEach>
 	<br />
 
-	<c:if test="showTable == null">
-		<table>
+	<c:if test="${showTable == null}">
+	<form action="SinhVienForm.do" method="get">
+		<table align="center">
 			<tr>
 				<th>
 					MÃ SINH VIÊN
@@ -57,7 +58,14 @@
 						<fmt:formatDate pattern="yyyy/MM/dd" value="${sinhVien.ngaySinh}" />
 					</td>
 					<td align="left">
-						<c:out value="${sinhVien.gioiTinh}" />
+						<c:choose>
+							<c:when test="${sinhVien.gioiTinh}">
+								Nam
+							</c:when>
+							<c:otherwise>
+								Nữ
+							</c:otherwise>
+						</c:choose>
 					</td>
 					<td align="left">
 						<c:forEach items="${lsHdt}" var="hdt">
@@ -83,6 +91,19 @@
 				</tr>
 			</c:forEach>
 		</table>
+	<div class="btn">
+			<table align="center">
+				<tr>
+					<td>
+						<input type="submit" name="btnAdd" value="Thêm" />
+					</td>
+	</form>
 	</c:if>
+					<td>
+						<input type="button" name="btnBack" value="Trở Về" onclick="window.history.back()" />
+					</td>
+				</tr>
+			</table>
+		</div>
 </body>
 </html>

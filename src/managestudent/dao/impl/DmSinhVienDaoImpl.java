@@ -45,7 +45,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 
 				if(rs != null) {
 					while(rs.next()) {
-						DmSinhVien sinhVien = new DmSinhVien(rs.getInt("sinhvienid"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
+						DmSinhVien sinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
 								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getString("cmtnd"), rs.getString("sodthoai"), rs.getString("noisinh"),
 								rs.getString("quequan"), rs.getString("hokhauthuongtru"), rs.getString("noiohientai"), rs.getString("chedouudai"),
 								rs.getInt("dantoc_id"), rs.getInt("tongiao_id"), rs.getInt("quoctich_id"), rs.getString("hotenbo"), rs.getString("nghenghiepbo"),

@@ -30,6 +30,14 @@ public interface ChuyenNganhDao extends BaseDao {
 	ChuyenNganh getChuyenNganhByMaCN(String maChuyenNganh);
 
 	/**
+	 * Lấy thông tin chuyên ngành bằng id chuyên ngành
+	 *
+	 * @param chuyenNganhId int chuyên ngành id
+	 * @return ChuyenNganh đối tượng chuyên ngành
+	 */
+	ChuyenNganh getChuyenNganhById(int chuyenNganhId);
+
+	/**
 	 * Lấy ra danh sách các chuyên ngành dựa trên mã ngành
 	 * @param nganhId int Id ngành
 	 * @return List<ChuyenNganh> Danh sách các chuyên ngành thuộc ngành id

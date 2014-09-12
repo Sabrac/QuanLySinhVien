@@ -60,8 +60,10 @@ public class SinhVienController extends HttpServlet {
 
 			if (lsSinhVien == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));
+				request.setAttribute("showTable", false);
 			} else if (lsSinhVien.size() <= 0) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_001_table"));
+				request.setAttribute("showTable", false);
 			} else {
 				request.setAttribute("lsData", lsSinhVien);
 				request.setAttribute("lsHdt", lsHdt);
