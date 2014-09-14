@@ -26,10 +26,9 @@
 </header>
 <section class="user">
 	<div class="profile-img">
-		<p><img src="../images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
+		<p><img src="./images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
 	</div>
 	<div class="buttons">
-		<span class="button">Live</span>
 		<span class="button">Help</span>
 		<span class="button blue"><a href="/QuanLySinhVien/Logout.do">Đăng xuất</a></span>
 	</div>
@@ -49,7 +48,7 @@
 		<div class="content cycle">
 
 
-			<table align="center">
+			<table align="center" class="dashboard-table">
 				<tr>
 					<td>
 						<input type="button" name="btnQLSV" value="Quản Lý Hồ Sơ Sinh Viên" onclick="redirect('sinhvien')" />
@@ -66,8 +65,6 @@
 					<td>
 						<input type="button" name="btnQLHK" value="Quản Lý Học Kỳ" onclick="redirect('hocky')" />
 					</td>
-				</tr>
-				<tr>
 					<td>
 						<input type="button" name="btnQLKH" value="Quản Lý Khóa Học" onclick="redirect('khoahoc')" />
 					</td>
@@ -83,8 +80,6 @@
 					<td>
 						<input type="button" name="btnQLQT" value="Quản Lý Quốc Tịch" onclick="redirect('quoctich')" />
 					</td>
-				</tr>
-				<tr>
 					<td>
 						<input type="button" name="btnQLTG" value="Quản Lý Tôn Giáo" onclick="redirect('tongiao')" />
 					</td>
@@ -92,7 +87,6 @@
 			</table>
 
 
-		</div>
 		</div>
 	</section>
 
