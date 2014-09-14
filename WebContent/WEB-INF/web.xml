@@ -159,4 +159,13 @@
     <servlet-name>TonGiaoController</servlet-name>
     <url-pattern>/TonGiao.do</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>CharacterEncodingFilter</display-name>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>managestudent.utils.CharacterEncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

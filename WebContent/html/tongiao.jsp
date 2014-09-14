@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,6 +36,30 @@
 				</tr>
 			</c:forEach>
 		</table>
+
+		<div class="paging" align="center">
+			<c:if test="${totalPage > 1}">
+					<c:set var="i" value="1" />
+					<c:forEach items="${lsPage}" var="curPage">
+						<c:if test="${curPage > 1 && i == 1}">
+							<a href='/QuanLySinhVien/TonGiao.do?page=<c:out value="${curPage - range}" />&sorttype=${sorttype}&sortcolumn=${sortcolumn}'>&laquo;</a>
+						</c:if>
+						<c:choose>
+							<c:when test="${page == curPage}">
+								<a><c:out value="${curPage}" /></a>
+							</c:when>
+							<c:otherwise>
+								<a href='/QuanLySinhVien/TonGiao.do?page=<c:out value="${curPage}" />&sorttype=${sorttype}&sortcolumn=${sortcolumn}'><c:out value="${curPage}" /></a>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${curPage < totalPage && i == (fn:length(lsPage))}">
+							<a href='/QuanLySinhVien/TonGiao.do?page=<c:out value="${curPage + 1}" />&sorttype=${sorttype}&sortcolumn=${sortcolumn}'>&raquo;</a>
+						</c:if>
+						<c:set var="i" value="${i + 1}" />
+					</c:forEach>
+			</c:if>
+		</div>
+
 	<div class="btn">
 			<table align="center">
 				<tr>
