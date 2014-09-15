@@ -22,10 +22,10 @@ hs_err_pid*
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+
 
 # Thumbnails
-._*
+
 
 # Files that might appear on external disk
 .Spotlight-V100
