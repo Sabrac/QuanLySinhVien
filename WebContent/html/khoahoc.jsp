@@ -40,7 +40,8 @@
 		</table>
 	</form>
 
-	<form action="KhoaHoc.do" method="get">
+	<form action="KhoaHocProcess.do" method="post">
+		<input type="hidden" value="add" name="ref" />
 		<table align="center">
 			<tr>
 				<th>

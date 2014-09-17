@@ -40,7 +40,8 @@
 		</table>
 	</form>
 
-	<form action="HocKyForm.do" method="get">
+	<form action="HocKyProcess.do" method="post">
+		<input type="hidden" value="add" name="ref" />
 		<table align="center">
 			<tr>
 				<th>
