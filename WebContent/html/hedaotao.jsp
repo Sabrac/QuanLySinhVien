@@ -40,7 +40,8 @@
 		</table>
 	</form>
 
-	<form action="HeDaoTaoForm.do" method="get">
+	<form action="HeDaoTaoProcess.do" method="post">
+		<input type="hidden" value="add" name="ref" />
 		<table align="center">
 			<tr>
 				<th>

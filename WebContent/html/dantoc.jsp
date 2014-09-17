@@ -40,7 +40,8 @@
 		</table>
 	</form>
 
-	<form action="DanTocForm.do" method="get">
+	<form action="DanTocProcess.do" method="post">
+		<input type="hidden" name="ref" value="add" />
 		<table align="center">
 			<tr>
 				<th>

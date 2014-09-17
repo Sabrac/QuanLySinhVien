@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,19 +14,15 @@
 	</c:forEach>
 	<br />
 
-	<c:if test="${showTable == null}">
-
-	<form action="ChuyenNganh.do" name="searchform" id="searchform" method="post">
-		<table align="center" class="searchbox">
+	<form action="SinhVienProcess.do?submit=true" method="post">
+		<input type="hidden" name="ref" value="${ref}" />
+		<table align="center">
 			<tr>
 				<td>
 					Mã sinh viên
 				</td>
 				<td>
-					<input type="text" name="masv" value="${masv}" />
-				</td>
-				<td colspan="4" valign="middle" align="center">
-					<input type="submit" name="btnSubmit" id="btnSubmit" value="Tìm kiếm" />
+					<input type="text" name="masinhvien" value="${sinhvien.maSinhVien}" />
 				</td>
 			</tr>
 			<tr>
@@ -35,7 +30,7 @@
 					Họ đệm
 				</td>
 				<td>
-					<input type="text" name="hodem" value="${hodem}" />
+					<input type="text" name="hodem" value="${sinhvien.hoDem}" />
 				</td>
 			</tr>
 			<tr>
@@ -43,7 +38,7 @@
 					Tên
 				</td>
 				<td>
-					<input type="text" name="ten" value="${ten}" />
+					<input type="text" name="ten" value="${sinhvien.ten}" />
 				</td>
 			</tr>
 			<tr>
@@ -51,7 +46,7 @@
 					Ngày sinh
 				</td>
 				<td>
-					<input type="text" name="ngaysinh" value="${ngaysinh}" />
+					<input type="text" name="ngaysinh" value="${sinhvien.ngaySinh}" />
 				</td>
 			</tr>
 			<tr>
@@ -89,7 +84,7 @@
 					Số chứng minh thư
 				</td>
 				<td>
-					<input type="text" name="socmt" value="${socmt}" />
+					<input type="text" name="cmtnd" value="${sinhvien.cmtnd}" />
 				</td>
 			</tr>
 			<tr>
@@ -97,7 +92,7 @@
 					Số điện thoại
 				</td>
 				<td>
-					<input type="text" name="sodienthoai" value="${sodienthoai}" />
+					<input type="text" name="sodienthoai" value="${sinhvien.soDienThoai}" />
 				</td>
 			</tr>
 			<tr>
@@ -105,7 +100,7 @@
 					Nơi sinh
 				</td>
 				<td>
-					<input type="text" name="noisinh" value="${noisinh}" />
+					<input type="text" name="noisinh" value="${sinhvien.noiSinh}" />
 				</td>
 			</tr>
 			<tr>
@@ -113,7 +108,7 @@
 					Quê quán
 				</td>
 				<td>
-					<input type="text" name="quequan" value="${quequan}" />
+					<input type="text" name="quequan" value="${sinhvien.queQuan}" />
 				</td>
 			</tr>
 			<tr>
@@ -121,7 +116,7 @@
 					Hộ khẩu thường trú
 				</td>
 				<td>
-					<input type="text" name="hokhau" value="${hokhau}" />
+					<input type="text" name="hokhauthuongtru" value="${sinhvien.hoKhauThuongTru}" />
 				</td>
 			</tr>
 			<tr>
@@ -129,7 +124,7 @@
 					Nơi ở hiện tại
 				</td>
 				<td>
-					<input type="text" name="noiohientai" value="${noiohientai}" />
+					<input type="text" name="noiohientai" value="${sinhvien.noiOHienTai}" />
 				</td>
 			</tr>
 			<tr>
@@ -137,7 +132,7 @@
 					Chế độ ưu đãi
 				</td>
 				<td>
-					<input type="text" name="chedo" value="${chedo}" />
+					<input type="text" name="chedouudai" value="${sinhvien.cheDoUuDai}" />
 				</td>
 			</tr>
 			<tr>
@@ -151,7 +146,7 @@
 						</option>
 						<c:forEach items="${lsDanToc}" var="danToc">
 							<c:choose>
-								<c:when test="${danToc.danTocId == dantocid}">
+								<c:when test="${danToc.danTocId == sinhvien.danTocId}">
 									<option value="${danToc.danTocId}" SELECTED>
 										<c:out value="${danToc.tenDanToc}" />
 									</option>
@@ -177,7 +172,7 @@
 						</option>
 						<c:forEach items="${lsTonGiao}" var="tonGiao">
 							<c:choose>
-								<c:when test="${tonGiao.tonGiaoId == tongiaoid}">
+								<c:when test="${tonGiao.tonGiaoId == sinhvien.tonGiaoId}">
 									<option value="${tonGiao.tonGiaoId}" SELECTED>
 										<c:out value="${tonGiao.tenTonGiao}" />
 									</option>
@@ -203,7 +198,7 @@
 						</option>
 						<c:forEach items="${lsQuocTich}" var="quocTich">
 							<c:choose>
-								<c:when test="${quocTich.quocTichId == quoctichid}">
+								<c:when test="${quocTich.quocTichId == sinhvien.quocTichId}">
 									<option value="${quocTich.quocTichId}" SELECTED>
 										<c:out value="${quocTich.tenQuocTich}" />
 									</option>
@@ -223,7 +218,7 @@
 					Họ tên bố
 				</td>
 				<td>
-					<input type="text" name="hotenbo" value="${hotenbo}" />
+					<input type="text" name="hotenbo" value="${sinhvien.hoTenBo}" />
 				</td>
 			</tr>
 			<tr>
@@ -231,7 +226,7 @@
 					Nghề nghiệp bố
 				</td>
 				<td>
-					<input type="text" name="nghenghiepbo" value="${nghenghiepbo}" />
+					<input type="text" name="nghenghiepbo" value="${sinhvien.ngheNghiepBo}" />
 				</td>
 			</tr>
 			<tr>
@@ -239,7 +234,7 @@
 					Họ tên mẹ
 				</td>
 				<td>
-					<input type="text" name="hotenme" value="${hotenme}" />
+					<input type="text" name="hotenme" value="${sinhvien.hoTenMe}" />
 				</td>
 			</tr>
 			<tr>
@@ -247,7 +242,7 @@
 					Nghề nghiệp mẹ
 				</td>
 				<td>
-					<input type="text" name="nghenghiepme" value="${nghenghiepme}" />
+					<input type="text" name="nghenghiepme" value="${sinhvien.ngheNghiepMe}" />
 				</td>
 			</tr>
 			<tr>
@@ -261,7 +256,7 @@
 						</option>
 						<c:forEach items="${lsHdt}" var="heDaoTao">
 							<c:choose>
-								<c:when test="${heDaoTao.heDtId == hedaotaoid}">
+								<c:when test="${heDaoTao.heDtId == heDtId}">
 									<option value="${heDaoTao.heDtId}" SELECTED>
 										<c:out value="${heDaoTao.tenHeDt}" />
 									</option>
@@ -287,7 +282,7 @@
 						</option>
 						<c:forEach items="${lsLop}" var="lopHoc">
 							<c:choose>
-								<c:when test="${lopHoc.lopHocId == lophocid}">
+								<c:when test="${lopHoc.lopHocId == sinhvien.lopId}">
 									<option value="${lopHoc.lopHocId}" SELECTED>
 										<c:out value="${lopHoc.tenLopHoc}" />
 									</option>
@@ -313,7 +308,7 @@
 						</option>
 						<c:forEach items="${lsKhoaHoc}" var="khoaHoc">
 							<c:choose>
-								<c:when test="${khoaHoc.khoaHocId == khoahocid}">
+								<c:when test="${khoaHoc.khoaHocId == sinhvien.khoaHocId}">
 									<option value="${khoaHoc.khoaHocId}" SELECTED>
 										<c:out value="${khoaHoc.tenKhoaHoc}" />
 									</option>
@@ -333,7 +328,7 @@
 					Ngày nhập học
 				</td>
 				<td>
-					<input type="text" name="ngaynhaphoc" value="${ngaynhaphoc}" />
+					<input type="text" name="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" />
 				</td>
 			</tr>
 			<tr>
@@ -341,7 +336,7 @@
 					Điểm đầu vào 1
 				</td>
 				<td>
-					<input type="text" name="diemdauvao1" value="${diemdauvao1}" />
+					<input type="text" name="diemdauvao1" value="${sinhvien.diemDauVao1}" />
 				</td>
 			</tr>
 			<tr>
@@ -349,7 +344,7 @@
 					Điểm đầu vào 2
 				</td>
 				<td>
-					<input type="text" name="diemdauvao2" value="${diemdauvao2}" />
+					<input type="text" name="diemdauvao2" value="${sinhvien.diemDauVao2}" />
 				</td>
 			</tr>
 			<tr>
@@ -357,152 +352,23 @@
 					Điểm đầu vào 3
 				</td>
 				<td>
-					<input type="text" name="diemdauvao3" value="${diemdauvao3}" />
+					<input type="text" name="diemdauvao3" value="${sinhvien.diemDauVao3}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					Học kỳ
+					Ảnh sinh viên
 				</td>
 				<td>
-					<select name="hocky">
-						<option value="-1">
-							Chọn học kỳ
-						</option>
-						<c:forEach items="${lsHocKy}" var="hocKy">
-							<c:choose>
-								<c:when test="${hocKy.hocKyId == hockyid}">
-									<option value="${hocKy.hocKyId}" SELECTED>
-										<c:out value="${hocKy.tenHocKy}" />
-									</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${hocKy.hocKyId}">
-										<c:out value="${hocKy.tenHocKy}" />
-									</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select>
+					<input type="text" name="anhsinhvien" value="${sinhvien.anhSinhVien}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" valign="middle" align="center">
+					<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
 				</td>
 			</tr>
 		</table>
 	</form>
-
-	<form action="SinhVienProcess.do" method="post">
-		<input type="hidden" name="ref" value="add" />
-		<table align="center">
-			<tr>
-				<th>
-					MÃ SINH VIÊN
-				</th>
-				<th>
-					HỌ ĐỆM
-				</th>
-				<th>
-					TÊN
-				</th>
-				<th>
-					NGÀY SINH
-				</th>
-				<th>
-					GIỚI TÍNH
-				</th>
-				<th>
-					HỆ ĐÀO TẠO
-				</th>
-				<th>
-					LỚP
-				</th>
-				<th>
-					KHÓA HỌC
-				</th>
-			</tr>
-			<c:forEach items="${lsData}" var="sinhVien">
-				<tr>
-					<td align="left">
-						<c:out value="${sinhVien.maSinhVien}" />
-					</td>
-					<td align="left">
-						<c:out value="${sinhVien.hoDem}" />
-					</td>
-					<td align="left">
-						<c:out value="${sinhVien.ten}" />
-					</td>
-					<td align="center">
-						<fmt:formatDate pattern="yyyy/MM/dd" value="${sinhVien.ngaySinh}" />
-					</td>
-					<td align="left">
-						<c:choose>
-							<c:when test="${sinhVien.gioiTinh}">
-								Nam
-							</c:when>
-							<c:otherwise>
-								Nữ
-							</c:otherwise>
-						</c:choose>
-					</td>
-					<td align="left">
-						<c:forEach items="${lsHdt}" var="hdt">
-							<c:if test="${sinhVien.heDtId == hdt.heDtId}">
-								<c:out value="${hdt.tenHeDt}" />
-							</c:if>
-						</c:forEach>
-					</td>
-					<td align="left">
-						<c:forEach items="${lsLop}" var="lop">
-							<c:if test="${sinhVien.lopId == lop.lopHocId}">
-								<c:out value="${lop.tenLopHoc}" />
-							</c:if>
-						</c:forEach>
-					</td>
-					<td align="left">
-						<c:forEach items="${lsKhoaHoc}" var="khoaHoc">
-							<c:if test="${sinhVien.khoaHocId == khoaHoc.khoaHocId}">
-								<c:out value="${khoaHoc.tenKhoaHoc}" />
-							</c:if>
-						</c:forEach>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-
-		<div class="paging" align="center">
-			<c:if test="${totalPage > 1}">
-					<c:set var="i" value="1" />
-					<c:forEach items="${lsPage}" var="curPage">
-						<c:if test="${curPage > 1 && i == 1}">
-							<a href='/QuanLySinhVien/SinhVien.do?page=<c:out value="${curPage - range}" />&sorttype=${sorttype}&sortcolumn=${sortcolumn}'>&laquo;</a>
-						</c:if>
-						<c:choose>
-							<c:when test="${page == curPage}">
-								<a><c:out value="${curPage}" /></a>
-							</c:when>
-							<c:otherwise>
-								<a href='/QuanLySinhVien/SinhVien.do?page=<c:out value="${curPage}" />&sorttype=${sorttype}&sortcolumn=${sortcolumn}'><c:out value="${curPage}" /></a>
-							</c:otherwise>
-						</c:choose>
-						<c:if test="${curPage < totalPage && i == (fn:length(lsPage))}">
-							<a href='/QuanLySinhVien/SinhVien.do?page=<c:out value="${curPage + 1}" />&sorttype=${sorttype}&sortcolumn=${sortcolumn}'>&raquo;</a>
-						</c:if>
-						<c:set var="i" value="${i + 1}" />
-					</c:forEach>
-			</c:if>
-		</div>
-
-	<div class="btn">
-			<table align="center">
-				<tr>
-					<td>
-						<input type="submit" name="btnAdd" value="Thêm" />
-					</td>
-	</form>
-	</c:if>
-					<td>
-						<input type="button" name="btnBack" value="Trở Về" onclick="window.history.back()" />
-					</td>
-				</tr>
-			</table>
-		</div>
 </body>
 </html>

@@ -50,7 +50,8 @@
 		</table>
 	</form>
 
-	<form action="NganhForm.do" method="get">
+	<form action="NganhProcess.do" method="post">
+		<input type="hidden" value="add" name="ref" />
 		<table align="center">
 			<tr>
 				<th>

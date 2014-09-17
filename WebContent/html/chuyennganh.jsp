@@ -74,7 +74,8 @@
 		</table>
 	</form>
 
-	<form action="ChuyenNganhForm.do" method="get">
+	<form action="ChuyenNganhProcess.do" method="post">
+		<input type="hidden" value="add" name="ref" />
 		<table align="center">
 			<tr>
 				<th>

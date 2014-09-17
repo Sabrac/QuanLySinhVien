@@ -8,6 +8,6 @@
 </head>
 <body>
 	<a style="font: bold; color: red">Lỗi Hệ Thống</a><br/>
-	<input type="button" name="OK" value="OK" onclick="window.location.href='/QuanLySinhVien/html/dashboard.jsp'" />
+	<input type="button" name="OK" value="OK" onclick="window.location.href='DashBoard.do'" />
 </body>
 </html>

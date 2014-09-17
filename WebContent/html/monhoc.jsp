@@ -47,6 +47,38 @@
 			</tr>
 			<tr>
 				<td>
+					Số trình
+				</td>
+				<td>
+					<input type="text" name="sotrinh" value="${sotrinh}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Hệ số chuyên cần
+				</td>
+				<td>
+					<input type="text" name="hesochuyencan" value="${hesochuyencan}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Hệ số giữa kỳ
+				</td>
+				<td>
+					<input type="text" name="hesogiuaky" value="${hesogiuaky}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Hệ số học kỳ
+				</td>
+				<td>
+					<input type="text" name="hesohocky" value="${hesohocky}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
 					Chuyên ngành
 				</td>
 				<td>
@@ -74,7 +106,8 @@
 		</table>
 	</form>
 
-	<form action="MonHocForm.do" method="get">
+	<form action="MonHocProcess.do" method="post">
+		<input type="hidden" name="ref" value="add" />
 		<table align="center">
 			<tr>
 				<th>
