@@ -97,4 +97,37 @@ public class BaseDaoImpl implements BaseDao {
 		return lsColumn;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.dao.BaseDao#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(String tableName) {
+		int total = -1;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("SELECT COUNT(*) count ");
+				sqlCommand.append("FROM " + tableName);
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				rs = preparedStatement.executeQuery();
+
+				if(rs != null) {
+					while(rs.next()) {
+						total = rs.getInt("count");
+					}
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				total = -1;
+			}
+			closeConnect();
+		}
+
+		return total;
+	}
+
 }

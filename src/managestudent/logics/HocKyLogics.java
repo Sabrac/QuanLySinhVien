@@ -21,7 +21,7 @@ public interface HocKyLogics {
 	 *
 	 * @return List<HocKy> Danh sách đối tượng học kỳ
 	 */
-	List<HocKy> getAllHocKy();
+	List<HocKy> getAllHocKy(HocKy hocKy, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin 1 học kỳ bằng học kỳ id
@@ -62,4 +62,11 @@ public interface HocKyLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(HocKy hocKy);
 }

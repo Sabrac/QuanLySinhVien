@@ -46,7 +46,6 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-		String contextPath = request.getContextPath();
         HttpSession session = request.getSession();
         List<String> lsErrMessage = new ArrayList<String>();
         String template = "";

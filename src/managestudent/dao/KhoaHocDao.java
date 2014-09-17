@@ -21,7 +21,7 @@ public interface KhoaHocDao extends BaseDao {
 	 *
 	 * @return List<KhoaHoc> Danh sách đối tượng khóa học
 	 */
-	List<KhoaHoc> getAllKhoaHoc();
+	List<KhoaHoc> getAllKhoaHoc(KhoaHoc khoaHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin khóa học bằng khóa học id
@@ -55,4 +55,12 @@ public interface KhoaHocDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteKhoaHocById(int khoaHocId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param khoaHoc KhoaHoc đối tượng khóa học (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(KhoaHoc khoaHoc);
 }

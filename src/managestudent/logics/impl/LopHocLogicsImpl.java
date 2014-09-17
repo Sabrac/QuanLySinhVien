@@ -45,9 +45,9 @@ public class LopHocLogicsImpl implements LopHocLogics {
 	 * @see managestudent.logics.LopHocLogics#getAllLopHoc()
 	 */
 	@Override
-	public List<LopHoc> getAllLopHoc() {
+	public List<LopHoc> getAllLopHoc(LopHoc lopHoc, int offset, int limit, int sortColumn, String sortType) {
 		LopHocDaoImpl lopHocDao = new LopHocDaoImpl();
-		List<LopHoc> lsLopHoc = lopHocDao.getAllLopHoc();
+		List<LopHoc> lsLopHoc = lopHocDao.getAllLopHoc(lopHoc, offset, limit, sortColumn, sortType);
 
 		return lsLopHoc;
 	}
@@ -83,6 +83,17 @@ public class LopHocLogicsImpl implements LopHocLogics {
 		List<String> lsColumn = lopHocDao.getAllColumnName("lophoc");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.LopHocLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(LopHoc lopHoc) {
+		LopHocDaoImpl lopHocDao = new LopHocDaoImpl();
+		int total = lopHocDao.getTotalRecords(lopHoc);
+
+		return total;
 	}
 
 }

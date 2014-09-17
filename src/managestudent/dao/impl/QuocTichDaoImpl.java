@@ -88,25 +88,63 @@ public class QuocTichDaoImpl extends BaseDaoImpl implements QuocTichDao {
 	 * @see managestudent.dao.QuocTichDao#getAllQuocTich()
 	 */
 	@Override
-	public List<QuocTich> getAllQuocTich() {
+	public List<QuocTich> getAllQuocTich(QuocTich quocTich, int offset, int limit, int sortColumn, String sortType) {
 		List<QuocTich> lsQuocTich = new ArrayList<QuocTich>();
 
 		if(connectToDB()) {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
+				int conCount = 0;
+				int pos = -1;
+				int countChar = 0;
+				String tmp = "";
 
 				sqlCommand.append("SELECT quoctich_id, tenquoctich ");
 				sqlCommand.append("FROM quoctich ");
-				sqlCommand.append("ORDER BY quoctich_id ASC");
+
+				if(quocTich.getQuocTichId() > 0) {
+					sqlCommand.append("WHERE quoctich_id = ? ");
+					conCount++;
+				}
+				if(quocTich.getTenQuocTich().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("tenquoctich LIKE ? ");
+					conCount++;
+				}
+
+				sqlCommand.append("ORDER BY ");
+				if(sortColumn == 2) {
+					sqlCommand.append("tenquoctich ");
+				} else {
+					sqlCommand.append("quoctich_id ");
+				}
+				sqlCommand.append(sortType + " ");
+
+				sqlCommand.append("LIMIT " + offset + ", " + limit);
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+
+				if(sqlCommand.indexOf("quoctich_id = ?") > 0) {
+					preparedStatement.setInt(1, quocTich.getQuocTichId());
+				}
+				if((pos = sqlCommand.indexOf("tenquoctich LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + quocTich.getTenQuocTich() + "%");
+				}
+
 				rs = preparedStatement.executeQuery();
 
 				if(rs != null) {
 					while(rs.next()) {
-						QuocTich quocTich = new QuocTich(rs.getInt("quoctich_id"), rs.getString("tenquoctich"));
+						QuocTich objQuocTich = new QuocTich(rs.getInt("quoctich_id"), rs.getString("tenquoctich"));
 
-						lsQuocTich.add(quocTich);
+						lsQuocTich.add(objQuocTich);
 					}
 					rs.close();
 				}
@@ -186,6 +224,68 @@ public class QuocTichDaoImpl extends BaseDaoImpl implements QuocTichDao {
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.QuocTichDao#getTotalRecords(managestudent.entities.QuocTich)
+	 */
+	@Override
+	public int getTotalRecords(QuocTich quocTich) {
+		int total = 0;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+				int conCount = 0;
+				int pos = -1;
+				int countChar = 0;
+				String tmp = "";
+
+				sqlCommand.append("SELECT COUNT(*) count ");
+				sqlCommand.append("FROM quoctich ");
+
+				if(quocTich.getQuocTichId() > 0) {
+					sqlCommand.append("WHERE quoctich_id = ? ");
+					conCount++;
+				}
+				if(quocTich.getTenQuocTich().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("tenquoctich LIKE ? ");
+					conCount++;
+				}
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+
+				if(sqlCommand.indexOf("quoctich_id = ?") > 0) {
+					preparedStatement.setInt(1, quocTich.getQuocTichId());
+				}
+				if((pos = sqlCommand.indexOf("tenquoctich LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + quocTich.getTenQuocTich() + "%");
+				}
+
+				rs = preparedStatement.executeQuery();
+
+				if(rs != null) {
+					while(rs.next()) {
+						total = rs.getInt("count");
+					}
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+				total = 0;
+			}
+			closeConnect();
+		}
+
+		return total;
 	}
 
 }

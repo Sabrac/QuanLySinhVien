@@ -88,25 +88,63 @@ public class TonGiaoDaoImpl extends BaseDaoImpl implements TonGiaoDao {
 	 * @see managestudent.dao.TonGiaoDao#getAllTonGiao()
 	 */
 	@Override
-	public List<TonGiao> getAllTonGiao() {
+	public List<TonGiao> getAllTonGiao(TonGiao tonGiao, int offset, int limit, int sortColumn, String sortType) {
 		List<TonGiao> lsTonGiao = new ArrayList<TonGiao>();
 
 		if(connectToDB()) {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
+				int conCount = 0;
+				int pos = -1;
+				int countChar = 0;
+				String tmp = "";
 
 				sqlCommand.append("SELECT tongiao_id, tentongiao ");
 				sqlCommand.append("FROM tongiao ");
-				sqlCommand.append("ORDER BY tongiao_id ASC");
+
+				if(tonGiao.getTonGiaoId() > 0) {
+					sqlCommand.append("WHERE tongiao_id = ? ");
+					conCount++;
+				}
+				if(tonGiao.getTenTonGiao().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("tentongiao LIKE ? ");
+					conCount++;
+				}
+
+				sqlCommand.append("ORDER BY ");
+				if(sortColumn == 2) {
+					sqlCommand.append("tentongiao ");
+				} else {
+					sqlCommand.append("tongiao_id ");
+				}
+				sqlCommand.append(sortType + " ");
+
+				sqlCommand.append("LIMIT " + offset + ", " + limit);
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+
+				if(sqlCommand.indexOf("tongiao_id = ?") > 0) {
+					preparedStatement.setInt(1, tonGiao.getTonGiaoId());
+				}
+				if((pos = sqlCommand.indexOf("tentongiao LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + tonGiao.getTenTonGiao() + "%");
+				}
+
 				rs = preparedStatement.executeQuery();
 
 				if(rs != null) {
 					while(rs.next()) {
-						TonGiao tonGiao = new TonGiao(rs.getInt("tongiao_id"), rs.getString("tentongiao"));
+						TonGiao objTonGiao = new TonGiao(rs.getInt("tongiao_id"), rs.getString("tentongiao"));
 
-						lsTonGiao.add(tonGiao);
+						lsTonGiao.add(objTonGiao);
 					}
 					rs.close();
 				}
@@ -186,6 +224,68 @@ public class TonGiaoDaoImpl extends BaseDaoImpl implements TonGiaoDao {
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.TonGiaoDao#getTotalRecords(managestudent.entities.TonGiao)
+	 */
+	@Override
+	public int getTotalRecords(TonGiao tonGiao) {
+		int total = 0;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+				int conCount = 0;
+				int pos = -1;
+				int countChar = 0;
+				String tmp = "";
+
+				sqlCommand.append("SELECT COUNT(*) count ");
+				sqlCommand.append("FROM tongiao ");
+
+				if(tonGiao.getTonGiaoId() > 0) {
+					sqlCommand.append("WHERE tongiao_id = ? ");
+					conCount++;
+				}
+				if(tonGiao.getTenTonGiao().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("tentongiao LIKE ? ");
+					conCount++;
+				}
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+
+				if(sqlCommand.indexOf("tongiao_id = ?") > 0) {
+					preparedStatement.setInt(1, tonGiao.getTonGiaoId());
+				}
+				if((pos = sqlCommand.indexOf("tentongiao LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + tonGiao.getTenTonGiao() + "%");
+				}
+
+				rs = preparedStatement.executeQuery();
+
+				if(rs != null) {
+					while(rs.next()) {
+						total = rs.getInt("count");
+					}
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+				total = 0;
+			}
+			closeConnect();
+		}
+
+		return total;
 	}
 
 }

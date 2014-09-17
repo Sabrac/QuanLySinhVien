@@ -21,7 +21,7 @@ public interface HocKyDao extends BaseDao {
 	 *
 	 * @return List<HocKy> Danh sách đối tượng học kỳ
 	 */
-	List<HocKy> getAllHocKy();
+	List<HocKy> getAllHocKy(HocKy hocKy, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin 1 học kỳ bằng học kỳ id
@@ -55,4 +55,12 @@ public interface HocKyDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteHocKyById(int hocKyId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param hocKy HocKy đối tượng học kỳ (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(HocKy hocKy);
 }

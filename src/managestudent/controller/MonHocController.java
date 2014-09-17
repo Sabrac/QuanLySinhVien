@@ -17,6 +17,7 @@ import managestudent.logics.impl.MonHocLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
+import managestudent.utils.MessageProperties;
 
 /**
  * Servlet implementation class MonHocController
@@ -44,9 +45,74 @@ public class MonHocController extends HttpServlet {
 			ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
 			List<MonHoc> lsMonHoc = new ArrayList<MonHoc>();
 			List<ChuyenNganh> lsChuyenNganh = new ArrayList<ChuyenNganh>();
+			MonHoc monHoc = new MonHoc();
+			int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
+			int range = Integer.parseInt(MessageProperties.getMessage("range"));
+			List<Integer> lsPage = new ArrayList<Integer>();
+			int page = 0;
+			int totalPage = 0;
+			int totalRecords = 0;
+			int offset = 0;
+			int sortColumn = 1;
+			String sortType = "";
 
-			lsMonHoc = monHocLogics.getAllMonHoc();
-			lsChuyenNganh = chuyenNganhLogics.getAllChuyenNganh();
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+
+			if(page == 0) {
+				page = 1;
+			}
+
+			if(request.getParameter("monhocid") != null && request.getParameter("monhocid").length() > 0) {
+				try {
+					monHoc.setMonHocId(Integer.parseInt(request.getParameter("monhocid")));
+					request.setAttribute("monhocid", monHoc.getMonHocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			}
+			if(request.getParameter("tenmonhoc") != null) {
+				monHoc.setTenMonHoc(request.getParameter("tenmonhoc"));
+				request.setAttribute("tenmonhoc", monHoc.getTenMonHoc());
+			}
+			if(request.getParameter("chuyennganhid") != null && request.getParameter("chuyennganhid").length() > 0) {
+				try {
+					monHoc.setChuyenNganhId(Integer.parseInt(request.getParameter("chuyennganhid")));
+					request.setAttribute("chuyennganhid", monHoc.getChuyenNganhId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			}
+			if(request.getParameter("tenchuyennganh") != null) {
+				monHoc.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
+				request.setAttribute("tenchuyennganh", monHoc.getTenChuyenNganh());
+			}
+
+			if(request.getParameter("sortcolumn") != null) {
+				if(request.getParameter("sortcolumn").length() > 0) {
+					sortColumn = Integer.parseInt(request.getParameter("sortcolumn"));
+				}
+
+				request.setAttribute("sortcolumn", sortColumn);
+			}
+			if(request.getParameter("sorttype") != null) {
+				sortType = request.getParameter("sorttype");
+				request.setAttribute("sorttype", sortType);
+			}
+
+			totalRecords = monHocLogics.getTotalRecords(monHoc);
+			offset = (page > 0) ? limit * ((int) page - 1) : 0;
+
+			lsMonHoc = monHocLogics.getAllMonHoc(monHoc, offset, limit, sortColumn, sortType);
+			lsChuyenNganh = chuyenNganhLogics.getAllChuyenNganh(new ChuyenNganh(), 0, chuyenNganhLogics.getTotalRecords(new ChuyenNganh()), 1, "ASC");
+			lsPage = Common.getListPaging(totalRecords, limit, page);
+			totalPage = Common.getTotalPage(totalRecords, limit);
+
+			request.setAttribute("page", page);
+	        request.setAttribute("lsPage", lsPage);
+	        request.setAttribute("range", range);
+	        request.setAttribute("totalPage", totalPage);
 
 			if (lsMonHoc == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));

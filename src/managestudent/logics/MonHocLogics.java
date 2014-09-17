@@ -21,7 +21,7 @@ public interface MonHocLogics {
 	 *
 	 * @return List<MonHoc> danh sách đối tượng môn học
 	 */
-	List<MonHoc> getAllMonHoc();
+	List<MonHoc> getAllMonHoc(MonHoc monHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin môn học bằng id môn học
@@ -37,7 +37,7 @@ public interface MonHocLogics {
 	 * @param chuyenNganhId int chuyên ngành id
 	 * @return List<MonHoc> Danh sách đối tượng môn học
 	 */
-	List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId);
+	List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId, MonHoc monHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Thêm môn học
@@ -70,4 +70,11 @@ public interface MonHocLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(MonHoc monHoc);
 }

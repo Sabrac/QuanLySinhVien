@@ -21,6 +21,7 @@ import managestudent.logics.impl.HeDaoTaoLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
+import managestudent.utils.MessageProperties;
 
 /**
  * Servlet implementation class HeDaoTaoController
@@ -46,8 +47,57 @@ public class HeDaoTaoController extends HttpServlet {
 			template = Constant.HEDAOTAO;
 			HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
 			List<HeDaoTao> lsHdt = new ArrayList<HeDaoTao>();
+			HeDaoTao hdt = new HeDaoTao();
+			int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
+			int range = Integer.parseInt(MessageProperties.getMessage("range"));
+			List<Integer> lsPage = new ArrayList<Integer>();
+			int page = 0;
+			int totalPage = 0;
+			int totalRecords = 0;
+			int offset = 0;
+			int sortColumn = 1;
+			String sortType = "";
 
-			lsHdt = hdtLogics.getAllHeDaoTao();
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+
+			if(page == 0) {
+				page = 1;
+			}
+
+			if(request.getParameter("mahedaotao") != null) {
+				hdt.setMaHeDt(request.getParameter("mahedaotao"));
+				request.setAttribute("mahedaotao", hdt.getMaHeDt());
+			}
+			if(request.getParameter("tenhedaotao") != null) {
+				hdt.setTenHeDt(request.getParameter("tenhedaotao"));
+				request.setAttribute("tenhedaotao", hdt.getTenHeDt());
+			}
+
+			if(request.getParameter("sortcolumn") != null) {
+				if(request.getParameter("sortcolumn").length() > 0) {
+					sortColumn = Integer.parseInt(request.getParameter("sortcolumn"));
+				}
+
+				request.setAttribute("sortcolumn", sortColumn);
+			}
+			if(request.getParameter("sorttype") != null) {
+				sortType = request.getParameter("sorttype");
+				request.setAttribute("sorttype", sortType);
+			}
+
+			totalRecords = hdtLogics.getTotalRecords(hdt);
+			offset = (page > 0) ? limit * ((int) page - 1) : 0;
+
+			lsHdt = hdtLogics.getAllHeDaoTao(hdt, offset, limit, sortColumn, sortType);
+			lsPage = Common.getListPaging(totalRecords, limit, page);
+			totalPage = Common.getTotalPage(totalRecords, limit);
+
+			request.setAttribute("page", page);
+	        request.setAttribute("lsPage", lsPage);
+	        request.setAttribute("range", range);
+	        request.setAttribute("totalPage", totalPage);
 
 			if (lsHdt == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));

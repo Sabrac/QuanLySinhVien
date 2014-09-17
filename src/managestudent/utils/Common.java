@@ -333,6 +333,23 @@ public class Common {
 	}
 
 	/**
+	 * Kiểm tra 2 chuỗi trùng nhau
+	 *
+	 * @param s1 String
+	 * @param s2 String
+	 * @return true: 2 chuỗi trùng nhau / false: 2 chuỗi không trùng nhau
+	 */
+	public static boolean checkEquals(String s1, String s2) {
+		boolean rs = false;
+
+		if(s1.toUpperCase().trim().equals(s2.toUpperCase().trim())) {
+			rs = true;
+		}
+
+		return rs;
+	}
+
+	/**
 	 * Lấy danh sách các năm
 	 * @param start năm bắt đầu
 	 * @param end năm kết thúc

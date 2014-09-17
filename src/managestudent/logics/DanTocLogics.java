@@ -20,7 +20,7 @@ public interface DanTocLogics {
 	 * Lấy danh sách tất cả các dân tộc trong database
 	 * @return List<DanToc> Danh sách các dân tộc
 	 */
-	List<DanToc> getAllDanToc();
+	List<DanToc> getAllDanToc(DanToc danToc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy 1 dân tộc bằng id dân tộc
@@ -43,7 +43,7 @@ public interface DanTocLogics {
 	 * @param dt DanToc đối tượng dân tộc (danTocId = điều kiện update)
 	 * @return true: thành công / false: thất bại
 	 */
-	boolean updateDanTocById(DanToc dt);
+	boolean updateDanTocById(int danTocId, DanToc dt);
 
 	/**
 	 * Xóa dân tộc
@@ -59,4 +59,11 @@ public interface DanTocLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(DanToc danToc);
 }

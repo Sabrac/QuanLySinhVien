@@ -45,9 +45,9 @@ public class KhoaHocLogicsImpl implements KhoaHocLogics {
 	 * @see managestudent.logics.KhoaHocLogics#getAllKhoaHoc()
 	 */
 	@Override
-	public List<KhoaHoc> getAllKhoaHoc() {
+	public List<KhoaHoc> getAllKhoaHoc(KhoaHoc khoaHoc, int offset, int limit, int sortColumn, String sortType) {
 		KhoaHocDaoImpl khoaHocDao = new KhoaHocDaoImpl();
-		List<KhoaHoc> lsKhoaHoc = khoaHocDao.getAllKhoaHoc();
+		List<KhoaHoc> lsKhoaHoc = khoaHocDao.getAllKhoaHoc(khoaHoc, offset, limit, sortColumn, sortType);
 
 		return lsKhoaHoc;
 	}
@@ -83,6 +83,17 @@ public class KhoaHocLogicsImpl implements KhoaHocLogics {
 		List<String> lsColumn = khoaHocDao.getAllColumnName("khoahoc");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.KhoaHocLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(KhoaHoc khoaHoc) {
+		KhoaHocDaoImpl khoaHocDao = new KhoaHocDaoImpl();
+		int total = khoaHocDao.getTotalRecords(khoaHoc);
+
+		return total;
 	}
 
 }

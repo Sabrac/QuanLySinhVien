@@ -45,9 +45,9 @@ public class NganhLogicsImpl implements NganhLogics {
 	 * @see managestudent.logics.NganhLogics#getAllNganh()
 	 */
 	@Override
-	public List<Nganh> getAllNganh() {
+	public List<Nganh> getAllNganh(Nganh nganh, int offset, int limit, int sortColumn, String sortType) {
 		NganhDaoImpl nganhDao = new NganhDaoImpl();
-		List<Nganh> lsNganh = nganhDao.getAllNganh();
+		List<Nganh> lsNganh = nganhDao.getAllNganh(nganh, offset, limit, sortColumn, sortType);
 
 		return lsNganh;
 	}
@@ -83,6 +83,39 @@ public class NganhLogicsImpl implements NganhLogics {
 		List<String> lsColumn = nganhDao.getAllColumnName("nganh");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.NganhLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(Nganh nganh) {
+		NganhDaoImpl nganhDao = new NganhDaoImpl();
+		int total = nganhDao.getTotalRecords(nganh);
+
+		return total;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.NganhLogics#updateNganhByID(int, managestudent.entities.Nganh)
+	 */
+	@Override
+	public boolean updateNganhByID(int nganhId, Nganh nganh) {
+		NganhDaoImpl nganhDao = new NganhDaoImpl();
+		boolean rs = nganhDao.updateNganhByID(nganhId, nganh);
+
+		return rs;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.NganhLogics#getNganhById(int)
+	 */
+	@Override
+	public Nganh getNganhById(int nganhId) {
+		NganhDaoImpl nganhDao = new NganhDaoImpl();
+		Nganh nganh = nganhDao.getNganhById(nganhId);
+
+		return nganh;
 	}
 
 }

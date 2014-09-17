@@ -33,4 +33,12 @@ public interface BaseDao {
 	 * @return List<String> Danh sách tên các column trong bảng
 	 */
 	List<String> getAllColumnName(String tableName);
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @param tableName String tên bảng
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(String tableName);
 }

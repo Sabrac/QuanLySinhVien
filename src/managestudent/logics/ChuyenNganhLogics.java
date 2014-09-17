@@ -20,7 +20,7 @@ public interface ChuyenNganhLogics {
 	 * Lấy danh sách tất cả chuyên ngành trong database
 	 * @return List<ChuyenNganh> Danh sách các chuyên ngành
 	 */
-	List<ChuyenNganh> getAllChuyenNganh();
+	List<ChuyenNganh> getAllChuyenNganh(ChuyenNganh chuyenNganh, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy 1 chuyên ngành bằng mã chuyên ngành
@@ -34,7 +34,7 @@ public interface ChuyenNganhLogics {
 	 * @param nganhId int Id ngành
 	 * @return List<ChuyenNganh> Danh sách các chuyên ngành thuộc ngành id
 	 */
-	List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId);
+	List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId, ChuyenNganh chuyenNganh, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Thêm chuyên ngành
@@ -51,6 +51,14 @@ public interface ChuyenNganhLogics {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean updateChuyenNganhByMaChuyenNganh(ChuyenNganh cn);
+
+	/**
+	 * Cập nhật chuyên ngành bằng id chuyên ngành
+	 *
+	 * @param cn ChuyenNganh đối tượng chuyên ngành (maChuyenNganh: điều kiện update)
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateChuyenNganhById(int chuyenNganhId, ChuyenNganh cn);
 
 	/**
 	 * Xóa chuyên ngành bằng mã chuyên ngành
@@ -74,4 +82,11 @@ public interface ChuyenNganhLogics {
 	 * @return ChuyenNganh đối tượng chuyên ngành
 	 */
 	ChuyenNganh getChuyenNganhById(int chuyenNganhId);
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(ChuyenNganh chuyenNganh);
 }

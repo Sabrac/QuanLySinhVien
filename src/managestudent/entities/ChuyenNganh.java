@@ -16,6 +16,25 @@ public class ChuyenNganh {
 	private String maChuyenNganh;
 	private String tenChuyenNganh;
 	private int nganhId;
+	private String tenNganh;
+
+	/**
+	 * Constructor thông tin tổng hợp của chuyên ngành
+	 *
+	 * @param chuyenNganhId int id chuyên ngành
+	 * @param maChuyenNganh String mã chuyên ngành
+	 * @param tenChuyenNganh String tên chuyên ngành
+	 * @param nganhId int id ngành
+	 * @param tenNganh String tên ngành
+	 */
+	public ChuyenNganh(int chuyenNganhId, String maChuyenNganh, String tenChuyenNganh, int nganhId, String tenNganh) {
+		super();
+		this.chuyenNganhId = chuyenNganhId;
+		this.maChuyenNganh = maChuyenNganh;
+		this.tenChuyenNganh = tenChuyenNganh;
+		this.nganhId = nganhId;
+		this.tenNganh = tenNganh;
+	}
 
 	/**
 	 * Constructor đầy đủ tham số
@@ -30,6 +49,7 @@ public class ChuyenNganh {
 		this.maChuyenNganh = maChuyenNganh;
 		this.tenChuyenNganh = tenChuyenNganh;
 		this.nganhId = nganhId;
+		this.tenNganh = "";
 	}
 
 	/**
@@ -44,6 +64,7 @@ public class ChuyenNganh {
 		this.maChuyenNganh = maChuyenNganh;
 		this.tenChuyenNganh = tenChuyenNganh;
 		this.nganhId = nganhId;
+		this.tenNganh = "";
 	}
 
 	/**
@@ -55,6 +76,7 @@ public class ChuyenNganh {
 		this.maChuyenNganh = "";
 		this.tenChuyenNganh = "";
 		this.nganhId = -1;
+		this.tenNganh = "";
 	}
 
 	/**
@@ -91,7 +113,7 @@ public class ChuyenNganh {
 	 * @param tenChuyenNganh the tenChuyenNganh to set
 	 */
 	public void setTenChuyenNganh(String tenChuyenNganh) {
-		tenChuyenNganh = tenChuyenNganh;
+		this.tenChuyenNganh = tenChuyenNganh;
 	}
 	/**
 	 * @return the nganhId
@@ -104,5 +126,19 @@ public class ChuyenNganh {
 	 */
 	public void setNganhId(int nganhId) {
 		this.nganhId = nganhId;
+	}
+
+	/**
+	 * @return the tenNganh
+	 */
+	public String getTenNganh() {
+		return tenNganh;
+	}
+
+	/**
+	 * @param tenNganh the tenNganh to set
+	 */
+	public void setTenNganh(String tenNganh) {
+		this.tenNganh = tenNganh;
 	}
 }

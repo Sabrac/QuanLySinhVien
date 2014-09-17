@@ -23,6 +23,7 @@ import managestudent.logics.impl.NganhLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
+import managestudent.utils.MessageProperties;
 
 /**
  * Servlet implementation class ChuyenNganhController
@@ -47,12 +48,73 @@ public class ChuyenNganhController extends HttpServlet {
 		if(Common.checkLogin(request.getSession())) {
 			ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
 			template = Constant.CHUYENNGANH;
+			int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
+			int range = Integer.parseInt(MessageProperties.getMessage("range"));
+			List<Integer> lsPage = new ArrayList<Integer>();
 			NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
 			List<ChuyenNganh> lsChuyenNganh = new ArrayList<ChuyenNganh>();
 			List<Nganh> lsNganh = new ArrayList<Nganh>();
+			int page = 0;
+			int totalPage = 0;
+			int totalRecords = 0;
+			ChuyenNganh chuyenNganh = new ChuyenNganh();
+			int offset = 0;
+			int sortColumn = 1;
+			String sortType = "";
 
-			lsChuyenNganh = chuyenNganhLogics.getAllChuyenNganh();
-			lsNganh = nganhLogics.getAllNganh();
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+
+			if(page == 0) {
+				page = 1;
+			}
+
+			if(request.getParameter("machuyennganh") != null) {
+				chuyenNganh.setMaChuyenNganh(request.getParameter("machuyennganh"));
+				request.setAttribute("machuyennganh", chuyenNganh.getMaChuyenNganh());
+			}
+			if(request.getParameter("tenchuyennganh") != null) {
+				chuyenNganh.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
+				request.setAttribute("tenchuyennganh", chuyenNganh.getTenChuyenNganh());
+			}
+			if(request.getParameter("nganhid") != null) {
+				try {
+					chuyenNganh.setNganhId(Integer.parseInt(request.getParameter("nganhid")));
+					request.setAttribute("nganhid", chuyenNganh.getNganhId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			}
+			if(request.getParameter("tennganh") != null) {
+				chuyenNganh.setTenNganh(request.getParameter("tennganh"));
+				request.setAttribute("tennganh", chuyenNganh.getTenNganh());
+			}
+
+			if(request.getParameter("sortcolumn") != null) {
+				if(request.getParameter("sortcolumn").length() > 0) {
+					sortColumn = Integer.parseInt(request.getParameter("sortcolumn"));
+				}
+
+				request.setAttribute("sortcolumn", sortColumn);
+			}
+			if(request.getParameter("sorttype") != null) {
+				sortType = request.getParameter("sorttype");
+				request.setAttribute("sorttype", sortType);
+			}
+
+			totalRecords = chuyenNganhLogics.getTotalRecords(chuyenNganh);
+			offset = (page > 0) ? limit * ((int) page - 1) : 0;
+
+			lsChuyenNganh = chuyenNganhLogics.getAllChuyenNganh(chuyenNganh, offset, limit, sortColumn, sortType);
+			lsNganh = nganhLogics.getAllNganh(new Nganh(), 0, nganhLogics.getTotalRecords(new Nganh()), 1, "ASC");
+			lsPage = Common.getListPaging(totalRecords, limit, page);
+			totalPage = Common.getTotalPage(totalRecords, limit);
+
+			request.setAttribute("page", page);
+	        request.setAttribute("lsPage", lsPage);
+	        request.setAttribute("range", range);
+	        request.setAttribute("totalPage", totalPage);
 
 			if (lsChuyenNganh == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));

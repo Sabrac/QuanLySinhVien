@@ -21,7 +21,7 @@ public interface MonHocDao extends BaseDao {
 	 *
 	 * @return List<MonHoc> danh sách đối tượng môn học
 	 */
-	List<MonHoc> getAllMonHoc();
+	List<MonHoc> getAllMonHoc(MonHoc monHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin môn học bằng id môn học
@@ -37,7 +37,7 @@ public interface MonHocDao extends BaseDao {
 	 * @param chuyenNganhId int chuyên ngành id
 	 * @return List<MonHoc> Danh sách đối tượng môn học
 	 */
-	List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId);
+	List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId, MonHoc monHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Thêm môn học
@@ -63,4 +63,12 @@ public interface MonHocDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteMonHocById(int monHocId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param monHoc MonHoc đối tượng môn học (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(MonHoc monHoc);
 }

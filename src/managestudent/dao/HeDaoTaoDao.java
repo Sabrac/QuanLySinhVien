@@ -21,7 +21,7 @@ public interface HeDaoTaoDao extends BaseDao {
 	 *
 	 * @return List<HeDaoTao> Danh sách đối tượng hệ đào tạo
 	 */
-	List<HeDaoTao> getAllHeDaoTao();
+	List<HeDaoTao> getAllHeDaoTao(HeDaoTao hdt, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy hệ đào tạo bằng mã hệ
@@ -30,6 +30,14 @@ public interface HeDaoTaoDao extends BaseDao {
 	 * @return HeDaoTao đối tượng hệ đào tạo
 	 */
 	HeDaoTao getHeDaoTaoByMaHe(String maHeDaoTao);
+
+	/**
+	 * Lấy hệ đào tạo bằng id hệ
+	 *
+	 * @param hdtId int id hệ đào tạo
+	 * @return HeDaoTao đối tượng hệ đào tạo
+	 */
+	HeDaoTao getHeDaoTaoById(int hdtId);
 
 	/**
 	 * Thêm hệ đào tạo
@@ -49,10 +57,27 @@ public interface HeDaoTaoDao extends BaseDao {
 	boolean updateHeDaoTaoByMaHe(String maHeDaoTao, HeDaoTao hdt);
 
 	/**
+	 * Cập nhật hệ đào tạo bằng id hệ đào tạo
+	 *
+	 * @param hdtId id hệ đào tạo
+	 * @param hdt HeDaoTao đối tượng hệ đào tạo
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateHeDaoTaoById(int hdtId, HeDaoTao hdt);
+
+	/**
 	 * Xóa thông tin hệ đào tạo
 	 *
 	 * @param maHeDaoTao String mã hệ đào tạo
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteHeDaoTaoByMaHe(String maHeDaoTao);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param hdt HeDaoTao đối tượng hệ đào tạo (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(HeDaoTao hdt);
 }

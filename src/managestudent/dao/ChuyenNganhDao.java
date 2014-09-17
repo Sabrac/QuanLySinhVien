@@ -20,7 +20,7 @@ public interface ChuyenNganhDao extends BaseDao {
 	 * Lấy danh sách tất cả chuyên ngành trong database
 	 * @return List<ChuyenNganh> Danh sách các chuyên ngành
 	 */
-	List<ChuyenNganh> getAllChuyenNganh();
+	List<ChuyenNganh> getAllChuyenNganh(ChuyenNganh chuyenNganh, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy 1 chuyên ngành bằng mã chuyên ngành
@@ -42,7 +42,7 @@ public interface ChuyenNganhDao extends BaseDao {
 	 * @param nganhId int Id ngành
 	 * @return List<ChuyenNganh> Danh sách các chuyên ngành thuộc ngành id
 	 */
-	List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId);
+	List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId, ChuyenNganh chuyenNganh, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Thêm chuyên ngành
@@ -61,10 +61,26 @@ public interface ChuyenNganhDao extends BaseDao {
 	boolean updateChuyenNganhByMaChuyenNganh(ChuyenNganh cn);
 
 	/**
+	 * Cập nhật chuyên ngành bằng id chuyên ngành
+	 *
+	 * @param cn ChuyenNganh đối tượng chuyên ngành (maChuyenNganh: điều kiện update)
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateChuyenNganhById(int chuyenNganhId, ChuyenNganh cn);
+
+	/**
 	 * Xóa chuyên ngành bằng mã chuyên ngành
 	 *
 	 * @param maChuyenNganh String mã chuyên ngành
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteChuyenNganhByMaChuyenNganh(String maChuyenNganh);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param chuyenNganh ChuyenNganh đối tượng chuyên ngành (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(ChuyenNganh chuyenNganh);
 }

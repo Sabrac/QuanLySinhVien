@@ -21,7 +21,7 @@ public interface QuocTichDao extends BaseDao {
 	 *
 	 * @return List<QuocTich> Danh sách đối tượng quốc tịch
 	 */
-	List<QuocTich> getAllQuocTich();
+	List<QuocTich> getAllQuocTich(QuocTich quocTich, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin quốc tịch bằng id
@@ -55,4 +55,12 @@ public interface QuocTichDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteQuocTichById(int quocTichId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param quocTich QuocTich đối tượng quốc tịch (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(QuocTich quocTich);
 }

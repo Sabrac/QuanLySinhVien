@@ -21,6 +21,7 @@ import managestudent.logics.impl.NganhLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
+import managestudent.utils.MessageProperties;
 
 /**
  * Servlet implementation class NganhController
@@ -46,8 +47,56 @@ public class NganhController extends HttpServlet {
 			template = Constant.NGANH;
 			NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
 			List<Nganh> lsNganh = new ArrayList<Nganh>();
+			int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
+			int range = Integer.parseInt(MessageProperties.getMessage("range"));
+			List<Integer> lsPage = new ArrayList<Integer>();
+			int page = 0;
+			int totalPage = 0;
+			int totalRecords = 0;
+			Nganh nganh = new Nganh();
+			int offset = 0;
+			int sortColumn = 1;
+			String sortType = "";
 
-			lsNganh = nganhLogics.getAllNganh();
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+
+			if(page == 0) {
+				page = 1;
+			}
+
+			if(request.getParameter("manganh") != null) {
+				nganh.setMaNganh(request.getParameter("manganh"));
+				request.setAttribute("manganh", nganh.getMaNganh());
+			}
+			if(request.getParameter("tennganh") != null) {
+				nganh.setTenNganh(request.getParameter("tennganh"));
+				request.setAttribute("tennganh", nganh.getTenNganh());
+			}
+			if(request.getParameter("sortcolumn") != null) {
+				if(request.getParameter("sortcolumn").length() > 0) {
+					sortColumn = Integer.parseInt(request.getParameter("sortcolumn"));
+				}
+
+				request.setAttribute("sortcolumn", sortColumn);
+			}
+			if(request.getParameter("sorttype") != null) {
+				sortType = request.getParameter("sorttype");
+				request.setAttribute("sorttype", sortType);
+			}
+
+			totalRecords = nganhLogics.getTotalRecords(nganh);
+			offset = (page > 0) ? limit * ((int) page - 1) : 0;
+
+			lsNganh = nganhLogics.getAllNganh(nganh, offset, limit, sortColumn, sortType);
+			lsPage = Common.getListPaging(totalRecords, limit, page);
+			totalPage = Common.getTotalPage(totalRecords, limit);
+
+			request.setAttribute("page", page);
+	        request.setAttribute("lsPage", lsPage);
+	        request.setAttribute("range", range);
+	        request.setAttribute("totalPage", totalPage);
 
 			if (lsNganh == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));

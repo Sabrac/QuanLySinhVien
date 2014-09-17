@@ -20,7 +20,7 @@ public interface DanTocDao extends BaseDao {
 	 * Lấy danh sách tất cả các dân tộc trong database
 	 * @return List<DanToc> Danh sách các dân tộc
 	 */
-	List<DanToc> getAllDanToc();
+	List<DanToc> getAllDanToc(DanToc danToc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy 1 dân tộc bằng id dân tộc
@@ -43,7 +43,7 @@ public interface DanTocDao extends BaseDao {
 	 * @param dt DanToc đối tượng dân tộc (danTocId = điều kiện update)
 	 * @return true: thành công / false: thất bại
 	 */
-	boolean updateDanTocById(DanToc dt);
+	boolean updateDanTocById(int danTocId, DanToc dt);
 
 	/**
 	 * Xóa dân tộc
@@ -52,4 +52,12 @@ public interface DanTocDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteDanTocById(int danTocId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param danToc DanToc đối tượng dân tộc (chưa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(DanToc danToc);
 }

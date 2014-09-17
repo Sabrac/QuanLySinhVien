@@ -21,7 +21,7 @@ public interface NganhLogics {
 	 *
 	 * @return List<Nganh> Danh sách đối tượng ngành
 	 */
-	List<Nganh> getAllNganh();
+	List<Nganh> getAllNganh(Nganh nganh, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin ngành bằng mã ngành
@@ -30,6 +30,14 @@ public interface NganhLogics {
 	 * @return Nganh đối tượng ngành
 	 */
 	Nganh getNganhByMaNganh(String maNganh);
+
+	/**
+	 * Lấy thông tin ngành bằng id ngành
+	 *
+	 * @param nganhId int id ngành
+	 * @return Nganh đối tượng ngành
+	 */
+	Nganh getNganhById(int nganhId);
 
 	/**
 	 * Thêm mới ngành
@@ -62,4 +70,20 @@ public interface NganhLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(Nganh nganh);
+
+	/**
+	 * Cập nhật thông tin ngành bằng ngành id
+	 *
+	 * @param nganhId int ngành id
+	 * @param nganh Nganh đối tượng ngành
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateNganhByID(int nganhId, Nganh nganh);
 }

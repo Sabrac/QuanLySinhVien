@@ -21,7 +21,7 @@ public interface QuocTichLogics {
 	 *
 	 * @return List<QuocTich> Danh sách đối tượng quốc tịch
 	 */
-	List<QuocTich> getAllQuocTich();
+	List<QuocTich> getAllQuocTich(QuocTich quocTich, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin quốc tịch bằng id
@@ -62,4 +62,11 @@ public interface QuocTichLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(QuocTich quocTich);
 }

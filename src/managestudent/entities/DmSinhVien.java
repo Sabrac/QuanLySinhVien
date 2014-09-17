@@ -42,6 +42,36 @@ public class DmSinhVien {
 	private float diemDauVao2;
 	private float diemDauVao3;
 	private String anhSinhVien;
+	private String tenHeDaoTao;
+	private String tenLopHoc;
+	private String tenKhoaHoc;
+	private String maHeDaoTao;
+
+	/**
+	 * Constructor thông tin tổng quát của sinh viên
+	 *
+	 * @param sinhVienId int id sinh viên
+	 * @param maSinhVien String mã sinh viên
+	 * @param hoDem String họ đệm
+	 * @param ten String tên
+	 * @param ngaySinh Date ngày sinh
+	 * @param gioiTinh boolean giới tính : true - nam, false: nữ
+	 * @param heDtId int id hệ đào tạo
+	 * @param lopId int id lớp học
+	 * @param khoaHocId int id khóa học
+	 */
+	public DmSinhVien(int sinhVienId, String maSinhVien, String hoDem, String ten, Date ngaySinh, boolean gioiTinh, int heDtId, int lopId, int khoaHocId) {
+		super();
+		this.sinhVienId = sinhVienId;
+		this.maSinhVien = maSinhVien;
+		this.hoDem = hoDem;
+		this.ten = ten;
+		this.ngaySinh = ngaySinh;
+		this.gioiTinh = gioiTinh;
+		this.heDtId = heDtId;
+		this.lopId = lopId;
+		this.khoaHocId = khoaHocId;
+	}
 
 	/**
 	 * Constructor không tham số
@@ -77,6 +107,10 @@ public class DmSinhVien {
 		diemDauVao2 = -1;
 		diemDauVao3 = -1;
 		anhSinhVien = "";
+		tenHeDaoTao = "";
+		tenKhoaHoc = "";
+		tenLopHoc = "";
+		maHeDaoTao = "";
 	}
 
 	/**
@@ -143,6 +177,10 @@ public class DmSinhVien {
 		this.diemDauVao2 = diemDauVao2;
 		this.diemDauVao3 = diemDauVao3;
 		this.anhSinhVien = anhSinhVien;
+		tenHeDaoTao = "";
+		tenKhoaHoc = "";
+		tenLopHoc = "";
+		maHeDaoTao = "";
 	}
 
 	/**
@@ -480,5 +518,61 @@ public class DmSinhVien {
 	 */
 	public void setDiemDauVao3(float diemDauVao3) {
 		this.diemDauVao3 = diemDauVao3;
+	}
+
+	/**
+	 * @return the tenHeDaoTao
+	 */
+	public String getTenHeDaoTao() {
+		return tenHeDaoTao;
+	}
+
+	/**
+	 * @param tenHeDaoTao the tenHeDaoTao to set
+	 */
+	public void setTenHeDaoTao(String tenHeDaoTao) {
+		this.tenHeDaoTao = tenHeDaoTao;
+	}
+
+	/**
+	 * @return the tenLopHoc
+	 */
+	public String getTenLopHoc() {
+		return tenLopHoc;
+	}
+
+	/**
+	 * @param tenLopHoc the tenLopHoc to set
+	 */
+	public void setTenLopHoc(String tenLopHoc) {
+		this.tenLopHoc = tenLopHoc;
+	}
+
+	/**
+	 * @return the tenKhoaHoc
+	 */
+	public String getTenKhoaHoc() {
+		return tenKhoaHoc;
+	}
+
+	/**
+	 * @param tenKhoaHoc the tenKhoaHoc to set
+	 */
+	public void setTenKhoaHoc(String tenKhoaHoc) {
+		this.tenKhoaHoc = tenKhoaHoc;
+	}
+
+	/**
+	 * @return the maHeDaoTao
+	 */
+	public String getMaHeDaoTao() {
+		return maHeDaoTao;
+	}
+
+	/**
+	 * @param maHeDaoTao the maHeDaoTao to set
+	 */
+	public void setMaHeDaoTao(String maHeDaoTao) {
+		this.maHeDaoTao = maHeDaoTao;
 	}
 }

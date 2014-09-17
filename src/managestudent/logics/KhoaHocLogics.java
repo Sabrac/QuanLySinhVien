@@ -21,7 +21,7 @@ public interface KhoaHocLogics {
 	 *
 	 * @return List<KhoaHoc> Danh sách đối tượng khóa học
 	 */
-	List<KhoaHoc> getAllKhoaHoc();
+	List<KhoaHoc> getAllKhoaHoc(KhoaHoc khoaHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin khóa học bằng khóa học id
@@ -62,4 +62,11 @@ public interface KhoaHocLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(KhoaHoc khoaHoc);
 }

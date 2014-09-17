@@ -21,7 +21,7 @@ public interface HeDaoTaoLogics {
 	 *
 	 * @return List<HeDaoTao> Danh sách đối tượng hệ đào tạo
 	 */
-	List<HeDaoTao> getAllHeDaoTao();
+	List<HeDaoTao> getAllHeDaoTao(HeDaoTao hdt, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy hệ đào tạo bằng mã hệ
@@ -30,6 +30,14 @@ public interface HeDaoTaoLogics {
 	 * @return HeDaoTao đối tượng hệ đào tạo
 	 */
 	HeDaoTao getHeDaoTaoByMaHe(String maHeDaoTao);
+
+	/**
+	 * Lấy hệ đào tạo bằng id hệ
+	 *
+	 * @param hdtId int id hệ đào tạo
+	 * @return HeDaoTao đối tượng hệ đào tạo
+	 */
+	HeDaoTao getHeDaoTaoById(int hdtId);
 
 	/**
 	 * Thêm hệ đào tạo
@@ -49,6 +57,15 @@ public interface HeDaoTaoLogics {
 	boolean updateHeDaoTaoByMaHe(String maHeDaoTao, HeDaoTao hdt);
 
 	/**
+	 * Cập nhật hệ đào tạo bằng id hệ đào tạo
+	 *
+	 * @param hdtId id hệ đào tạo
+	 * @param hdt HeDaoTao đối tượng hệ đào tạo
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateHeDaoTaoById(int hdtId, HeDaoTao hdt);
+
+	/**
 	 * Xóa thông tin hệ đào tạo
 	 *
 	 * @param maHeDaoTao String mã hệ đào tạo
@@ -62,4 +79,11 @@ public interface HeDaoTaoLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(HeDaoTao hdt);
 }

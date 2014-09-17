@@ -88,25 +88,63 @@ public class KhoaHocDaoImpl extends BaseDaoImpl implements KhoaHocDao {
 	 * @see managestudent.dao.KhoaHocDao#getAllKhoaHoc()
 	 */
 	@Override
-	public List<KhoaHoc> getAllKhoaHoc() {
+	public List<KhoaHoc> getAllKhoaHoc(KhoaHoc khoaHoc, int offset, int limit, int sortColumn, String sortType) {
 		List<KhoaHoc> lsKhoaHoc = new ArrayList<KhoaHoc>();
 
 		if(connectToDB()) {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
+				int conCount = 0;
+				int pos = -1;
+				int countChar = 0;
+				String tmp = "";
 
 				sqlCommand.append("SELECT khoahoc_id, tenkhoahoc ");
 				sqlCommand.append("FROM khoahoc ");
-				sqlCommand.append("ORDER BY khoahoc_id");
+
+				if(khoaHoc.getKhoaHocId() > 0) {
+					sqlCommand.append("WHERE khoahoc_id = ? ");
+					conCount++;
+				}
+				if(khoaHoc.getTenKhoaHoc().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("tenkhoahoc LIKE ? ");
+					conCount++;
+				}
+
+				sqlCommand.append("ORDER BY ");
+				if(sortColumn == 2) {
+					sqlCommand.append("tenkhoahoc ");
+				} else {
+					sqlCommand.append("khoahoc_id ");
+				}
+				sqlCommand.append(sortType + " ");
+
+				sqlCommand.append("LIMIT " + offset + ", " + limit);
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+
+				if(sqlCommand.indexOf("khoahoc_id = ?") > 0) {
+					preparedStatement.setInt(1, khoaHoc.getKhoaHocId());
+				}
+				if((pos = sqlCommand.indexOf("tenkhoahoc LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + khoaHoc.getTenKhoaHoc() + "%");
+				}
+
 				rs = preparedStatement.executeQuery();
 
 				if(rs != null) {
 					while(rs.next()) {
-						KhoaHoc khoaHoc = new KhoaHoc(rs.getInt("khoahoc_id"), rs.getString("tenkhoahoc"));
+						KhoaHoc objKhoaHoc = new KhoaHoc(rs.getInt("khoahoc_id"), rs.getString("tenkhoahoc"));
 
-						lsKhoaHoc.add(khoaHoc);
+						lsKhoaHoc.add(objKhoaHoc);
 					}
 					rs.close();
 				}
@@ -186,6 +224,68 @@ public class KhoaHocDaoImpl extends BaseDaoImpl implements KhoaHocDao {
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.KhoaHocDao#getTotalRecords(managestudent.entities.KhoaHoc)
+	 */
+	@Override
+	public int getTotalRecords(KhoaHoc khoaHoc) {
+		int total = 0;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+				int conCount = 0;
+				int pos = -1;
+				int countChar = 0;
+				String tmp = "";
+
+				sqlCommand.append("SELECT COUNT(*) count ");
+				sqlCommand.append("FROM khoahoc ");
+
+				if(khoaHoc.getKhoaHocId() > 0) {
+					sqlCommand.append("WHERE khoahoc_id = ? ");
+					conCount++;
+				}
+				if(khoaHoc.getTenKhoaHoc().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("tenkhoahoc LIKE ? ");
+					conCount++;
+				}
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+
+				if(sqlCommand.indexOf("khoahoc_id = ?") > 0) {
+					preparedStatement.setInt(1, khoaHoc.getKhoaHocId());
+				}
+				if((pos = sqlCommand.indexOf("tenkhoahoc LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + khoaHoc.getTenKhoaHoc() + "%");
+				}
+
+				rs = preparedStatement.executeQuery();
+
+				if(rs != null) {
+					while(rs.next()) {
+						total = rs.getInt("count");
+					}
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+				total = 0;
+			}
+			closeConnect();
+		}
+
+		return total;
 	}
 
 }

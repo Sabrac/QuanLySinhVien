@@ -45,9 +45,9 @@ public class TonGIaoLogicsImpl implements TonGiaoLogics {
 	 * @see managestudent.logics.TonGiaoLogics#getAllTonGiao()
 	 */
 	@Override
-	public List<TonGiao> getAllTonGiao() {
+	public List<TonGiao> getAllTonGiao(TonGiao tonGiao, int offset, int limit, int sortColumn, String sortType) {
 		TonGiaoDaoImpl tonGiaoDao = new TonGiaoDaoImpl();
-		List<TonGiao> lsTonGiao = tonGiaoDao.getAllTonGiao();
+		List<TonGiao> lsTonGiao = tonGiaoDao.getAllTonGiao(tonGiao, offset, limit, sortColumn, sortType);
 
 		return lsTonGiao;
 	}
@@ -83,6 +83,17 @@ public class TonGIaoLogicsImpl implements TonGiaoLogics {
 		List<String> lsColumn = tonGiaoDao.getAllColumnName("tongiao");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.TonGiaoLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(TonGiao tonGiao) {
+		TonGiaoDaoImpl tonGiaoDao = new TonGiaoDaoImpl();
+		int total = tonGiaoDao.getTotalRecords(tonGiao);
+
+		return total;
 	}
 
 }

@@ -45,9 +45,9 @@ public class MonHocLogicsImpl implements MonHocLogics {
 	 * @see managestudent.logics.MonHocLogics#getAllMonHoc()
 	 */
 	@Override
-	public List<MonHoc> getAllMonHoc() {
+	public List<MonHoc> getAllMonHoc(MonHoc monHoc, int offset, int limit, int sortColumn, String sortType) {
 		MonHocDaoImpl monHocDao = new MonHocDaoImpl();
-		List<MonHoc> lsMonHoc = monHocDao.getAllMonHoc();
+		List<MonHoc> lsMonHoc = monHocDao.getAllMonHoc(monHoc, offset, limit, sortColumn, sortType);
 
 		return lsMonHoc;
 	}
@@ -56,9 +56,9 @@ public class MonHocLogicsImpl implements MonHocLogics {
 	 * @see managestudent.logics.MonHocLogics#getMonHocByChuyenNganh(int)
 	 */
 	@Override
-	public List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId) {
+	public List<MonHoc> getMonHocByChuyenNganh(int chuyenNganhId, MonHoc monHoc, int offset, int limit, int sortColumn, String sortType) {
 		MonHocDaoImpl monHocDao = new MonHocDaoImpl();
-		List<MonHoc> lsMonHoc = monHocDao.getMonHocByChuyenNganh(chuyenNganhId);
+		List<MonHoc> lsMonHoc = monHocDao.getMonHocByChuyenNganh(chuyenNganhId, monHoc, offset, limit, sortColumn, sortType);
 
 		return lsMonHoc;
 	}
@@ -94,6 +94,17 @@ public class MonHocLogicsImpl implements MonHocLogics {
 		List<String> lsColumn = monHocDao.getAllColumnName("monhoc");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.MonHocLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(MonHoc monHoc) {
+		MonHocDaoImpl monHocDao = new MonHocDaoImpl();
+		int total = monHocDao.getTotalRecords(monHoc);
+
+		return total;
 	}
 
 }

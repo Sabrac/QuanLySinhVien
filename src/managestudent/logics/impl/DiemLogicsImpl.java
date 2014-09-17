@@ -74,4 +74,15 @@ public class DiemLogicsImpl implements DiemLogics {
 		return lsColumn;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DiemLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords() {
+		DiemDaoImpl diemDao = new DiemDaoImpl();
+		int total = diemDao.getTotalRecords("diem");
+
+		return total;
+	}
+
 }

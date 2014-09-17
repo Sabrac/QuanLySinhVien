@@ -21,7 +21,7 @@ public interface TonGiaoDao extends BaseDao {
 	 *
 	 * @return List<TonGiao> Danh sách đối tượng tôn giáo
 	 */
-	List<TonGiao> getAllTonGiao();
+	List<TonGiao> getAllTonGiao(TonGiao tonGiao, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin tôn giáo bằng id tôn giáo
@@ -55,4 +55,12 @@ public interface TonGiaoDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteTonGiaoById(int tonGiaoId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param tonGiao TonGiao đối tượng tôn giáo (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(TonGiao tonGiao);
 }

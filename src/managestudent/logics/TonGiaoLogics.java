@@ -21,7 +21,7 @@ public interface TonGiaoLogics {
 	 *
 	 * @return List<TonGiao> Danh sách đối tượng tôn giáo
 	 */
-	List<TonGiao> getAllTonGiao();
+	List<TonGiao> getAllTonGiao(TonGiao tonGiao, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin tôn giáo bằng id tôn giáo
@@ -62,4 +62,11 @@ public interface TonGiaoLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(TonGiao tonGiao);
 }

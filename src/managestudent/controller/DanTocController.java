@@ -15,6 +15,7 @@ import managestudent.logics.impl.DanTocLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
+import managestudent.utils.MessageProperties;
 
 /**
  * Servlet implementation class DanTocController
@@ -38,9 +39,60 @@ public class DanTocController extends HttpServlet {
 
 		if(Common.checkLogin(request.getSession())) {
 			DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
-			List<DanToc> lsDanToc = new ArrayList<DanToc>();
+			List<DanToc> lsDanToc = new ArrayList<DanToc>();int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
+			int range = Integer.parseInt(MessageProperties.getMessage("range"));
+			List<Integer> lsPage = new ArrayList<Integer>();
+			int page = 0;
+			int totalPage = 0;
+			int totalRecords = 0;
+			DanToc danToc = new DanToc();
+			int offset = 0;
+			int sortColumn = 1;
+			String sortType = "";
 
-			lsDanToc = danTocLogics.getAllDanToc();
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+
+			if(page == 0) {
+				page = 1;
+			}
+
+			if(request.getParameter("dantocid") != null) {
+				try {
+					danToc.setDanTocId(Integer.parseInt(request.getParameter("dantocid")));
+					request.setAttribute("dantocid", danToc.getDanTocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			}
+			if(request.getParameter("tendantoc") != null) {
+				danToc.setTenDanToc(request.getParameter("tendantoc"));
+				request.setAttribute("tendantoc", danToc.getTenDanToc());
+			}
+			if(request.getParameter("sortcolumn") != null) {
+				if(request.getParameter("sortcolumn").length() > 0) {
+					sortColumn = Integer.parseInt(request.getParameter("sortcolumn"));
+				}
+
+				request.setAttribute("sortcolumn", sortColumn);
+			}
+			if(request.getParameter("sorttype") != null) {
+				sortType = request.getParameter("sorttype");
+				request.setAttribute("sorttype", sortType);
+			}
+
+			totalRecords = danTocLogics.getTotalRecords(danToc);
+			offset = (page > 0) ? limit * ((int) page - 1) : 0;
+
+			lsDanToc = danTocLogics.getAllDanToc(danToc, offset, limit, sortColumn, sortType);
+			lsPage = Common.getListPaging(totalRecords, limit, page);
+			totalPage = Common.getTotalPage(totalRecords, limit);
+
+			request.setAttribute("page", page);
+	        request.setAttribute("lsPage", lsPage);
+	        request.setAttribute("range", range);
+	        request.setAttribute("totalPage", totalPage);
 
 			if (lsDanToc == null) {
 				lsMessage.add(MessageErrorProperties.getMessage("error_022"));

@@ -45,9 +45,9 @@ public class DanTocLogicsImpl implements DanTocLogics {
 	 * @see managestudent.logics.DanTocLogics#getAllDanToc()
 	 */
 	@Override
-	public List<DanToc> getAllDanToc() {
+	public List<DanToc> getAllDanToc(DanToc danToc, int offset, int limit, int sortColumn, String sortType) {
 		DanTocDaoImpl danTocDao = new DanTocDaoImpl();
-		List<DanToc> lsDanToc = danTocDao.getAllDanToc();
+		List<DanToc> lsDanToc = danTocDao.getAllDanToc(danToc, offset, limit, sortColumn, sortType);
 
 		return lsDanToc;
 	}
@@ -67,9 +67,9 @@ public class DanTocLogicsImpl implements DanTocLogics {
 	 * @see managestudent.logics.DanTocLogics#updateDanTocById(managestudent.entities.DanToc)
 	 */
 	@Override
-	public boolean updateDanTocById(DanToc dt) {
+	public boolean updateDanTocById(int danTocId, DanToc dt) {
 		DanTocDaoImpl danTocDao = new DanTocDaoImpl();
-		boolean rs = danTocDao.updateDanTocById(dt);
+		boolean rs = danTocDao.updateDanTocById(danTocId, dt);
 
 		return rs;
 	}
@@ -83,6 +83,17 @@ public class DanTocLogicsImpl implements DanTocLogics {
 		List<String> lsColumn = danTocDao.getAllColumnName("dantoc");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DanTocLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(DanToc danToc) {
+		DanTocDaoImpl danTocDao = new DanTocDaoImpl();
+		int total = danTocDao.getTotalRecords(danToc);
+
+		return total;
 	}
 
 }

@@ -18,9 +18,25 @@ public class MonHoc {
 	private float heSoChuyenCan;
 	private float heSoGiuaKy;
 	private float heSoHocKy;
-	private int tinhTrang;
 	private int chuyenNganhId;
 	private int soNgayNghi;
+	private String tenChuyenNganh;
+
+	/**
+	 * Constructor thông tin tổng quát của môn học
+	 *
+	 * @param monHocId id môn học
+	 * @param tenMonHoc String tên môn học
+	 * @param chuyenNganhId int id chuyên ngành của môn học
+	 * @param tenChuyenNganh String tên chuyên ngành của môn học
+	 */
+	public MonHoc(int monHocId, String tenMonHoc, int chuyenNganhId, String tenChuyenNganh) {
+		super();
+		this.monHocId = monHocId;
+		this.tenMonHoc = tenMonHoc;
+		this.chuyenNganhId = chuyenNganhId;
+		this.tenChuyenNganh = tenChuyenNganh;
+	}
 
 	/**
 	 * Constructor không tham số
@@ -34,9 +50,9 @@ public class MonHoc {
 		heSoChuyenCan = -1;
 		heSoGiuaKy = -1;
 		heSoHocKy = -1;
-		tinhTrang = -1;
 		chuyenNganhId = -1;
 		soNgayNghi = -1;
+		tenChuyenNganh = "";
 	}
 
 	/**
@@ -48,20 +64,19 @@ public class MonHoc {
 	 * @param heSoChuyenCan float hệ số chuyên cần
 	 * @param heSoGiuaKy float hệ số giữa kỳ
 	 * @param heSoHocKy float hệ số học kỳ
-	 * @param tinhTrang int tình trạng
 	 * @param chuyenNganhId int chuyên ngành id
 	 * @param soNgayNghi int số ngày nghỉ
 	 */
-	public MonHoc(int monHocId, String tenMonHoc, String soTrinh, float heSoChuyenCan, float heSoGiuaKy, float heSoHocKy, int tinhTrang, int chuyenNganhId, int soNgayNghi) {
+	public MonHoc(int monHocId, String tenMonHoc, String soTrinh, float heSoChuyenCan, float heSoGiuaKy, float heSoHocKy, int chuyenNganhId, int soNgayNghi) {
 		this.monHocId = monHocId;
 		this.tenMonHoc = tenMonHoc;
 		this.soTrinh = soTrinh;
 		this.heSoChuyenCan = heSoChuyenCan;
 		this.heSoGiuaKy = heSoGiuaKy;
 		this.heSoHocKy = heSoHocKy;
-		this.tinhTrang = tinhTrang;
 		this.chuyenNganhId = chuyenNganhId;
 		this.soNgayNghi = soNgayNghi;
+		tenChuyenNganh = "";
 	}
 
 	/**
@@ -72,20 +87,19 @@ public class MonHoc {
 	 * @param heSoChuyenCan float hệ số chuyên cần
 	 * @param heSoGiuaKy float hệ số giữa kỳ
 	 * @param heSoHocKy float hệ số học kỳ
-	 * @param tinhTrang int tình trạng
 	 * @param chuyenNganhId int chuyên ngành id
 	 * @param soNgayNghi int số ngày nghỉ
 	 */
-	public MonHoc(String tenMonHoc, String soTrinh, float heSoChuyenCan, float heSoGiuaKy, float heSoHocKy, int tinhTrang, int chuyenNganhId, int soNgayNghi) {
+	public MonHoc(String tenMonHoc, String soTrinh, float heSoChuyenCan, float heSoGiuaKy, float heSoHocKy, int chuyenNganhId, int soNgayNghi) {
 		this.monHocId = -1;
 		this.tenMonHoc = tenMonHoc;
 		this.soTrinh = soTrinh;
 		this.heSoChuyenCan = heSoChuyenCan;
 		this.heSoGiuaKy = heSoGiuaKy;
 		this.heSoHocKy = heSoHocKy;
-		this.tinhTrang = tinhTrang;
 		this.chuyenNganhId = chuyenNganhId;
 		this.soNgayNghi = soNgayNghi;
+		tenChuyenNganh = "";
 	}
 
 	/**
@@ -184,16 +198,18 @@ public class MonHoc {
 	public void setHeSoHocKy(float heSoHocKy) {
 		this.heSoHocKy = heSoHocKy;
 	}
+
 	/**
-	 * @return the tinhTrang
+	 * @return the tenChuyenNganh
 	 */
-	public int getTinhTrang() {
-		return tinhTrang;
+	public String getTenChuyenNganh() {
+		return tenChuyenNganh;
 	}
+
 	/**
-	 * @param tinhTrang the tinhTrang to set
+	 * @param tenChuyenNganh the tenChuyenNganh to set
 	 */
-	public void setTinhTrang(int tinhTrang) {
-		this.tinhTrang = tinhTrang;
+	public void setTenChuyenNganh(String tenChuyenNganh) {
+		this.tenChuyenNganh = tenChuyenNganh;
 	}
 }

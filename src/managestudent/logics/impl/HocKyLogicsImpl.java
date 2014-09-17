@@ -45,9 +45,9 @@ public class HocKyLogicsImpl implements HocKyLogics {
 	 * @see managestudent.logics.HocKyLogics#getAllHocKy()
 	 */
 	@Override
-	public List<HocKy> getAllHocKy() {
+	public List<HocKy> getAllHocKy(HocKy hocKy, int offset, int limit, int sortColumn, String sortType) {
 		HocKyDaoImpl hocKyDao = new HocKyDaoImpl();
-		List<HocKy> lsHocKy = hocKyDao.getAllHocKy();
+		List<HocKy> lsHocKy = hocKyDao.getAllHocKy(hocKy, offset, limit, sortColumn, sortType);
 
 		return lsHocKy;
 	}
@@ -83,6 +83,17 @@ public class HocKyLogicsImpl implements HocKyLogics {
 		List<String> lsColumn = hocKyDao.getAllColumnName("hocky");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HocKyLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(HocKy hocKy) {
+		HocKyDaoImpl hocKyDao = new HocKyDaoImpl();
+		int total = hocKyDao.getTotalRecords(hocKy);
+
+		return total;
 	}
 
 }

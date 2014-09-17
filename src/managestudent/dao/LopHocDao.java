@@ -21,7 +21,7 @@ public interface LopHocDao extends BaseDao {
 	 *
 	 * @return List<LopHoc> Danh sách đối tượng lớp học
 	 */
-	List<LopHoc> getAllLopHoc();
+	List<LopHoc> getAllLopHoc(LopHoc lopHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin lớp học bằng lớp học id
@@ -55,4 +55,12 @@ public interface LopHocDao extends BaseDao {
 	 * @return true: thành công / false: thất bại
 	 */
 	boolean deleteLopHocById(int lopHocId);
+
+	/**
+	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 *
+	 * @param lopHoc LopHoc đối tượng lớp học (chứa thông tin điều kiện tìm kiếm)
+	 * @return int tổng số bản ghi thỏa mãn điều kiện tìm kiếm
+	 */
+	int getTotalRecords(LopHoc lopHoc);
 }

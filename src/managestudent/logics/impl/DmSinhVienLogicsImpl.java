@@ -45,9 +45,9 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 	 * @see managestudent.logics.DmSinhVienLogics#getAllSinhVien()
 	 */
 	@Override
-	public List<DmSinhVien> getAllSinhVien() {
+	public List<DmSinhVien> getAllSinhVien(DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType) {
 		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
-		List<DmSinhVien> lsSinhVien = sinhVienDao.getAllSinhVien();
+		List<DmSinhVien> lsSinhVien = sinhVienDao.getAllSinhVien(sinhVien, offset, limit, sortColumn, sortType);
 
 		return lsSinhVien;
 	}
@@ -56,9 +56,9 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 	 * @see managestudent.logics.DmSinhVienLogics#getListSinhVienByHeDaoTaoId(int)
 	 */
 	@Override
-	public List<DmSinhVien> getListSinhVienByHeDaoTaoId(int heDaoTaoId) {
+	public List<DmSinhVien> getListSinhVienByHeDaoTaoId(int heDaoTaoId, DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType) {
 		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
-		List<DmSinhVien> lsSinhVien = sinhVienDao.getListSinhVienByHeDaoTaoId(heDaoTaoId);
+		List<DmSinhVien> lsSinhVien = sinhVienDao.getListSinhVienByHeDaoTaoId(heDaoTaoId, sinhVien, offset, limit, sortColumn, sortType);
 
 		return lsSinhVien;
 	}
@@ -67,9 +67,9 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 	 * @see managestudent.logics.DmSinhVienLogics#getListSinhVienByKhoaHocId(int)
 	 */
 	@Override
-	public List<DmSinhVien> getListSinhVienByKhoaHocId(int khoaHocId) {
+	public List<DmSinhVien> getListSinhVienByKhoaHocId(int khoaHocId, DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType) {
 		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
-		List<DmSinhVien> lsSinhVien = sinhVienDao.getListSinhVienByKhoaHocId(khoaHocId);
+		List<DmSinhVien> lsSinhVien = sinhVienDao.getListSinhVienByKhoaHocId(khoaHocId, sinhVien, offset, limit, sortColumn, sortType);
 
 		return lsSinhVien;
 	}
@@ -78,9 +78,9 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 	 * @see managestudent.logics.DmSinhVienLogics#getListSinhVienByLopId(int)
 	 */
 	@Override
-	public List<DmSinhVien> getListSinhVienByLopId(int lopId) {
+	public List<DmSinhVien> getListSinhVienByLopId(int lopId, DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType) {
 		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
-		List<DmSinhVien> lsSinhVien = sinhVienDao.getListSinhVienByLopId(lopId);
+		List<DmSinhVien> lsSinhVien = sinhVienDao.getListSinhVienByLopId(lopId, sinhVien, offset, limit, sortColumn, sortType);
 
 		return lsSinhVien;
 	}
@@ -117,6 +117,50 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 		List<String> lsColumn = sinhVienDao.getAllColumnName("dmsinhvien");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(DmSinhVien sinhVien) {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		int total = sinhVienDao.getTotalRecords(sinhVien);
+
+		return total;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#getAllSinhVienDetail(managestudent.entities.DmSinhVien, int, int, int, java.lang.String)
+	 */
+	@Override
+	public List<DmSinhVien> getAllSinhVienDetail(DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType) {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		List<DmSinhVien> lsSinhVien = sinhVienDao.getAllSinhVienDetail(sinhVien, offset, limit, sortColumn, sortType);
+
+		return lsSinhVien;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#getSinhVienById(int)
+	 */
+	@Override
+	public DmSinhVien getSinhVienById(int sinhVienId) {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		DmSinhVien sinhVien = sinhVienDao.getSinhVienById(sinhVienId);
+
+		return sinhVien;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#updateSinhVienById(int, managestudent.entities.DmSinhVien)
+	 */
+	@Override
+	public boolean updateSinhVienById(int idSinhVien, DmSinhVien sinhVien) {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		boolean rs = sinhVienDao.updateSinhVienById(idSinhVien, sinhVien);
+
+		return rs;
 	}
 
 }

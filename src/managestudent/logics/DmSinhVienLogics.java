@@ -21,7 +21,14 @@ public interface DmSinhVienLogics {
 	 *
 	 * @return List<DmSinhVien> Danh sách đối tượng DmSinhVien
 	 */
-	List<DmSinhVien> getAllSinhVien();
+	List<DmSinhVien> getAllSinhVien(DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType);
+
+	/**
+	 * Lấy danh sách thông tin chi tiết tất cả sinh viên
+	 *
+	 * @return List<DmSinhVien> Danh sách đối tượng DmSinhVien
+	 */
+	List<DmSinhVien> getAllSinhVienDetail(DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy danh sách sinh viên trong hệ đào tạo
@@ -29,7 +36,7 @@ public interface DmSinhVienLogics {
 	 * @param heDaoTaoId int hệ đào tạo id
 	 * @return List<DmSinhVien> Danh sách đối tượng DmSinhVien
 	 */
-	List<DmSinhVien> getListSinhVienByHeDaoTaoId(int heDaoTaoId);
+	List<DmSinhVien> getListSinhVienByHeDaoTaoId(int heDaoTaoId, DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy danh sách sinh viên trong lớp
@@ -37,7 +44,7 @@ public interface DmSinhVienLogics {
 	 * @param lopId int lớp id
 	 * @return List<DmSinhVien> Danh sách đối tượng DmSinhVien
 	 */
-	List<DmSinhVien> getListSinhVienByLopId(int lopId);
+	List<DmSinhVien> getListSinhVienByLopId(int lopId, DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy danh sách sinh viên trong khóa học
@@ -45,7 +52,7 @@ public interface DmSinhVienLogics {
 	 * @param khoaHocId int khóa học id
 	 * @return List<DmSinhVien> Danh sách đối tượng DmSinhVien
 	 */
-	List<DmSinhVien> getListSinhVienByKhoaHocId(int khoaHocId);
+	List<DmSinhVien> getListSinhVienByKhoaHocId(int khoaHocId, DmSinhVien sinhVien, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy sinh viên theo mã sinh viên
@@ -54,6 +61,14 @@ public interface DmSinhVienLogics {
 	 * @return DmSinhVien đối tượng DmSinhVien
 	 */
 	DmSinhVien getSinhVienByMaSinhVien(String maSinhVien);
+
+	/**
+	 * Lấy sinh viên theo id sinh viên
+	 *
+	 * @param sinhVienId int id sinh viên
+	 * @return DmSinhVien đối tượng DmSinhVien
+	 */
+	DmSinhVien getSinhVienById(int sinhVienId);
 
 	/**
 	 * Thêm sinh viên
@@ -73,6 +88,15 @@ public interface DmSinhVienLogics {
 	boolean updateSinhVienByMaSinhVien(String maSinhVien, DmSinhVien sinhVien);
 
 	/**
+	 * Cập nhật thông tin sinh viên bằng id
+	 *
+	 * @param idSinhVien id sinh viên
+	 * @param sinhVien DmSinhVien đối tượng DmSinhVien
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean updateSinhVienById(int idSinhVien, DmSinhVien sinhVien);
+
+	/**
 	 * Xóa thông tin sinh viên
 	 *
 	 * @param maSinhVien String mã sinh viên
@@ -86,4 +110,11 @@ public interface DmSinhVienLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(DmSinhVien sinhVien);
 }

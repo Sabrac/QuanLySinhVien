@@ -45,9 +45,9 @@ public class HeDaoTaoLogicsImpl implements HeDaoTaoLogics {
 	 * @see managestudent.logics.HeDaoTaoLogics#getAllHeDaoTao()
 	 */
 	@Override
-	public List<HeDaoTao> getAllHeDaoTao() {
+	public List<HeDaoTao> getAllHeDaoTao(HeDaoTao hdt, int offset, int limit, int sortColumn, String sortType) {
 		HeDaoTaoDaoImpl hdtDao = new HeDaoTaoDaoImpl();
-		List<HeDaoTao> lsHdt = hdtDao.getAllHeDaoTao();
+		List<HeDaoTao> lsHdt = hdtDao.getAllHeDaoTao(hdt, offset, limit, sortColumn, sortType);
 
 		return lsHdt;
 	}
@@ -83,6 +83,39 @@ public class HeDaoTaoLogicsImpl implements HeDaoTaoLogics {
 		List<String> lsColumn = hdtDao.getAllColumnName("hedaotao");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HeDaoTaoLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(HeDaoTao hdt) {
+		HeDaoTaoDaoImpl hdtDao = new HeDaoTaoDaoImpl();
+		int total = hdtDao.getTotalRecords(hdt);
+
+		return total;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HeDaoTaoLogics#updateHeDaoTaoById(int, managestudent.entities.HeDaoTao)
+	 */
+	@Override
+	public boolean updateHeDaoTaoById(int hdtId, HeDaoTao hdt) {
+		HeDaoTaoDaoImpl hdtDao = new HeDaoTaoDaoImpl();
+		boolean rs = hdtDao.updateHeDaoTaoById(hdtId, hdt);
+
+		return rs;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HeDaoTaoLogics#getHeDaoTaoById(int)
+	 */
+	@Override
+	public HeDaoTao getHeDaoTaoById(int hdtId) {
+		HeDaoTaoDaoImpl hdtDao = new HeDaoTaoDaoImpl();
+		HeDaoTao hdt = hdtDao.getHeDaoTaoById(hdtId);
+
+		return hdt;
 	}
 
 }

@@ -6,7 +6,6 @@
  */
 package managestudent.logics.impl;
 
-import java.net.ConnectException;
 import java.util.List;
 
 import managestudent.dao.impl.ChuyenNganhDaoImpl;
@@ -47,9 +46,9 @@ public class ChuyenNganhLogicsImpl implements ChuyenNganhLogics {
 	 * @see managestudent.logics.ChuyenNganhLogics#getAllChuyenNganh()
 	 */
 	@Override
-	public List<ChuyenNganh> getAllChuyenNganh() {
+	public List<ChuyenNganh> getAllChuyenNganh(ChuyenNganh chuyenNganh, int offset, int limit, int sortColumn, String sortType) {
 		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
-		List<ChuyenNganh> lsChuyenNganh = chuyenNganhDao.getAllChuyenNganh();
+		List<ChuyenNganh> lsChuyenNganh = chuyenNganhDao.getAllChuyenNganh(chuyenNganh, offset, limit, sortColumn, sortType);
 
 		return lsChuyenNganh;
 	}
@@ -69,9 +68,9 @@ public class ChuyenNganhLogicsImpl implements ChuyenNganhLogics {
 	 * @see managestudent.logics.ChuyenNganhLogics#getChuyenNganhByNganhId(int)
 	 */
 	@Override
-	public List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId) {
+	public List<ChuyenNganh> getChuyenNganhByNganhId(int nganhId, ChuyenNganh chuyenNganh, int offset, int limit, int sortColumn, String sortType) {
 		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
-		List<ChuyenNganh> lsChuyenNganh = chuyenNganhDao.getChuyenNganhByNganhId(nganhId);
+		List<ChuyenNganh> lsChuyenNganh = chuyenNganhDao.getChuyenNganhByNganhId(nganhId, chuyenNganh, offset, limit, sortColumn, sortType);
 
 		return lsChuyenNganh;
 	}
@@ -107,6 +106,28 @@ public class ChuyenNganhLogicsImpl implements ChuyenNganhLogics {
 		ChuyenNganh cn = chuyenNganhDao.getChuyenNganhById(chuyenNganhId);
 
 		return cn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.ChuyenNganhLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(ChuyenNganh chuyenNganh) {
+		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
+		int total = chuyenNganhDao.getTotalRecords(chuyenNganh);
+
+		return total;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.ChuyenNganhLogics#updateChuyenNganhById(int, managestudent.entities.ChuyenNganh)
+	 */
+	@Override
+	public boolean updateChuyenNganhById(int chuyenNganhId, ChuyenNganh cn) {
+		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
+		boolean rs = chuyenNganhDao.updateChuyenNganhById(chuyenNganhId, cn);
+
+		return rs;
 	}
 
 }

@@ -45,9 +45,9 @@ public class QuocTichLogicsImpl implements QuocTichLogics {
 	 * @see managestudent.logics.QuocTichLogics#getAllQuocTich()
 	 */
 	@Override
-	public List<QuocTich> getAllQuocTich() {
+	public List<QuocTich> getAllQuocTich(QuocTich quocTich, int offset, int limit, int sortColumn, String sortType) {
 		QuocTichDaoImpl quocTichDao = new QuocTichDaoImpl();
-		List<QuocTich> lsQuocTich = quocTichDao.getAllQuocTich();
+		List<QuocTich> lsQuocTich = quocTichDao.getAllQuocTich(quocTich, offset, limit, sortColumn, sortType);
 
 		return lsQuocTich;
 	}
@@ -83,6 +83,17 @@ public class QuocTichLogicsImpl implements QuocTichLogics {
 		List<String> lsColumn = quocTichDao.getAllColumnName("quoctich");
 
 		return lsColumn;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.logics.QuocTichLogics#getTotalRecords()
+	 */
+	@Override
+	public int getTotalRecords(QuocTich quocTich) {
+		QuocTichDaoImpl quocTichDao = new QuocTichDaoImpl();
+		int total = quocTichDao.getTotalRecords(quocTich);
+
+		return total;
 	}
 
 }

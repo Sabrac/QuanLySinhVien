@@ -21,7 +21,7 @@ public interface LopHocLogics {
 	 *
 	 * @return List<LopHoc> Danh sách đối tượng lớp học
 	 */
-	List<LopHoc> getAllLopHoc();
+	List<LopHoc> getAllLopHoc(LopHoc lopHoc, int offset, int limit, int sortColumn, String sortType);
 
 	/**
 	 * Lấy thông tin lớp học bằng lớp học id
@@ -62,4 +62,11 @@ public interface LopHocLogics {
 	 * @return List<String> Danh sách tên các column có trong table
 	 */
 	List<String> getAllColumnName();
+
+	/**
+	 * Lấy toàn bộ số bản ghi trong bảng
+	 *
+	 * @return int tổng số bản ghi
+	 */
+	int getTotalRecords(LopHoc lopHoc);
 }
