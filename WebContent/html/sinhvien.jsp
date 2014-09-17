@@ -1,64 +1,86 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<meta charset="utf-8">
+	<title>Retina Dashboard</title>
+	<link rel="stylesheet" href="css/style.css" media="all" />
+	<script>
+		function redirect(dmName) {
+			window.location.href = "ListDM.do?name=" + dmName;
+		}
+	</script>
+	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
 <body>
-	<c:forEach items="${lsMessage}" var="message">
+<div class="testing">
+<header class="main">
+	<h1><strong>Retina</strong> Dashboard</h1>
+	<input type="text" value="search" />
+</header>
+<section class="user">
+	<div class="profile-img">
+		<p><img src="./images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
+	</div>
+	<div class="buttons">
+		<span class="button">Help</span>
+		<span class="button blue"><a href="/QuanLySinhVien/Logout.do">Đăng xuất</a></span>
+	</div>
+</section>
+</div>
+<jsp:include page="left-menu.jsp"></jsp:include>
+
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon">&#128200;</span>
+			<hgroup>
+				<h1>QUẢN LÝ DANH MỤC</h1>
+				<h2>Danh sách các danh mục</h2>
+			</hgroup>
+		</header>
+		<div class="content cycle">
+<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>
 	<br />
 
 	<c:if test="${showTable == null}">
 
-	<form action="ChuyenNganh.do" name="searchform" id="searchform" method="post">
+	<form action="ChuyenNganh.do" name="searchform" id="searchform-sinhvien" method="post">
+		<fieldset>
+		<legend>Personalia:</legend>
+		</fieldset>
 		<table align="center" class="searchbox">
+
 			<tr>
 				<td>
 					Mã sinh viên
-				</td>
-				<td>
 					<input type="text" name="masv" value="${masv}" />
 				</td>
-				<td colspan="4" valign="middle" align="center">
-					<input type="submit" name="btnSubmit" id="btnSubmit" value="Tìm kiếm" />
-				</td>
-			</tr>
-			<tr>
 				<td>
 					Họ đệm
-				</td>
-				<td>
 					<input type="text" name="hodem" value="${hodem}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên
-				</td>
-				<td>
 					<input type="text" name="ten" value="${ten}" />
-				</td>
-			</tr>
-			<tr>
-				<td>
+				</td><td>
 					Ngày sinh
-				</td>
-				<td>
 					<input type="text" name="ngaysinh" value="${ngaysinh}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					Giới tính
-				</td>
-				<td>
 					<select name="gioitinh">
 						<option value="-1">
 							Chọn giới tính
@@ -83,39 +105,20 @@
 						</c:choose>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Số chứng minh thư
-				</td>
-				<td>
 					<input type="text" name="socmt" value="${socmt}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Số điện thoại
-				</td>
-				<td>
 					<input type="text" name="sodienthoai" value="${sodienthoai}" />
-				</td>
-			</tr>
-			<tr>
-				<td>
+				</td><td>
 					Nơi sinh
-				</td>
-				<td>
 					<input type="text" name="noisinh" value="${noisinh}" />
 				</td>
 			</tr>
-			<tr>
-				<td>
-					Quê quán
-				</td>
-				<td>
-					<input type="text" name="quequan" value="${quequan}" />
-				</td>
-			</tr>
+
+			<!--
 			<tr>
 				<td>
 					Hộ khẩu thường trú
@@ -132,19 +135,18 @@
 					<input type="text" name="noiohientai" value="${noiohientai}" />
 				</td>
 			</tr>
+			-->
 			<tr>
+				<td>
+					Quê quán
+					<input type="text" name="quequan" value="${quequan}" />
+				</td>
 				<td>
 					Chế độ ưu đãi
-				</td>
-				<td>
 					<input type="text" name="chedo" value="${chedo}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Dân tộc
-				</td>
-				<td>
 					<select name="dantoc">
 						<option value="-1">
 							Chọn dân tộc
@@ -165,12 +167,8 @@
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tôn giáo
-				</td>
-				<td>
 					<select name="tongiao">
 						<option value="-1">
 							Chọn tôn giáo
@@ -192,7 +190,7 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
+			<!--<tr>
 				<td>
 					Quốc tịch
 				</td>
@@ -218,7 +216,7 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
+			--><!--<tr>
 				<td>
 					Họ tên bố
 				</td>
@@ -250,11 +248,10 @@
 					<input type="text" name="nghenghiepme" value="${nghenghiepme}" />
 				</td>
 			</tr>
+			-->
 			<tr>
 				<td>
 					Hệ đào tạo
-				</td>
-				<td>
 					<select name="hedaotao">
 						<option value="-1">
 							Chọn hệ đào tạo
@@ -275,12 +272,8 @@
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên lớp học
-				</td>
-				<td>
 					<select name="lophoc">
 						<option value="-1">
 							Chọn lớp học
@@ -301,12 +294,8 @@
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên khóa học
-				</td>
-				<td>
 					<select name="khoahoc">
 						<option value="-1">
 							Chọn khóa học
@@ -327,8 +316,8 @@
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
+
+			<!--<tr>
 				<td>
 					Ngày nhập học
 				</td>
@@ -360,11 +349,10 @@
 					<input type="text" name="diemdauvao3" value="${diemdauvao3}" />
 				</td>
 			</tr>
-			<tr>
+			-->
+
 				<td>
 					Học kỳ
-				</td>
-				<td>
 					<select name="hocky">
 						<option value="-1">
 							Chọn học kỳ
@@ -385,6 +373,11 @@
 						</c:forEach>
 					</select>
 				</td>
+				<tr>
+				<td colspan="4" valign="middle" align="center">
+					<input type="submit" name="btnSubmit" id="btnSubmit" value="Tìm kiếm" />
+				</td>
+				</tr>
 			</tr>
 		</table>
 	</form>
@@ -504,5 +497,30 @@
 				</tr>
 			</table>
 		</div>
+		</div>
+	</section>
+</section>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="../js/jquery.wysiwyg.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/cycle.js"></script>
+<script src="../js/jquery.checkbox.min.js"></script>
+<script src="../js/flot.js"></script>
+<script src="../js/flot.resize.js"></script>
+<script src="../js/flot-time.js"></script>
+<script src="../js/flot-pie.js"></script>
+<script src="../js/flot-graphs.js"></script>
+<script src="../js/cycle.js"></script>
+<script src="../js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+// Feature slider for graphs
+$('.cycle').cycle({
+	fx: "scrollHorz",
+	timeout: 0,
+    slideResize: 0,
+    prev:    '.left-btn',
+    next:    '.right-btn'
+});
+</script>
 </body>
 </html>

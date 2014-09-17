@@ -108,7 +108,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 }
 
 input, textarea {
-	padding: 25px 60px;
+	/*padding: 25px 60px;*/
 	font-size: 12px;
 	font-family: Arial;
 	color:#606060;
@@ -1925,35 +1925,64 @@ ul.icon-fonts li .html {
     min-width: 300px;
 }
 .dashboard-table input[name="btnQLSV"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlsv.png') no-repeat;
 }
 .dashboard-table input[name="btnQLCN"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlcn.png') no-repeat;
 }
 .dashboard-table input[name="btnQLDT"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qldt.png') no-repeat;
 }
 .dashboard-table input[name="btnQLHDT"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlhdt.png') no-repeat;
 }
 .dashboard-table input[name="btnQLHK"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlhk.png') no-repeat;
 }
 .dashboard-table input[name="btnQLKH"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlhk.png') no-repeat;
 }
 .dashboard-table input[name="btnQLLH"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qllh.png') no-repeat;
 }
 .dashboard-table input[name="btnQLMH"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlmh.png') no-repeat;
 }
 .dashboard-table input[name="btnQLN"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qln.png') no-repeat;
 }
 .dashboard-table input[name="btnQLQT"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qlqt.png') no-repeat;
 }
 .dashboard-table input[name="btnQLTG"] {
+	padding: 25px 60px;
 	background: url('../images/icon/qltg.png') no-repeat;
+}
+.searchbox {
+	border-radius: 3px;
+	border: 1px solid #cfcfcf;
+}
+/*-----------Sinhvien Search Forms Table Style------------*/
+.searchbox td {
+    display: inline-block;
+    width: 20%;
+    margin: 10px;
+    text-align: center;
+}
+#searchform-sinhvien select{
+	display: block;
+	width: 100%;
+}
+#searchform-sinhvien tr {
+    text-align: center;
 }
