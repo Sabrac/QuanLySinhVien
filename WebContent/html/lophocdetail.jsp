@@ -8,26 +8,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${lsMessage}" var="message">
-		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
-	</c:forEach>
-	<br />
-
-	<form action="LopHocProcess.do?submit=true" method="post">
+	<form action="LopHocProcess.do" method="post">
 		<input type="hidden" name="id" value="${id}" />
-		<input type="hidden" name="ref" value="${ref}" />
+		<input type="hidden" name="ref" value="update" />
 		<table align="center">
+			<tr>
+				<td>
+					ID
+				</td>
+				<td>
+					<c:out value="${lophoc.lopHocId}" />
+				</td>
+			</tr>
 			<tr>
 				<td>
 					Tên lớp học
 				</td>
 				<td>
-					<input type="text" name="tenlophoc" value="${lophoc.tenLopHoc}" />
+					<c:out value="${lophoc.tenLopHoc}" />
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" valign="middle" align="center">
-					<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
+				<td>
+					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
+				</td>
+				<td>
+					<input type="button" value="Xóa" name="btnDelete" />
+				</td>
+				<td>
+					<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='ChuyenNganh.do';" />
 				</td>
 			</tr>
 		</table>

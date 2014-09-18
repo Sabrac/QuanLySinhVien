@@ -14,6 +14,7 @@
 	<br />
 
 	<form action="KhoaHocProcess.do?submit=true" method="post">
+		<input type="hidden" name="id" value="${id}" />
 		<input type="hidden" value="${ref}" name="ref" />
 		<table align="center">
 			<tr>

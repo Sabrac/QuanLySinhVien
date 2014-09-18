@@ -15,6 +15,7 @@
 
 	<form action="HocKyProcess.do?submit=true" method="post">
 		<input type="hidden" value="${ref}" name="ref" />
+		<input type="hidden" value="${id}" name="id" />
 		<table align="center">
 			<tr>
 				<td>

@@ -8,34 +8,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${lsMessage}" var="message">
-		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
-	</c:forEach>
-	<br />
-
-	<form action="HeDaoTaoProcess.do?submit=true" method="post">
-		<input type="hidden" value="${ref}" name="ref" />
+	<form action="HeDaoTaoProcess.do" method="post">
+		<input type="hidden" value="update" name="ref" />
 		<input type="hidden" value="${id}" name="id" />
 		<table align="center" class="searchbox">
 			<tr>
 				<td>
 					Mã hệ đào tạo
 				</td>
-				<td>
-					<input type="text" name="mahedaotao" value="${hedaotao.maHeDt}" />
+				<td colspan="2">
+					<c:out value="${hedaotao.maHeDt}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					Tên hệ đào tạo
 				</td>
-				<td>
-					<input type="text" name="tenhedaotao" value="${hedaotao.tenHeDt}" />
+				<td colspan="2">
+					<c:out value="${hedaotao.tenHeDt}" />
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" valign="middle" align="center">
-					<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
+				<td>
+					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
+				</td>
+				<td>
+					<input type="button" value="Xóa" name="btnDelete" />
+				</td>
+				<td>
+					<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='HeDaoTao.do';" />
 				</td>
 			</tr>
 		</table>

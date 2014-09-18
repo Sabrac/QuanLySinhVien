@@ -8,21 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${lsMessage}" var="message">
-		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
-	</c:forEach>
-	<br />
-
-	<form action="NganhProcess.do?submit=true" method="post">
-		<input type="hidden" value="${ref}" name="ref" />
+	<form action="NganhProcess.do" method="post">
+		<input type="hidden" value="update" name="ref" />
 		<input type="hidden" value="${id}" name="id" />
-		<table align="center" class="searchbox">
+		<table align="center">
 			<tr>
 				<td>
 					Mã ngành
 				</td>
 				<td>
-					<input type="text" name="manganh" value="${nganh.maNganh}" />
+					<c:out value="${nganh.maNganh}" />
 				</td>
 			</tr>
 			<tr>
@@ -30,7 +25,7 @@
 					Tên ngành
 				</td>
 				<td>
-					<input type="text" name="tennganh" value="${nganh.tenNganh}" />
+					<c:out value="${nganh.tenNganh}" />
 				</td>
 			</tr>
 			<tr>
@@ -38,12 +33,18 @@
 					Ghi Chú
 				</td>
 				<td>
-					<input type="text" name="ghichu" value="${nganh.ghiChu}" />
+					<c:out value="${nganh.ghiChu}" />
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
+				<td>
+					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
+				</td>
+				<td>
+					<input type="button" value="Xóa" name="btnDelete" />
+				</td>
+				<td>
+					<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='Nganh.do';" />
 				</td>
 			</tr>
 		</table>

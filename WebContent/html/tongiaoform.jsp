@@ -15,6 +15,7 @@
 	<br />
 
 	<form action="TonGiaoProcess.do?submit=true" method="post">
+		<input type="hidden" name="id" value="${id}" />
 		<input type="hidden" name="ref" value="${ref}" />
 		<table align="center">
 			<tr>

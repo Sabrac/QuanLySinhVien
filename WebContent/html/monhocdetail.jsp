@@ -8,21 +8,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${lsMessage}" var="message">
-		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
-	</c:forEach>
-	<br />
-
-	<form action="MonHocProcess.do?submit=true" method="post">
-		<input type="hidden" name="ref" value="${ref}" />
+	<form action="MonHocProcess.do" method="post">
+		<input type="hidden" name="ref" value="update" />
 		<input type="hidden" name="id" value="${id}" />
 		<table align="center">
+			<tr>
+				<td>
+					ID
+				</td>
+				<td>
+					<c:out value="${monhoc.monHocId}" />
+				</td>
+			</tr>
 			<tr>
 				<td>
 					Tên môn học
 				</td>
 				<td>
-					<input type="text" name="tenmonhoc" value="${monhoc.tenMonHoc}" />
+					<c:out value="${monhoc.tenMonHoc}" />
 				</td>
 			</tr>
 			<tr>
@@ -30,7 +33,7 @@
 					Số trình
 				</td>
 				<td>
-					<input type="text" name="sotrinh" value="${monhoc.soTrinh}" />
+					<c:out value="${monhoc.soTrinh}" />
 				</td>
 			</tr>
 			<tr>
@@ -40,10 +43,10 @@
 				<td>
 					<c:choose>
 						<c:when test="${monhoc.heSoChuyenCan > 0}">
-							<input type="text" name="hesochuyencan" value="${monhoc.heSoChuyenCan}" />
+							<c:out value="${monhoc.heSoChuyenCan}" />
 						</c:when>
 						<c:otherwise>
-							<input type="text" name="hesochuyencan" value="" />
+							<c:out value="" />
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -55,10 +58,10 @@
 				<td>
 					<c:choose>
 						<c:when test="${monhoc.heSoGiuaKy > 0}">
-							<input type="text" name="hesogiuaky" value="${monhoc.heSoGiuaKy}" />
+							<c:out value="${monhoc.heSoGiuaKy}" />
 						</c:when>
 						<c:otherwise>
-							<input type="text" name="hesogiuaky" value="" />
+							<c:out value="" />
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -70,10 +73,10 @@
 				<td>
 					<c:choose>
 						<c:when test="${monhoc.heSoHocKy > 0}">
-							<input type="text" name="hesohocky" value="${monhoc.heSoHocKy}" />
+							<c:out value="${monhoc.heSoHocKy}" />
 						</c:when>
 						<c:otherwise>
-							<input type="text" name="hesohocky" value="" />
+							<c:out value="" />
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -83,30 +86,27 @@
 					Chuyên ngành
 				</td>
 				<td>
-					<select name="chuyennganhid">
-						<option value="-1">
-							Chọn chuyên ngành
-						</option>
-						<c:forEach items="${lsChuyenNganh}" var="chuyenNganh">
+					<c:forEach items="${lsChuyenNganh}" var="chuyenNganh">
 							<c:choose>
 								<c:when test="${chuyenNganh.chuyenNganhId == monhoc.chuyenNganhId}">
-									<option value="${chuyenNganh.chuyenNganhId}" SELECTED>
 										<c:out value="${chuyenNganh.tenChuyenNganh}" />
-									</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${chuyenNganh.chuyenNganhId}">
-										<c:out value="${chuyenNganh.tenChuyenNganh}" />
-									</option>
+										<c:out value="" />
 								</c:otherwise>
 							</c:choose>
-						</c:forEach>
-					</select>
+					</c:forEach>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" valign="middle" align="center">
-					<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
+				<td>
+					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
+				</td>
+				<td>
+					<input type="button" value="Xóa" name="btnDelete" />
+				</td>
+				<td>
+					<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='MonHoc.do';" />
 				</td>
 			</tr>
 		</table>

@@ -16,6 +16,7 @@
 
 	<form action="QuocTichProcess.do?submit=true" method="post">
 		<input type="hidden" name="ref" value="${ref}" />
+		<input type="hidden" name="id" value="${id}" />
 		<table align="center">
 			<tr>
 				<td>
