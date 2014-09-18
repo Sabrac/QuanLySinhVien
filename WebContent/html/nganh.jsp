@@ -64,7 +64,7 @@
 			<c:forEach items="${lsData}" var="nganh">
 				<tr>
 					<td>
-						<c:out value="${nganh.maNganh}" />
+						<a href="NganhDetail.do?id=${nganh.nganhId}" ><c:out value="${nganh.maNganh}" /></a>
 					</td>
 					<td>
 						<c:out value="${nganh.tenNganh}" />

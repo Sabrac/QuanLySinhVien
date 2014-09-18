@@ -7,6 +7,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="css/jquery.datepick.css" rel="stylesheet">
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.plugin.js"></script>
+<script src="js/jquery.datepick.js"></script>
+<script>
+$(function() {
+	$('#popupDatepicker').datepick();
+	$('#popupDatepicker2').datepick();
+	//$('#inlineDatepicker').datepick({onSelect: showDate});
+});
+
+function showDate(date) {
+	alert('The date chosen is ' + date);
+}
+</script>
 </head>
 <body>
 	<c:forEach items="${lsMessage}" var="message">
@@ -46,7 +61,8 @@
 					Ngày sinh
 				</td>
 				<td>
-					<input type="text" name="ngaysinh" value="${sinhvien.ngaySinh}" />
+					<fmt:formatDate var="ngaysinh" value="${sinhVien.ngaySinh}" pattern="yyyy-MM-dd" />
+					<input type="text" id="popupDatepicker" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaysinh}" name="ngaysinh" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
@@ -328,7 +344,8 @@
 					Ngày nhập học
 				</td>
 				<td>
-					<input type="text" name="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" />
+					<fmt:formatDate var="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" pattern="yyyy-MM-dd" />
+					<input type="text" id="popupDatepicker2" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaynhaphoc}" name="ngaynhaphoc" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>

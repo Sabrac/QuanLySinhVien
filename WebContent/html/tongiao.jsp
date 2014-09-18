@@ -15,7 +15,32 @@
 	<br />
 
 	<c:if test="${showTable == null}">
-	<form action="TonGiaoForm.do" method="get">
+	<form action="TonGiao.do" name="searchform" id="searchform" method="post">
+		<table align="center" class="searchbox">
+			<tr>
+				<td>
+					ID
+				</td>
+				<td>
+					<input type="text" name="tongiaoid" value="${tongiaoid}" />
+				</td>
+				<td colspan="2" valign="middle" align="center">
+					<input type="submit" name="btnSubmit" id="btnSubmit" value="Tìm kiếm" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Tên tôn giáo
+				</td>
+				<td>
+					<input type="text" name="tentongiao" value="${tentongiao}" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<form action="TonGiaoProcess.do" method="post">
+		<input type="hidden" name="ref" value="add" />
 		<table align="center">
 			<tr>
 				<th>
@@ -28,7 +53,7 @@
 			<c:forEach items="${lsData}" var="tonGiao">
 				<tr>
 					<td>
-						<c:out value="${tonGiao.tonGiaoId}" />
+						<a href="TonGiaoDetail.do?id=${tonGiao.tonGiaoId}" ><c:out value="${tonGiao.tonGiaoId}" /></a>
 					</td>
 					<td>
 						<c:out value="${tonGiao.tenTonGiao}" />

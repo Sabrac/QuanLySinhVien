@@ -123,7 +123,7 @@
 			<c:forEach items="${lsData}" var="monHoc">
 				<tr>
 					<td>
-						<c:out value="${monHoc.monHocId}" />
+						<a href="MonHocDetail.do?id=${monHoc.monHocId}" ><c:out value="${monHoc.monHocId}" /></a>
 					</td>
 					<td>
 						<c:out value="${monHoc.tenMonHoc}" />

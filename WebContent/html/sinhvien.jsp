@@ -12,13 +12,20 @@
 	<meta charset="utf-8">
 	<title>Retina Dashboard</title>
 	<link rel="stylesheet" href="css/style.css" media="all" />
+	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+	<link href="css/jquery.datepick.css" rel="stylesheet">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery.plugin.js"></script>
+	<script src="js/jquery.datepick.js"></script>
 	<script>
 		function redirect(dmName) {
 			window.location.href = "ListDM.do?name=" + dmName;
 		}
+		$(function() {
+			$('#popupDatepicker').datepick();
+		});
 	</script>
-	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
-	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 </head>
 <body>
 <div class="testing">
@@ -55,7 +62,7 @@
 
 	<c:if test="${showTable == null}">
 
-	<form action="ChuyenNganh.do" name="searchform" id="searchform-sinhvien" method="post">
+	<form action="SinhVien.do" name="searchform" id="searchform-sinhvien" method="post">
 		<fieldset>
 		<legend>Personalia:</legend>
 		</fieldset>
@@ -75,7 +82,8 @@
 					<input type="text" name="ten" value="${ten}" />
 				</td><td>
 					Ngày sinh
-					<input type="text" name="ngaysinh" value="${ngaysinh}" />
+					<fmt:formatDate var="ngaysinh" value="${ngaysinh}" pattern="yyyy-MM-dd" />
+					<input type="text" id="popupDatepicker" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaysinh}" name="ngaysinh" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
@@ -414,7 +422,7 @@
 			<c:forEach items="${lsData}" var="sinhVien">
 				<tr>
 					<td align="left">
-						<c:out value="${sinhVien.maSinhVien}" />
+						<a href="SinhVienDetail.do?id=${sinhVien.sinhVienId}"><c:out value="${sinhVien.maSinhVien}" /></a>
 					</td>
 					<td align="left">
 						<c:out value="${sinhVien.hoDem}" />
@@ -500,7 +508,6 @@
 		</div>
 	</section>
 </section>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script src="../js/jquery.wysiwyg.js"></script>
 <script src="../js/custom.js"></script>
 <script src="../js/cycle.js"></script>

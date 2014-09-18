@@ -93,7 +93,7 @@
 			<c:forEach items="${lsData}" var="chuyenNganh">
 				<tr>
 					<td align="left">
-						<c:out value="${chuyenNganh.maChuyenNganh}" />
+						<a href="ChuyenNganhDetail.do?id=${chuyenNganh.chuyenNganhId}"><c:out value="${chuyenNganh.maChuyenNganh}" /></a>
 					</td align="left">
 					<td>
 						<c:out value="${chuyenNganh.tenChuyenNganh}" />

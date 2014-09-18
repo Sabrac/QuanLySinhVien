@@ -40,7 +40,8 @@
 		</table>
 	</form>
 
-	<form action="QuocTichForm.do" method="get">
+	<form action="QuocTichProcess.do" method="post">
+		<input type="hidden" name="ref" value="add" />
 		<table align="center">
 			<tr>
 				<th>
@@ -53,7 +54,7 @@
 			<c:forEach items="${lsData}" var="quocTich">
 				<tr>
 					<td>
-						<c:out value="${quocTich.quocTichId}" />
+						<a href="QuocTichDetail.do?id=${quocTich.quocTichId}" ><c:out value="${quocTich.quocTichId}" /></a>
 					</td>
 					<td>
 						<c:out value="${quocTich.tenQuocTich}" />
