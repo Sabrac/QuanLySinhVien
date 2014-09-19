@@ -9,7 +9,7 @@
 <script>
 	function onDelete() {
 		document.getElementsByName('ref')[0].value = "delete";
-		document.getElementById('form').action = "ChuyenNganhProcess.do?submit=true";
+		document.getElementById('form').action = "KhoaHocProcess.do?submit=true";
 		document.getElementById('form').submit();
 	}
 </script>
