@@ -1968,13 +1968,14 @@ ul.icon-fonts li .html {
 	padding: 25px 60px;
 	background: url('../images/icon/qltg.png') no-repeat;
 }
-.searchbox {
+.searchbox,.add-sinhvien {
 	border-radius: 3px;
 	border: 1px solid #cfcfcf;
 	width: 100%;
 }
 /*-----------Sinhvien Search Forms Table Style------------*/
-.searchbox td {
+.searchbox td,
+.add-sinhvien td {
     display: inline-block;
     width: 20%;
     margin: 10px;
