@@ -1971,6 +1971,7 @@ ul.icon-fonts li .html {
 .searchbox {
 	border-radius: 3px;
 	border: 1px solid #cfcfcf;
+	width: 100%;
 }
 /*-----------Sinhvien Search Forms Table Style------------*/
 .searchbox td {
@@ -1985,4 +1986,47 @@ ul.icon-fonts li .html {
 }
 #searchform-sinhvien tr {
     text-align: center;
+}
+
+.list-sinhvien {
+    margin: 50px 0;
+}
+
+.content.cycle > h1 {
+    color: #373a40;
+    font-size: 50px;
+}
+
+h2.form-headline {
+    background: none repeat scroll 0 0 #ffffff;
+    color: #373a40;
+    font-size: 16px;
+    margin-left: 10px;
+    position: relative;
+    top: 8px;
+    width: 145px;
+}
+.list-sinhvien-result {
+	width: 100%;
+}
+.list-sinhvien-result td, .list-sinhvien-result th {
+	display: inline-block;
+	width: 10%;
+	text-align: center
+}
+.list-sinhvien-result th {
+	background-color: #ccc;
+	padding: 10px 0;
+}
+.list-sinhvien-result tr {
+    display: block;
+    margin: 5px 0;
+}
+.list-sinhvien > h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.paging {
+	margin: 20px 0;
 }

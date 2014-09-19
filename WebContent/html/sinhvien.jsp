@@ -50,22 +50,20 @@
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ SINH VIÊN</h1>
+				<h2>Quản lý các thông tin của sinh viên</h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ SINH VIÊN</h1>
 <c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>
 	<br />
 
 	<c:if test="${showTable == null}">
-
+	<h2 class="form-headline"> Tìm kiếm sinh viên</h1>
 	<form action="SinhVien.do" name="searchform" id="searchform-sinhvien" method="post">
-		<fieldset>
-		<legend>Personalia:</legend>
-		</fieldset>
 		<table align="center" class="searchbox">
 
 			<tr>
@@ -389,51 +387,52 @@
 			</tr>
 		</table>
 	</form>
-
+	<div class="list-sinhvien">
+	<h2>Danh sách kết quả tìm kiếm</h2>
 	<form action="SinhVienProcess.do" method="post">
 		<input type="hidden" name="ref" value="add" />
-		<table align="center">
-			<tr>
-				<th>
+		<table align="center" class="list-sinhvien-result">
+			<thead>
+				<th class="header">
 					MÃ SINH VIÊN
 				</th>
-				<th>
+				<th class="header">
 					HỌ ĐỆM
 				</th>
-				<th>
+				<th class="header">
 					TÊN
 				</th>
-				<th>
+				<th class="header">
 					NGÀY SINH
 				</th>
-				<th>
+				<th class="header">
 					GIỚI TÍNH
 				</th>
-				<th>
+				<th class="header">
 					HỆ ĐÀO TẠO
 				</th>
-				<th>
+				<th class="header">
 					LỚP
 				</th>
-				<th>
+				<th class="header">
 					KHÓA HỌC
 				</th>
-			</tr>
+			</thead>
 			<c:forEach items="${lsData}" var="sinhVien">
 				<tr>
-					<td align="left">
+					<td>
 						<a href="SinhVienDetail.do?id=${sinhVien.sinhVienId}"><c:out value="${sinhVien.maSinhVien}" /></a>
 					</td>
-					<td align="left">
+					<td>
 						<c:out value="${sinhVien.hoDem}" />
 					</td>
-					<td align="left">
+					<td>
 						<c:out value="${sinhVien.ten}" />
 					</td>
-					<td align="center">
+					<td>
 						<fmt:formatDate pattern="yyyy/MM/dd" value="${sinhVien.ngaySinh}" />
 					</td>
-					<td align="left">
+					<td>
 						<c:choose>
 							<c:when test="${sinhVien.gioiTinh}">
 								Nam
@@ -443,21 +442,21 @@
 							</c:otherwise>
 						</c:choose>
 					</td>
-					<td align="left">
+					<td>
 						<c:forEach items="${lsHdt}" var="hdt">
 							<c:if test="${sinhVien.heDtId == hdt.heDtId}">
 								<c:out value="${hdt.tenHeDt}" />
 							</c:if>
 						</c:forEach>
 					</td>
-					<td align="left">
+					<td>
 						<c:forEach items="${lsLop}" var="lop">
 							<c:if test="${sinhVien.lopId == lop.lopHocId}">
 								<c:out value="${lop.tenLopHoc}" />
 							</c:if>
 						</c:forEach>
 					</td>
-					<td align="left">
+					<td>
 						<c:forEach items="${lsKhoaHoc}" var="khoaHoc">
 							<c:if test="${sinhVien.khoaHocId == khoaHoc.khoaHocId}">
 								<c:out value="${khoaHoc.tenKhoaHoc}" />
@@ -468,7 +467,7 @@
 			</c:forEach>
 		</table>
 
-		<div class="paging" align="center">
+		<div class="paging">
 			<c:if test="${totalPage > 1}">
 					<c:set var="i" value="1" />
 					<c:forEach items="${lsPage}" var="curPage">
@@ -504,6 +503,7 @@
 					</td>
 				</tr>
 			</table>
+		</div>
 		</div>
 		</div>
 	</section>
