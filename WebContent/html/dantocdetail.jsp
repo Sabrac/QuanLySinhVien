@@ -7,9 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script>
+	function onDelete() {
+		document.getElementsByName('ref')[0].value = "delete";
+		document.getElementById('form').submit();
+	}
+</script>
 </head>
 <body>
-	<form action="DanTocProcess.do" method="post">
+	<form action="DanTocProcess.do" method="post" id="form">
 		<input type="hidden" value="update" name="ref" />
 		<input type="hidden" value="${id}" name="id" />
 		<table align="center">
@@ -34,7 +40,7 @@
 					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 				</td>
 				<td>
-					<input type="button" value="Xóa" name="btnDelete" />
+					<input type="button" value="Xóa" name="btnDelete" onclick="onDelete();" />
 				</td>
 				<td>
 					<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='DanToc.do';" />
