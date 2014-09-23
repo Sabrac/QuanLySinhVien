@@ -1319,10 +1319,11 @@ body.login {
 .login section h1 {
 	color: #fff;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 36px;
+	font-size: 20px;
 	margin-bottom: 15px;
 	letter-spacing: -1px;
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+	text-transform: uppercase;
 }
 
 .login section h1 span {

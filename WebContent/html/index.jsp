@@ -12,7 +12,7 @@
 </head>
 <body class="login">
 	<section>
-		<h1><strong>Retina</strong> Dashboard</h1>
+		<h1><strong>Hệ thống</strong> Quản Lý Sinh Viên</h1>
 
 		<!-- Start list thông báo lỗi (nếu có) -->
 			<%

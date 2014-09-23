@@ -1,76 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="css/jquery.datepick.css" rel="stylesheet">
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/jquery.plugin.js"></script>
-<script src="js/jquery.datepick.js"></script>
-<script>
-$(function() {
-	$('#popupDatepicker').datepick();
-	$('#popupDatepicker2').datepick();
-	//$('#inlineDatepicker').datepick({onSelect: showDate});
-});
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-function showDate(date) {
-	alert('The date chosen is ' + date);
-}
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>Retina Dashboard</title>
+	<link rel="stylesheet" href="css/style.css" media="all" />
+	<script>
+		function redirect(dmName) {
+			window.location.href = "ListDM.do?name=" + dmName;
+		}
+	</script>
+	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
+	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<link href="css/jquery.datepick.css" rel="stylesheet">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery.plugin.js"></script>
+	<script src="js/jquery.datepick.js"></script>
+	<script>
+	$(function() {
+		$('#popupDatepicker').datepick();
+		$('#popupDatepicker2').datepick();
+		//$('#inlineDatepicker').datepick({onSelect: showDate});
+	});
+
+	function showDate(date) {
+		alert('The date chosen is ' + date);
+	}
 </script>
 </head>
 <body>
-	<c:forEach items="${lsMessage}" var="message">
+<div class="testing">
+<header class="main">
+	<h1><strong>Retina</strong> Dashboard</h1>
+	<input type="text" value="search" />
+</header>
+<section class="user">
+	<div class="profile-img">
+		<p><img src="./images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
+	</div>
+	<div class="buttons">
+		<span class="button">Help</span>
+		<span class="button blue"><a href="/QuanLySinhVien/Logout.do">Đăng xuất</a></span>
+	</div>
+</section>
+</div>
+<jsp:include page="left-menu.jsp"></jsp:include>
+
+<section class="content">
+	<section class="widget">
+		<header>
+			<span class="icon">&#128200;</span>
+			<hgroup>
+				<h1>QUẢN LÝ DANH MỤC</h1>
+				<h2>Danh sách các danh mục</h2>
+			</hgroup>
+		</header>
+		<div class="content cycle">
+
+<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>
 	<br />
 
-	<form action="SinhVienProcess.do?submit=true" method="post">
-		<input type="hidden" name="id" value="${id}" />
+	<form action="SinhVienProcess.do?submit=true" method="post" id="searchform-sinhvien">
 		<input type="hidden" name="ref" value="${ref}" />
-		<table align="center">
+		<table align="center" class="add-sinhvien">
 			<tr>
 				<td>
 					Mã sinh viên
-				</td>
-				<td>
 					<input type="text" name="masinhvien" value="${sinhvien.maSinhVien}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Họ đệm
-				</td>
-				<td>
 					<input type="text" name="hodem" value="${sinhvien.hoDem}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên
-				</td>
-				<td>
 					<input type="text" name="ten" value="${sinhvien.ten}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Ngày sinh
-				</td>
-				<td>
-					<fmt:formatDate var="ngaysinh" value="${sinhvien.ngaySinh}" pattern="yyyy-MM-dd" />
+					<fmt:formatDate var="ngaysinh" value="${sinhVien.ngaySinh}" pattern="yyyy-MM-dd" />
 					<input type="text" id="popupDatepicker" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaysinh}" name="ngaysinh" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					Giới tính
-				</td>
-				<td>
 					<select name="gioitinh">
 						<option value="-1">
 							Chọn giới tính
@@ -95,68 +117,40 @@ function showDate(date) {
 						</c:choose>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Số chứng minh thư
-				</td>
-				<td>
 					<input type="text" name="cmtnd" value="${sinhvien.cmtnd}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Số điện thoại
-				</td>
-				<td>
 					<input type="text" name="sodienthoai" value="${sinhvien.soDienThoai}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nơi sinh
-				</td>
-				<td>
 					<input type="text" name="noisinh" value="${sinhvien.noiSinh}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					Quê quán
-				</td>
-				<td>
 					<input type="text" name="quequan" value="${sinhvien.queQuan}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Hộ khẩu thường trú
-				</td>
-				<td>
 					<input type="text" name="hokhauthuongtru" value="${sinhvien.hoKhauThuongTru}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nơi ở hiện tại
-				</td>
-				<td>
 					<input type="text" name="noiohientai" value="${sinhvien.noiOHienTai}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Chế độ ưu đãi
-				</td>
-				<td>
 					<input type="text" name="chedouudai" value="${sinhvien.cheDoUuDai}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					Dân tộc
-				</td>
-				<td>
 					<select name="dantoc">
 						<option value="-1">
 							Chọn dân tộc
@@ -177,12 +171,8 @@ function showDate(date) {
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tôn giáo
-				</td>
-				<td>
 					<select name="tongiao">
 						<option value="-1">
 							Chọn tôn giáo
@@ -203,12 +193,8 @@ function showDate(date) {
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Quốc tịch
-				</td>
-				<td>
 					<select name="quoctich">
 						<option value="-1">
 							Chọn quốc tịch
@@ -233,47 +219,31 @@ function showDate(date) {
 			<tr>
 				<td>
 					Họ tên bố
-				</td>
-				<td>
 					<input type="text" name="hotenbo" value="${sinhvien.hoTenBo}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nghề nghiệp bố
-				</td>
-				<td>
 					<input type="text" name="nghenghiepbo" value="${sinhvien.ngheNghiepBo}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Họ tên mẹ
-				</td>
-				<td>
 					<input type="text" name="hotenme" value="${sinhvien.hoTenMe}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nghề nghiệp mẹ
-				</td>
-				<td>
 					<input type="text" name="nghenghiepme" value="${sinhvien.ngheNghiepMe}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					Hệ đào tạo
-				</td>
-				<td>
 					<select name="hedaotao">
 						<option value="-1">
 							Chọn hệ đào tạo
 						</option>
 						<c:forEach items="${lsHdt}" var="heDaoTao">
 							<c:choose>
-								<c:when test="${heDaoTao.heDtId == sinhvien.heDtId}">
+								<c:when test="${heDaoTao.heDtId == heDtId}">
 									<option value="${heDaoTao.heDtId}" SELECTED>
 										<c:out value="${heDaoTao.tenHeDt}" />
 									</option>
@@ -287,12 +257,8 @@ function showDate(date) {
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên lớp học
-				</td>
-				<td>
 					<select name="lophoc">
 						<option value="-1">
 							Chọn lớp học
@@ -313,12 +279,8 @@ function showDate(date) {
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên khóa học
-				</td>
-				<td>
 					<select name="khoahoc">
 						<option value="-1">
 							Chọn khóa học
@@ -339,12 +301,8 @@ function showDate(date) {
 						</c:forEach>
 					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Ngày nhập học
-				</td>
-				<td>
 					<fmt:formatDate var="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" pattern="yyyy-MM-dd" />
 					<input type="text" id="popupDatepicker2" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaynhaphoc}" name="ngaynhaphoc" readonly="readonly" />
 				</td>
@@ -352,32 +310,18 @@ function showDate(date) {
 			<tr>
 				<td>
 					Điểm đầu vào 1
-				</td>
-				<td>
 					<input type="text" name="diemdauvao1" value="${sinhvien.diemDauVao1}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Điểm đầu vào 2
-				</td>
-				<td>
 					<input type="text" name="diemdauvao2" value="${sinhvien.diemDauVao2}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Điểm đầu vào 3
-				</td>
-				<td>
 					<input type="text" name="diemdauvao3" value="${sinhvien.diemDauVao3}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Ảnh sinh viên
-				</td>
-				<td>
 					<input type="text" name="anhsinhvien" value="${sinhvien.anhSinhVien}" />
 				</td>
 			</tr>
@@ -388,5 +332,31 @@ function showDate(date) {
 			</tr>
 		</table>
 	</form>
+
+		</div>
+	</section>
+</section>
+
+<script src="../js/jquery.wysiwyg.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/cycle.js"></script>
+<script src="../js/jquery.checkbox.min.js"></script>
+<script src="../js/flot.js"></script>
+<script src="../js/flot.resize.js"></script>
+<script src="../js/flot-time.js"></script>
+<script src="../js/flot-pie.js"></script>
+<script src="../js/flot-graphs.js"></script>
+<script src="../js/cycle.js"></script>
+<script src="../js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+// Feature slider for graphs
+$('.cycle').cycle({
+	fx: "scrollHorz",
+	timeout: 0,
+    slideResize: 0,
+    prev:    '.left-btn',
+    next:    '.right-btn'
+});
+</script>
 </body>
 </html>

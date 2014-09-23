@@ -9,36 +9,35 @@
 <body>
 <nav>
 	<ul>
-		<li class="section"><a href="dashboard.jsp"><span class="icon">&#128711;</span> Dashboard</a></li>
+		<li class="section"><a href="DashBoard.do"><span>Dashboard</span></a></li>
 		<li>
-			<a href="pages-table.html"><span class="icon">&#128196;</span> Pages</a>
-			<ul class="submenu">
-				<li><a href="page-new.html">Create page</a></li>
-				<li><a href="page-timeline.html">View pages</a></li>
-			</ul>
+			<a href="SinhVien.do"><span>Quản lý hồ sơ sinh viên</span></a>
 		</li>
 		<li>
-			<a href="files.html"><span class="icon">&#127748;</span> Media <span class="pip">7</span></a>
-			<ul class="submenu">
-				<li><a href="files-upload.html">Upload file</a></li>
-				<li><a href="files.html">View files</a></li>
-			</ul>
+			<a href="ChuyenNganh.do"><span>Quản lý chuyên ngành</span></a>
 		</li>
 		<li>
-			<a href="blog-timeline.html"><span class="icon">&#59160;</span> Blog <span class="pip">12</span></a>
-			<ul class="submenu">
-				<li><a href="blog-new.html">New post</a></li>
-				<li><a href="blog-table.html">All posts</a></li>
-				<li><a href="comments-timeline.html">View comments</a></li>
-			</ul>
+			<a href="DanToc.do"><span>Quản lý dân tộc</span></a>
 		</li>
-		<li><a href="statistics.html"><span class="icon">&#128202;</span> Statistics</a></li>
-		<li><a href="users.html"><span class="icon">&#128101;</span> Users <span class="pip">3</span></a></li>
+		<li><a href="HeDaoTao.do"><span>Quản lý hệ đào tạo</span></a></li>
+		<li><a href="HocKy.do"><span>Quản lý học kỳ</span></a></li>
 		<li>
-			<a href="ui-elements.html"><span class="icon">&#9881;</span> UI Elements</a>
-			<ul class="submenu">
-				<li><a href="icon-fonts.html">Icon fonts</a></li>
-			</ul>
+			<a href="KhoaHoc.do"><span>Quản lý khóa học</span></a>
+		</li>
+		<li>
+			<a href="LopHoc.do"><span>Quản lý lớp học</span></a>
+		</li>
+		<li>
+			<a href="MonHoc.do"><span>Quản lý môn học</span></a>
+		</li>
+		<li>
+			<a href="Nganh.do"><span>Quản lý ngành</span></a>
+		</li>
+		<li>
+			<a href="QuocTich.do"><span>Quản lý quốc tịch</span></a>
+		</li>
+		<li>
+			<a href="TonGiao.do"><span>Quản lý tôn giáo</span></a>
 		</li>
 	</ul>
 </nav>
