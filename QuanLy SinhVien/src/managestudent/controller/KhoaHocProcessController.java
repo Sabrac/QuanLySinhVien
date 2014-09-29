@@ -38,17 +38,24 @@ public class KhoaHocProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("khoahoc") != null) {
 				request.setAttribute("khoahoc", request.getSession().getAttribute("khoahoc"));
+				template = Constant.KHOAHOCPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.KHOAHOCPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.KHOAHOCPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.KHOAHOCPROCESS;
 			}
 
-			template = Constant.KHOAHOCPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -70,6 +77,13 @@ public class KhoaHocProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				KhoaHoc khoaHoc = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("khoahoc", khoaHoc);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.KHOAHOCPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateKhoaHocInfor(khoaHoc, true);
@@ -83,6 +97,9 @@ public class KhoaHocProcessController extends HttpServlet {
 					request.setAttribute("khoahoc", khoaHoc);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.KHOAHOCPROCESS;
 				} else {
@@ -103,24 +120,56 @@ public class KhoaHocProcessController extends HttpServlet {
 							}
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
-								KhoaHocLogicsImpl khoaHocLogics = new KhoaHocLogicsImpl();
-								khoaHoc = khoaHocLogics.getKhoaHocById(Integer.parseInt(request.getParameter("id")));
+								try {
+									KhoaHocLogicsImpl khoaHocLogics = new KhoaHocLogicsImpl();
+									KhoaHoc khoaHocTemp = khoaHocLogics.getKhoaHocById(Integer.parseInt(request.getParameter("id")));
 
-								if(khoaHoc != null) {
-									boolean rs = processData(Integer.parseInt(request.getParameter("id")), khoaHoc, false);
+									if(khoaHocTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), khoaHoc, false);
 
-									if (rs) {
-										//lsMessage.add(MessageProperties.getMessage("msg_002"));
-										response.sendRedirect("Result.do?add=success");
-										return;
+										if (rs) {
+											//lsMessage.add(MessageProperties.getMessage("msg_002"));
+											response.sendRedirect("Result.do?update=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} catch (NumberFormatException e) {
+									System.out.println("An error occur: " + e.getMessage());
+									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+									template = Constant.KHOAHOCPROCESS;
+								}
+							} else {
+								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									KhoaHocLogicsImpl khoaHocLogics = new KhoaHocLogicsImpl();
+									KhoaHoc khoaHocTemp = khoaHocLogics.getKhoaHocById(Integer.parseInt(request.getParameter("id")));
+
+									if(khoaHocTemp != null) {
+										boolean rs = khoaHocLogics.deleteKhoaHocById(khoaHocTemp.getKhoaHocId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
 									} else {
 										template = Constant.SYSTEM_ERR;
 									}
 								} else {
 									template = Constant.SYSTEM_ERR;
 								}
-							} else {
-								template = Constant.SYSTEM_ERR;
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.KHOAHOCPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -152,12 +201,19 @@ public class KhoaHocProcessController extends HttpServlet {
 	 */
 	protected KhoaHoc setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		KhoaHoc khoaHoc = new KhoaHoc();
+		List<String> lsMessage = new ArrayList<String>();
 
-		if(request.getParameter("id") != null) {
-			khoaHoc.setKhoaHocId(Integer.parseInt(request.getParameter("id")));
-		}
-		if(request.getParameter("tenkhoahoc") != null) {
-			khoaHoc.setTenKhoaHoc(request.getParameter("tenkhoahoc"));
+		try {
+			if(request.getParameter("id") != null) {
+				khoaHoc.setKhoaHocId(Integer.parseInt(request.getParameter("id")));
+			}
+			if(request.getParameter("tenkhoahoc") != null) {
+				khoaHoc.setTenKhoaHoc(request.getParameter("tenkhoahoc"));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("An error occur: " + e.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
 		}
 
 		return khoaHoc;

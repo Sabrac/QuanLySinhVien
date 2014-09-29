@@ -316,7 +316,7 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("SELECT monhoc_id, tenmonhoc, sotrinh, hesochuyencan, hesogiuaky, hesohocky, chuyennganh_id, songaynghi ");
+				sqlCommand.append("SELECT monhoc_id, tenmonhoc, sotrinh, hesochuyencan, hesogiuaky, hesohocky, chuyennganh_id ");
 				sqlCommand.append("FROM monhoc ");
 				sqlCommand.append("WHERE monhoc_id = ? ");
 				sqlCommand.append("ORDER BY monhoc_id ASC");
@@ -328,7 +328,7 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 				if(rs != null) {
 					while(rs.next()) {
 						monHoc = new MonHoc(rs.getInt("monhoc_id"), rs.getString("tenmonhoc"), rs.getString("sotrinh"), rs.getFloat("hesochuyencan"),
-								rs.getFloat("hesogiuaky"), rs.getFloat("hesohocky"), rs.getInt("chuyennganh_id"), rs.getInt("songaynghi"));
+								rs.getFloat("hesogiuaky"), rs.getFloat("hesohocky"), rs.getInt("chuyennganh_id"));
 					}
 					rs.close();
 				}
@@ -354,7 +354,7 @@ public class MonHocDaoImpl extends BaseDaoImpl implements MonHocDao {
 				StringBuilder sqlCommand = new StringBuilder();
 
 				sqlCommand.append("UPDATE monhoc ");
-				sqlCommand.append("SET tenmonhoc = ?, sotrinh = ?, hesocuyencan = ?, hesogiuaky = ?, hesohocky = ?, chuyennganh_id = ? ");
+				sqlCommand.append("SET tenmonhoc = ?, sotrinh = ?, hesochuyencan = ?, hesogiuaky = ?, hesohocky = ?, chuyennganh_id = ? ");
 				sqlCommand.append("WHERE monhoc_id = ?");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());

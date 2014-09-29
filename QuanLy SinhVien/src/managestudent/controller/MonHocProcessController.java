@@ -41,17 +41,24 @@ public class MonHocProcessController extends HttpServlet {
 		loadData(request, response);
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("monhoc") != null) {
 				request.setAttribute("monhoc", request.getSession().getAttribute("monhoc"));
+				template = Constant.MONHOCPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.MONHOCPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.MONHOCPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.MONHOCPROCESS;
 			}
 
-			template = Constant.MONHOCPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -95,6 +102,9 @@ public class MonHocProcessController extends HttpServlet {
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
 					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
+					}
 					template = Constant.MONHOCPROCESS;
 				} else {
 					request.getSession().setAttribute("monhoc", monHoc);
@@ -115,15 +125,47 @@ public class MonHocProcessController extends HttpServlet {
 						} else if ("update".equals(ref)) {
 							try {
 								if (request.getParameter("id") != null) {
+									try {
+										MonHocLogicsImpl monHocLogics = new MonHocLogicsImpl();
+										MonHoc monHocTemp = monHocLogics.getMonHocById(Integer.parseInt(request.getParameter("id")));
+
+										if(monHocTemp != null) {
+											boolean rs = processData(Integer.parseInt(request.getParameter("id")), monHoc, false);
+
+											if (rs) {
+												//lsMessage.add(MessageProperties.getMessage("msg_002"));
+												response.sendRedirect("Result.do?update=success");
+												return;
+											} else {
+												template = Constant.SYSTEM_ERR;
+											}
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} catch (Exception e) {
+										System.out.println("An error occur: " + e.getMessage());
+										lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+										template = Constant.MONHOCPROCESS;
+									}
+								} else {
+									template = Constant.SYSTEM_ERR;
+								}
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.MONHOCPROCESS;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
 									MonHocLogicsImpl monHocLogics = new MonHocLogicsImpl();
-									monHoc = monHocLogics.getMonHocById(Integer.parseInt(request.getParameter("id")));
+									MonHoc monHocTemp = monHocLogics.getMonHocById(Integer.parseInt(request.getParameter("id")));
 
-									if(monHoc != null) {
-										boolean rs = processData(Integer.parseInt(request.getParameter("id")), monHoc, false);
+									if(monHocTemp != null) {
+										boolean rs = monHocLogics.deleteMonHocById(monHocTemp.getMonHocId());
 
-										if (rs) {
-											//lsMessage.add(MessageProperties.getMessage("msg_002"));
-											response.sendRedirect("Result.do?add=success");
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
 											return;
 										} else {
 											template = Constant.SYSTEM_ERR;

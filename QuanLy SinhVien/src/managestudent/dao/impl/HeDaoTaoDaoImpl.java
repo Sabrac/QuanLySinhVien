@@ -360,4 +360,35 @@ public class HeDaoTaoDaoImpl extends BaseDaoImpl implements HeDaoTaoDao {
 		return hdt;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.dao.HeDaoTaoDao#deleteHeDaoTaoById(int)
+	 */
+	@Override
+	public boolean deleteHeDaoTaoById(int idHeDaoTao) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM hedaotao ");
+				sqlCommand.append("WHERE hedt_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, idHeDaoTao);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
 }

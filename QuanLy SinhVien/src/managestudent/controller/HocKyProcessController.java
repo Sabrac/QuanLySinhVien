@@ -38,17 +38,24 @@ public class HocKyProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("hocky") != null) {
 				request.setAttribute("hocky", request.getSession().getAttribute("hocky"));
+				template = Constant.HOCKYPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.HOCKYPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.HOCKYPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.HOCKYPROCESS;
 			}
 
-			template = Constant.HOCKYPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -70,6 +77,13 @@ public class HocKyProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				HocKy hocKy = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("hocky", hocKy);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.HOCKYPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateHocKyInfor(hocKy, true);
@@ -83,6 +97,9 @@ public class HocKyProcessController extends HttpServlet {
 					request.setAttribute("hocky", hocKy);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.HOCKYPROCESS;
 				} else {
@@ -103,24 +120,56 @@ public class HocKyProcessController extends HttpServlet {
 							}
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
-								HocKyLogicsImpl hocKyLogics = new HocKyLogicsImpl();
-								hocKy = hocKyLogics.getHocKyById(Integer.parseInt(request.getParameter("id")));
+								try {
+									HocKyLogicsImpl hocKyLogics = new HocKyLogicsImpl();
+									HocKy hocKyTemp = hocKyLogics.getHocKyById(Integer.parseInt(request.getParameter("id")));
 
-								if(hocKy != null) {
-									boolean rs = processData(Integer.parseInt(request.getParameter("id")), hocKy, false);
+									if(hocKyTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), hocKy, false);
 
-									if (rs) {
-										//lsMessage.add(MessageProperties.getMessage("msg_002"));
-										response.sendRedirect("Result.do?add=success");
-										return;
+										if (rs) {
+											//lsMessage.add(MessageProperties.getMessage("msg_002"));
+											response.sendRedirect("Result.do?update=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} catch (NumberFormatException e) {
+									System.out.println("An error occur: " + e.getMessage());
+									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+									template = Constant.HOCKYPROCESS;
+								}
+							} else {
+								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									HocKyLogicsImpl hocKyLogics = new HocKyLogicsImpl();
+									HocKy hocKyTemp = hocKyLogics.getHocKyById(Integer.parseInt(request.getParameter("id")));
+
+									if(hocKyTemp != null) {
+										boolean rs = hocKyLogics.deleteHocKyById(hocKyTemp.getHocKyId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
 									} else {
 										template = Constant.SYSTEM_ERR;
 									}
 								} else {
 									template = Constant.SYSTEM_ERR;
 								}
-							} else {
-								template = Constant.SYSTEM_ERR;
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.HOCKYPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -152,12 +201,19 @@ public class HocKyProcessController extends HttpServlet {
 	 */
 	protected HocKy setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		HocKy hocKy = new HocKy();
+		List<String> lsMessage = new ArrayList<String>();
 
-		if(request.getParameter("id") != null) {
-			hocKy.setHocKyId(Integer.parseInt(request.getParameter("id")));
-		}
-		if(request.getParameter("tenhocky") != null) {
-			hocKy.setTenHocKy(request.getParameter("tenhocky"));
+		try {
+			if(request.getParameter("id") != null) {
+				hocKy.setHocKyId(Integer.parseInt(request.getParameter("id")));
+			}
+			if(request.getParameter("tenhocky") != null) {
+				hocKy.setTenHocKy(request.getParameter("tenhocky"));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("An error occur: " + e.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
 		}
 
 		return hocKy;

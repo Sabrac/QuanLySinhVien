@@ -38,6 +38,10 @@ public class DashBoardController extends HttpServlet {
 		String contextPath = request.getContextPath();
 
 		if(Common.checkLogin(request.getSession())) {
+			Object loginId = request.getSession().getAttribute("loginId");
+			request.getSession().invalidate();
+
+			request.getSession().setAttribute("loginId", loginId);
 			template = Constant.DASHBOARD;
 		} else {
 			response.sendRedirect(contextPath + "/Login.do");

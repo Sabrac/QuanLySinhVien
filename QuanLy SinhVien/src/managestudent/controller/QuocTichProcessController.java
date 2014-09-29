@@ -10,23 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import managestudent.entities.DanToc;
-import managestudent.logics.impl.DanTocLogicsImpl;
+import managestudent.entities.QuocTich;
+import managestudent.logics.impl.QuocTichLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
 import managestudent.validates.ValidateInfor;
 
 /**
- * Servlet implementation class DanTocProcessController
+ * Servlet implementation class QuocTichProcessController
  */
-public class DanTocProcessController extends HttpServlet {
+public class QuocTichProcessController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DanTocProcessController() {
+    public QuocTichProcessController() {
         super();
     }
 
@@ -38,26 +38,22 @@ public class DanTocProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
-			template = Constant.DANTOCPROCESS;
-			if(request.getSession().getAttribute("dantoc") != null) {
-				request.setAttribute("dantoc", request.getSession().getAttribute("dantoc"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+			template = Constant.SYSTEM_ERR;
+			if(request.getSession().getAttribute("quoctich") != null) {
+				request.setAttribute("quoctich", request.getSession().getAttribute("quoctich"));
+				template = Constant.QUOCTICHPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.QUOCTICHPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.QUOCTICHPROCESS;
 			}
 			if(request.getParameter("id") != null) {
 				request.setAttribute("id", request.getParameter("id"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.QUOCTICHPROCESS;
 			}
 
 		} else {
@@ -79,44 +75,44 @@ public class DanTocProcessController extends HttpServlet {
 
 		if(Common.checkLogin(request.getSession())) {
 			if(request.getParameter("submit") != null) {
-				DanToc danToc = setDefaultData(request, response);
+				QuocTich quocTich = setDefaultData(request, response);
 
 				if(request.getAttribute("lsMessage") != null) {
-					request.setAttribute("dantoc", danToc);
-					RequestDispatcher req = request.getRequestDispatcher(Constant.DANTOCPROCESS);
+					request.setAttribute("quoctich", quocTich);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.QUOCTICHPROCESS);
 					req.forward(request, response);
 					return;
 				}
 
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
-						lsMessage = ValidateInfor.validateDanTocInfor(danToc, true);
+						lsMessage = ValidateInfor.validateQuocTichInfor(quocTich, true);
 					} else if("update".equals(request.getParameter("ref"))) {
-						lsMessage = ValidateInfor.validateDanTocInfor(danToc, false);
+						lsMessage = ValidateInfor.validateQuocTichInfor(quocTich, false);
 					}
 				}
 
 				if (lsMessage.size() > 0) {
 					request.setAttribute("lsMessage", lsMessage);
-					request.setAttribute("dantoc", danToc);
+					request.setAttribute("quoctich", quocTich);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
 					}
 					if(request.getParameter("id") != null) {
 						request.setAttribute("id", request.getParameter("id"));
 					}
-					template = Constant.DANTOCPROCESS;
+					template = Constant.QUOCTICHPROCESS;
 				} else {
-					request.getSession().setAttribute("dantoc", danToc);
+					request.getSession().setAttribute("quoctich", quocTich);
 					if (request.getParameter("ref") != null) {
 						String ref = request.getParameter("ref");
 
 						if ("add".equals(ref)) {
-							boolean rs = processData(-1, danToc, true);
+							boolean rs = processData(-1, quocTich, true);
 
 							if (rs) {
 								//lsMessage.add(MessageProperties.getMessage("msg_001"));
-								request.getSession().removeAttribute("dantoc");
+								request.getSession().removeAttribute("quoctich");
 								response.sendRedirect("Result.do?add=success");
 								return;
 							} else {
@@ -125,11 +121,11 @@ public class DanTocProcessController extends HttpServlet {
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
 								try {
-									DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
-									DanToc danTocTemp = danTocLogics.getDanTocById((Integer.parseInt(request.getParameter("id"))));
+									QuocTichLogicsImpl quocTichLogics = new QuocTichLogicsImpl();
+									QuocTich quocTichTemp = quocTichLogics.getQuocTichById(Integer.parseInt(request.getParameter("id")));
 
-									if(danTocTemp != null) {
-										boolean rs = processData(Integer.parseInt(request.getParameter("id")), danToc, false);
+									if(quocTichTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), quocTich, false);
 
 										if (rs) {
 											//lsMessage.add(MessageProperties.getMessage("msg_002"));
@@ -144,7 +140,7 @@ public class DanTocProcessController extends HttpServlet {
 								} catch (NumberFormatException e) {
 									System.out.println("An error occur: " + e.getMessage());
 									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-									template = Constant.DANTOCPROCESS;
+									template = Constant.QUOCTICHPROCESS;
 								}
 							} else {
 								template = Constant.SYSTEM_ERR;
@@ -152,11 +148,11 @@ public class DanTocProcessController extends HttpServlet {
 						} else if("delete".equals(ref)) {
 							try {
 								if(request.getParameter("id") != null) {
-									DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
-									DanToc danTocTemp = danTocLogics.getDanTocById(Integer.parseInt(request.getParameter("id")));
+									QuocTichLogicsImpl quocTichLogics = new QuocTichLogicsImpl();
+									QuocTich quocTichTemp = quocTichLogics.getQuocTichById(Integer.parseInt(request.getParameter("id")));
 
-									if(danTocTemp != null) {
-										boolean rs = danTocLogics.deleteDanTocById(danTocTemp.getDanTocId());
+									if(quocTichTemp != null) {
+										boolean rs = quocTichLogics.deleteQuocTichById(quocTichTemp.getQuocTichId());
 
 										if(rs) {
 											response.sendRedirect("Result.do?delete=success");
@@ -173,7 +169,7 @@ public class DanTocProcessController extends HttpServlet {
 							} catch (NumberFormatException e) {
 								System.out.println("An error occur: " + e.getMessage());
 								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-								template = Constant.DANTOCPROCESS;
+								template = Constant.QUOCTICHPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -197,22 +193,22 @@ public class DanTocProcessController extends HttpServlet {
 	}
 
 	/**
-	 * Gán dữ liệu vào đối tượng dân tộc
+	 * Gán dữ liệu vào đối tượng quốc tịch
 	 *
 	 * @param request HttpServletRequest
 	 * @param response HttpServletResponse
-	 * @return DanToc đối tượng dân tộc
+	 * @return QuocTich đối tượng quốc tịch
 	 */
-	protected DanToc setDefaultData(HttpServletRequest request, HttpServletResponse response) {
-		DanToc danToc = new DanToc();
+	protected QuocTich setDefaultData(HttpServletRequest request, HttpServletResponse response) {
+		QuocTich quocTich = new QuocTich();
 		List<String> lsMessage = new ArrayList<String>();
 
 		try {
-			if(request.getParameter("id") != null) {
-				danToc.setDanTocId(Integer.parseInt(request.getParameter("id")));
+			if(request.getParameter("id") != null && request.getParameter("id").length() > 0) {
+				quocTich.setQuocTichId(Integer.parseInt(request.getParameter("id")));
 			}
-			if(request.getParameter("tendantoc") != null) {
-				danToc.setTenDanToc(request.getParameter("tendantoc"));
+			if(request.getParameter("tenquoctich") != null) {
+				quocTich.setTenQuocTich(request.getParameter("tenquoctich"));
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("An error occur: " + e.getMessage());
@@ -220,7 +216,7 @@ public class DanTocProcessController extends HttpServlet {
 			request.setAttribute("lsMessage", lsMessage);
 		}
 
-		return danToc;
+		return quocTich;
 	}
 
 	/**
@@ -229,14 +225,14 @@ public class DanTocProcessController extends HttpServlet {
 	 * @param isAdd true: action add / false: action update
 	 * @return true: thành công / false: thất bại
 	 */
-	protected boolean processData(int danTocId, DanToc danToc, boolean isAdd) {
+	protected boolean processData(int quocTichId, QuocTich quocTich, boolean isAdd) {
 		boolean rs = false;
+		QuocTichLogicsImpl quocTichLogics = new QuocTichLogicsImpl();
 
-		DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
 		if(isAdd) {
-			rs = danTocLogics.addDanToc(danToc);
+			rs = quocTichLogics.addQuocTich(quocTich);
 		} else {
-			rs = danTocLogics.updateDanTocById(danTocId, danToc);
+			rs = quocTichLogics.updateQuocTichById(quocTichId, quocTich);
 		}
 
 		return rs;

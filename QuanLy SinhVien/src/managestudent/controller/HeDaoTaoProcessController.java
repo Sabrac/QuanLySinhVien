@@ -38,17 +38,24 @@ public class HeDaoTaoProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("hedaotao") != null) {
 				request.setAttribute("hedaotao", request.getSession().getAttribute("hedaotao"));
+				template = Constant.HEDAOTAOPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.HEDAOTAOPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.HEDAOTAOPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.HEDAOTAOPROCESS;
 			}
 
-			template = Constant.HEDAOTAOPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -70,6 +77,13 @@ public class HeDaoTaoProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				HeDaoTao hdt = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("hedaotao", hdt);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.HEDAOTAOPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateHeDtInfor(hdt, true);
@@ -83,6 +97,9 @@ public class HeDaoTaoProcessController extends HttpServlet {
 					request.setAttribute("hedaotao", hdt);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.HEDAOTAOPROCESS;
 				} else {
@@ -103,24 +120,56 @@ public class HeDaoTaoProcessController extends HttpServlet {
 							}
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
-								HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
-								hdt = hdtLogics.getHeDaoTaoById(Integer.parseInt(request.getParameter("id")));
+								try {
+									HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
+									HeDaoTao hdtTemp = hdtLogics.getHeDaoTaoById(Integer.parseInt(request.getParameter("id")));
 
-								if(hdt != null) {
-									boolean rs = processData(Integer.parseInt(request.getParameter("id")), hdt, false);
+									if(hdtTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), hdt, false);
 
-									if (rs) {
-										//lsMessage.add(MessageProperties.getMessage("msg_002"));
-										response.sendRedirect("Result.do?add=success");
-										return;
+										if (rs) {
+											//lsMessage.add(MessageProperties.getMessage("msg_002"));
+											response.sendRedirect("Result.do?update=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} catch (NumberFormatException e) {
+									System.out.println("An error occur: " + e.getMessage());
+									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+									template = Constant.HEDAOTAOPROCESS;
+								}
+							} else {
+								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
+									HeDaoTao hdtTemp = hdtLogics.getHeDaoTaoById(Integer.parseInt(request.getParameter("id")));
+
+									if(hdtTemp != null) {
+										boolean rs = hdtLogics.deleteHeDaoTaoById(hdtTemp.getHeDtId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
 									} else {
 										template = Constant.SYSTEM_ERR;
 									}
 								} else {
 									template = Constant.SYSTEM_ERR;
 								}
-							} else {
-								template = Constant.SYSTEM_ERR;
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.HEDAOTAOPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -152,15 +201,22 @@ public class HeDaoTaoProcessController extends HttpServlet {
 	 */
 	protected HeDaoTao setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		HeDaoTao hdt = new HeDaoTao();
+		List<String> lsMessage = new ArrayList<String>();
 
-		if(request.getParameter("id") != null) {
-			hdt.setHeDtId(Integer.parseInt(request.getParameter("id")));
-		}
-		if(request.getParameter("mahedaotao") != null) {
-			hdt.setMaHeDt(request.getParameter("mahedaotao"));
-		}
-		if(request.getParameter("tenhedaotao") != null) {
-			hdt.setTenHeDt(request.getParameter("tenhedaotao"));
+		try {
+			if(request.getParameter("id") != null) {
+				hdt.setHeDtId(Integer.parseInt(request.getParameter("id")));
+			}
+			if(request.getParameter("mahedaotao") != null) {
+				hdt.setMaHeDt(request.getParameter("mahedaotao"));
+			}
+			if(request.getParameter("tenhedaotao") != null) {
+				hdt.setTenHeDt(request.getParameter("tenhedaotao"));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("An error occur: " + e.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
 		}
 
 		return hdt;

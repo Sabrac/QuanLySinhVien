@@ -41,17 +41,23 @@ public class ChuyenNganhProcessController extends HttpServlet {
 		loadData(request, response);
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("chuyennganh") != null) {
 				request.setAttribute("chuyennganh", request.getSession().getAttribute("chuyennganh"));
+				template = Constant.CHUYENNGANHPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.CHUYENNGANHPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.CHUYENNGANHPROCESS;
 			}
-
-			template = Constant.CHUYENNGANHPROCESS;
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.CHUYENNGANHPROCESS;
+			}
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -74,6 +80,13 @@ public class ChuyenNganhProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				ChuyenNganh cn = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("chuyennganh", cn);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.CHUYENNGANHPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateChuyenNganhInfor(cn, true);
@@ -87,6 +100,9 @@ public class ChuyenNganhProcessController extends HttpServlet {
 					request.setAttribute("chuyennganh", cn);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.CHUYENNGANHPROCESS;
 				} else {
@@ -106,25 +122,57 @@ public class ChuyenNganhProcessController extends HttpServlet {
 								template = Constant.SYSTEM_ERR;
 							}
 						} else if ("update".equals(ref)) {
-							if (request.getParameter("chuyennganhid") != null) {
-								ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
-								cn = chuyenNganhLogics.getChuyenNganhById(Integer.parseInt(request.getParameter("chuyennganhid")));
+							if (request.getParameter("id") != null) {
+								try {
+									ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
+									ChuyenNganh cnTemp = chuyenNganhLogics.getChuyenNganhById(Integer.parseInt(request.getParameter("id")));
 
-								if(cn != null) {
-									boolean rs = processData(Integer.parseInt(request.getParameter("chuyennganhid")), cn, false);
+									if(cnTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), cn, false);
 
-									if (rs) {
-										//lsMessage.add(MessageProperties.getMessage("msg_002"));
-										response.sendRedirect("Result.do?add=success");
-										return;
+										if (rs) {
+											//lsMessage.add(MessageProperties.getMessage("msg_002"));
+											response.sendRedirect("Result.do?update=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} catch (NumberFormatException e) {
+									System.out.println("An error occur: " + e.getMessage());
+									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+									template = Constant.CHUYENNGANHPROCESS;
+								}
+							} else {
+								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
+									ChuyenNganh cnTemp = chuyenNganhLogics.getChuyenNganhById(Integer.parseInt(request.getParameter("id")));
+
+									if(cnTemp != null) {
+										boolean rs = chuyenNganhLogics.deleteChuyenNganhById(cnTemp.getChuyenNganhId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
 									} else {
 										template = Constant.SYSTEM_ERR;
 									}
 								} else {
 									template = Constant.SYSTEM_ERR;
 								}
-							} else {
-								template = Constant.SYSTEM_ERR;
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.CHUYENNGANHPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -156,15 +204,25 @@ public class ChuyenNganhProcessController extends HttpServlet {
 	 */
 	protected ChuyenNganh setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		ChuyenNganh cn = new ChuyenNganh();
+		List<String> lsMessage = new ArrayList<String>();
 
-		if(request.getParameter("machuyennganh") != null) {
-			cn.setMaChuyenNganh(request.getParameter("machuyennganh"));
-		}
-		if(request.getParameter("tenchuyennganh") != null) {
-			cn.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
-		}
-		if(request.getParameter("nganhid") != null) {
-			cn.setNganhId(Integer.parseInt(request.getParameter("nganhid")));
+		try {
+			if(request.getParameter("machuyennganh") != null) {
+				cn.setMaChuyenNganh(request.getParameter("machuyennganh"));
+			}
+			if(request.getParameter("tenchuyennganh") != null) {
+				cn.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
+			}
+			if(request.getParameter("id") != null) {
+				cn.setNganhId(Integer.parseInt(request.getParameter("id")));
+			}
+			if(request.getParameter("nganhid") != null) {
+				cn.setNganhId(Integer.parseInt(request.getParameter("nganhid")));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("An error occur: " + e.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
 		}
 
 		return cn;

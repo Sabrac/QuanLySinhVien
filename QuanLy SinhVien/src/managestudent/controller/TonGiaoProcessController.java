@@ -10,23 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import managestudent.entities.DanToc;
-import managestudent.logics.impl.DanTocLogicsImpl;
+import managestudent.entities.TonGiao;
+import managestudent.logics.impl.TonGIaoLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
 import managestudent.validates.ValidateInfor;
 
 /**
- * Servlet implementation class DanTocProcessController
+ * Servlet implementation class TonGiaoProcessController
  */
-public class DanTocProcessController extends HttpServlet {
+public class TonGiaoProcessController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DanTocProcessController() {
+    public TonGiaoProcessController() {
         super();
     }
 
@@ -38,26 +38,22 @@ public class DanTocProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
-			template = Constant.DANTOCPROCESS;
-			if(request.getSession().getAttribute("dantoc") != null) {
-				request.setAttribute("dantoc", request.getSession().getAttribute("dantoc"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+			template = Constant.SYSTEM_ERR;
+			if(request.getSession().getAttribute("tongiao") != null) {
+				request.setAttribute("tongiao", request.getSession().getAttribute("tongiao"));
+				template = Constant.TONGIAOPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.TONGIAOPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.TONGIAOPROCESS;
 			}
 			if(request.getParameter("id") != null) {
 				request.setAttribute("id", request.getParameter("id"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.TONGIAOPROCESS;
 			}
 
 		} else {
@@ -79,44 +75,44 @@ public class DanTocProcessController extends HttpServlet {
 
 		if(Common.checkLogin(request.getSession())) {
 			if(request.getParameter("submit") != null) {
-				DanToc danToc = setDefaultData(request, response);
+				TonGiao tonGiao = setDefaultData(request, response);
 
 				if(request.getAttribute("lsMessage") != null) {
-					request.setAttribute("dantoc", danToc);
-					RequestDispatcher req = request.getRequestDispatcher(Constant.DANTOCPROCESS);
+					request.setAttribute("tongiao", tonGiao);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.TONGIAOPROCESS);
 					req.forward(request, response);
 					return;
 				}
 
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
-						lsMessage = ValidateInfor.validateDanTocInfor(danToc, true);
+						lsMessage = ValidateInfor.validateTonGiaoInfor(tonGiao, true);
 					} else if("update".equals(request.getParameter("ref"))) {
-						lsMessage = ValidateInfor.validateDanTocInfor(danToc, false);
+						lsMessage = ValidateInfor.validateTonGiaoInfor(tonGiao, false);
 					}
 				}
 
 				if (lsMessage.size() > 0) {
 					request.setAttribute("lsMessage", lsMessage);
-					request.setAttribute("dantoc", danToc);
+					request.setAttribute("tongiao", tonGiao);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
 					}
 					if(request.getParameter("id") != null) {
 						request.setAttribute("id", request.getParameter("id"));
 					}
-					template = Constant.DANTOCPROCESS;
+					template = Constant.TONGIAOPROCESS;
 				} else {
-					request.getSession().setAttribute("dantoc", danToc);
+					request.getSession().setAttribute("tongiao", tonGiao);
 					if (request.getParameter("ref") != null) {
 						String ref = request.getParameter("ref");
 
 						if ("add".equals(ref)) {
-							boolean rs = processData(-1, danToc, true);
+							boolean rs = processData(-1, tonGiao, true);
 
 							if (rs) {
 								//lsMessage.add(MessageProperties.getMessage("msg_001"));
-								request.getSession().removeAttribute("dantoc");
+								request.getSession().removeAttribute("tongiao");
 								response.sendRedirect("Result.do?add=success");
 								return;
 							} else {
@@ -125,11 +121,11 @@ public class DanTocProcessController extends HttpServlet {
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
 								try {
-									DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
-									DanToc danTocTemp = danTocLogics.getDanTocById((Integer.parseInt(request.getParameter("id"))));
+									TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
+									TonGiao tonGiaoTemp = tonGiaoLogics.getTonGiaoById(Integer.parseInt(request.getParameter("id")));
 
-									if(danTocTemp != null) {
-										boolean rs = processData(Integer.parseInt(request.getParameter("id")), danToc, false);
+									if(tonGiaoTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), tonGiao, false);
 
 										if (rs) {
 											//lsMessage.add(MessageProperties.getMessage("msg_002"));
@@ -144,7 +140,7 @@ public class DanTocProcessController extends HttpServlet {
 								} catch (NumberFormatException e) {
 									System.out.println("An error occur: " + e.getMessage());
 									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-									template = Constant.DANTOCPROCESS;
+									template = Constant.TONGIAOPROCESS;
 								}
 							} else {
 								template = Constant.SYSTEM_ERR;
@@ -152,11 +148,11 @@ public class DanTocProcessController extends HttpServlet {
 						} else if("delete".equals(ref)) {
 							try {
 								if(request.getParameter("id") != null) {
-									DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
-									DanToc danTocTemp = danTocLogics.getDanTocById(Integer.parseInt(request.getParameter("id")));
+									TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
+									TonGiao tonGiaoTemp = tonGiaoLogics.getTonGiaoById(Integer.parseInt(request.getParameter("id")));
 
-									if(danTocTemp != null) {
-										boolean rs = danTocLogics.deleteDanTocById(danTocTemp.getDanTocId());
+									if(tonGiaoTemp != null) {
+										boolean rs = tonGiaoLogics.deleteTonGiaoById(tonGiaoTemp.getTonGiaoId());
 
 										if(rs) {
 											response.sendRedirect("Result.do?delete=success");
@@ -173,7 +169,7 @@ public class DanTocProcessController extends HttpServlet {
 							} catch (NumberFormatException e) {
 								System.out.println("An error occur: " + e.getMessage());
 								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-								template = Constant.DANTOCPROCESS;
+								template = Constant.TONGIAOPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -197,22 +193,22 @@ public class DanTocProcessController extends HttpServlet {
 	}
 
 	/**
-	 * Gán dữ liệu vào đối tượng dân tộc
+	 * Gán dữ liệu vào đối tượng tôn giáo
 	 *
 	 * @param request HttpServletRequest
 	 * @param response HttpServletResponse
-	 * @return DanToc đối tượng dân tộc
+	 * @return TonGiao đối tượng tôn giáo
 	 */
-	protected DanToc setDefaultData(HttpServletRequest request, HttpServletResponse response) {
-		DanToc danToc = new DanToc();
+	protected TonGiao setDefaultData(HttpServletRequest request, HttpServletResponse response) {
+		TonGiao tonGiao = new TonGiao();
 		List<String> lsMessage = new ArrayList<String>();
 
 		try {
-			if(request.getParameter("id") != null) {
-				danToc.setDanTocId(Integer.parseInt(request.getParameter("id")));
+			if(request.getParameter("id") != null && request.getParameter("id").length() > 0) {
+				tonGiao.setTonGiaoId(Integer.parseInt(request.getParameter("id")));
 			}
-			if(request.getParameter("tendantoc") != null) {
-				danToc.setTenDanToc(request.getParameter("tendantoc"));
+			if(request.getParameter("tentongiao") != null && request.getParameter("tentongiao").length() > 0) {
+				tonGiao.setTenTonGiao(request.getParameter("tentongiao"));
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("An error occur: " + e.getMessage());
@@ -220,7 +216,7 @@ public class DanTocProcessController extends HttpServlet {
 			request.setAttribute("lsMessage", lsMessage);
 		}
 
-		return danToc;
+		return tonGiao;
 	}
 
 	/**
@@ -229,14 +225,14 @@ public class DanTocProcessController extends HttpServlet {
 	 * @param isAdd true: action add / false: action update
 	 * @return true: thành công / false: thất bại
 	 */
-	protected boolean processData(int danTocId, DanToc danToc, boolean isAdd) {
+	protected boolean processData(int tonGiaoId, TonGiao tonGiao, boolean isAdd) {
 		boolean rs = false;
+		TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
 
-		DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
 		if(isAdd) {
-			rs = danTocLogics.addDanToc(danToc);
+			rs = tonGiaoLogics.addTonGiao(tonGiao);
 		} else {
-			rs = danTocLogics.updateDanTocById(danTocId, danToc);
+			rs = tonGiaoLogics.updateTonGiaoById(tonGiaoId, tonGiao);
 		}
 
 		return rs;

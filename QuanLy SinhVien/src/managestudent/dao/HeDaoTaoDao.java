@@ -74,6 +74,14 @@ public interface HeDaoTaoDao extends BaseDao {
 	boolean deleteHeDaoTaoByMaHe(String maHeDaoTao);
 
 	/**
+	 * Xóa thông tin hệ đào tạo
+	 *
+	 * @param maHeDaoTao int id hệ đào tạo
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteHeDaoTaoById(int idHeDaoTao);
+
+	/**
 	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
 	 *
 	 * @param hdt HeDaoTao đối tượng hệ đào tạo (chứa thông tin điều kiện tìm kiếm)

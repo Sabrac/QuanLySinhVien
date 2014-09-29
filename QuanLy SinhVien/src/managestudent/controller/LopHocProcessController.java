@@ -38,17 +38,24 @@ public class LopHocProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("lophoc") != null) {
 				request.setAttribute("lophoc", request.getSession().getAttribute("lophoc"));
+				template = Constant.LOPHOCPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.LOPHOCPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.LOPHOCPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.LOPHOCPROCESS;
 			}
 
-			template = Constant.LOPHOCPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -70,6 +77,13 @@ public class LopHocProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				LopHoc lopHoc = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("lophoc", lopHoc);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.LOPHOCPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateLopHocInfor(lopHoc, true);
@@ -83,6 +97,9 @@ public class LopHocProcessController extends HttpServlet {
 					request.setAttribute("lophoc", lopHoc);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.LOPHOCPROCESS;
 				} else {
@@ -103,24 +120,56 @@ public class LopHocProcessController extends HttpServlet {
 							}
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
-								LopHocLogicsImpl lopHocLogics = new LopHocLogicsImpl();
-								lopHoc = lopHocLogics.getLopHocById(Integer.parseInt(request.getParameter("id")));
+								try {
+									LopHocLogicsImpl lopHocLogics = new LopHocLogicsImpl();
+									LopHoc lopHocTemp = lopHocLogics.getLopHocById(Integer.parseInt(request.getParameter("id")));
 
-								if(lopHoc != null) {
-									boolean rs = processData(Integer.parseInt(request.getParameter("id")), lopHoc, false);
+									if(lopHocTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), lopHoc, false);
 
-									if (rs) {
-										//lsMessage.add(MessageProperties.getMessage("msg_002"));
-										response.sendRedirect("Result.do?add=success");
-										return;
+										if (rs) {
+											//lsMessage.add(MessageProperties.getMessage("msg_002"));
+											response.sendRedirect("Result.do?update=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} catch (NumberFormatException e) {
+									System.out.println("An error occur: " + e.getMessage());
+									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+									template = Constant.LOPHOCPROCESS;
+								}
+							} else {
+								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									LopHocLogicsImpl lopHocLogics = new LopHocLogicsImpl();
+									LopHoc lopHocTemp = lopHocLogics.getLopHocById(Integer.parseInt(request.getParameter("id")));
+
+									if(lopHocTemp != null) {
+										boolean rs = lopHocLogics.deleteLopHocById(lopHocTemp.getLopHocId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
 									} else {
 										template = Constant.SYSTEM_ERR;
 									}
 								} else {
 									template = Constant.SYSTEM_ERR;
 								}
-							} else {
-								template = Constant.SYSTEM_ERR;
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.LOPHOCPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -152,12 +201,19 @@ public class LopHocProcessController extends HttpServlet {
 	 */
 	protected LopHoc setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		LopHoc lopHoc = new LopHoc();
+		List<String> lsMessage = new ArrayList<String>();
 
-		if(request.getParameter("id") != null) {
-			lopHoc.setLopHocId(Integer.parseInt(request.getParameter("id")));
-		}
-		if(request.getParameter("tenlophoc") != null) {
-			lopHoc.setTenLopHoc(request.getParameter("tenlophoc"));
+		try {
+			if(request.getParameter("id") != null) {
+				lopHoc.setLopHocId(Integer.parseInt(request.getParameter("id")));
+			}
+			if(request.getParameter("tenlophoc") != null) {
+				lopHoc.setTenLopHoc(request.getParameter("tenlophoc"));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("An error occur: " + e.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
 		}
 
 		return lopHoc;

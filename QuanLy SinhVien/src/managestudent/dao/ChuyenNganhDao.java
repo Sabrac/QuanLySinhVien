@@ -77,6 +77,14 @@ public interface ChuyenNganhDao extends BaseDao {
 	boolean deleteChuyenNganhByMaChuyenNganh(String maChuyenNganh);
 
 	/**
+	 * Xóa chuyên ngành bằng id chuyên ngành
+	 *
+	 * @param idChuyenNganh int id chuyên ngành
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteChuyenNganhById(int idChuyenNganh);
+
+	/**
 	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
 	 *
 	 * @param chuyenNganh ChuyenNganh đối tượng chuyên ngành (chứa thông tin điều kiện tìm kiếm)

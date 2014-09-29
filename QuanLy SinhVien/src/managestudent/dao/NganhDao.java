@@ -79,6 +79,14 @@ public interface NganhDao extends BaseDao {
 	boolean deleteNganhByMaNganh(String maNganh);
 
 	/**
+	 * Xóa thông tin ngành bằng id ngành
+	 *
+	 * @param idNganh int id ngành
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteNganhById(int idNganh);
+
+	/**
 	 * Lấy tổng số bản ghi thỏa mãn điều kiện tìm kiếm
 	 *
 	 * @param nganh Nganh đối tượng ngành (chứa điều kiện tìm kiếm)

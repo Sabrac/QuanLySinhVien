@@ -105,6 +105,14 @@ public interface DmSinhVienDao extends BaseDao {
 	boolean deleteSinhVienByMaSinhVien(String maSinhVien);
 
 	/**
+	 * Xóa thông tin sinh viên
+	 *
+	 * @param idSinhVien int id sinh viên
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteSinhVienById(int idSinhVien);
+
+	/**
 	 * Lấy tổng số tất cả bản ghi thỏa mãn điều kiện tìm kiếm
 	 *
 	 * @param sinhVien DmSinhVien đối tượng sinh viên (chứa thông tin điều kiện tìm kiếm)

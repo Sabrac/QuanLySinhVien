@@ -350,4 +350,35 @@ public class NganhDaoImpl extends BaseDaoImpl implements NganhDao {
 		return nganh;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.dao.NganhDao#deleteNganhById(int)
+	 */
+	@Override
+	public boolean deleteNganhById(int idNganh) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM nganh ");
+				sqlCommand.append("WHERE nganh_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, idNganh);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
 }

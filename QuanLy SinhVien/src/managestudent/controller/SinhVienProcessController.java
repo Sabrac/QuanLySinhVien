@@ -1,6 +1,8 @@
 package managestudent.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,18 +52,25 @@ public class SinhVienProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			loadData(request, response);
 			if(request.getSession().getAttribute("sinhvien") != null) {
 				request.setAttribute("sinhvien", request.getSession().getAttribute("sinhvien"));
+				template = Constant.SINHVIENPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.SINHVIENPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.SINHVIENPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.SINHVIENPROCESS;
 			}
 
-			template = Constant.SINHVIENPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -84,6 +93,13 @@ public class SinhVienProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				DmSinhVien sinhVien = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("sinhvien", sinhVien);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.SINHVIENPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateSinhVienInfor(sinhVien, true);
@@ -97,6 +113,9 @@ public class SinhVienProcessController extends HttpServlet {
 					request.setAttribute("sinhvien", sinhVien);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.SINHVIENPROCESS;
 				} else {
@@ -119,14 +138,14 @@ public class SinhVienProcessController extends HttpServlet {
 							if (request.getParameter("id") != null) {
 								DmSinhVienLogicsImpl sinhVienLogics = new DmSinhVienLogicsImpl();
 								try {
-									sinhVien = sinhVienLogics.getSinhVienById(Integer.parseInt(request.getParameter("id")));
+									DmSinhVien sinhVienTemp = sinhVienLogics.getSinhVienById(Integer.parseInt(request.getParameter("id")));
 
-									if(sinhVien != null) {
+									if(sinhVienTemp != null) {
 										boolean rs = processData(Integer.parseInt(request.getParameter("id")), sinhVien, false);
 
 										if (rs) {
 											//lsMessage.add(MessageProperties.getMessage("msg_002"));
-											response.sendRedirect("Result.do?add=success");
+											response.sendRedirect("Result.do?update=success");
 											return;
 										} else {
 											template = Constant.SYSTEM_ERR;
@@ -141,6 +160,32 @@ public class SinhVienProcessController extends HttpServlet {
 								}
 							} else {
 								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									DmSinhVienLogicsImpl sinhVienLogics = new DmSinhVienLogicsImpl();
+									DmSinhVien sinhVienTemp = sinhVienLogics.getSinhVienById(Integer.parseInt(request.getParameter("id")));
+
+									if(sinhVienTemp != null) {
+										boolean rs = sinhVienLogics.deleteSinhVienById(sinhVienTemp.getSinhVienId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} else {
+									template = Constant.SYSTEM_ERR;
+								}
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.SINHVIENPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -209,7 +254,9 @@ public class SinhVienProcessController extends HttpServlet {
 			if(request.getParameter("ten") != null && request.getParameter("ten").length() > 0) {
 				sinhVien.setTen(request.getParameter("ten"));
 			}
-			//TODO set ngay sinh
+			if(request.getParameter("ngaysinh") != null && request.getParameter("ngaysinh").length() > 0) {
+				sinhVien.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
+			}
 			if(request.getParameter("gioitinh") != null && request.getParameter("gioitinh").length() > 0) {
 				sinhVien.setGioiTinh(Boolean.parseBoolean(request.getParameter("gioitinh")));
 			}
@@ -264,7 +311,9 @@ public class SinhVienProcessController extends HttpServlet {
 			if(request.getParameter("khoahoc") != null && request.getParameter("khoahoc").length() > 0) {
 				sinhVien.setKhoaHocId(Integer.parseInt(request.getParameter("khoahoc")));
 			}
-			//TODO set ngay nhap hoc
+			if(request.getParameter("ngaynhaphoc") != null && request.getParameter("ngaynhaphoc").length() > 0) {
+				sinhVien.setNgayNhapHoc(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaynhaphoc")));
+			}
 			if(request.getParameter("diemdauvao1") != null && request.getParameter("diemdauvao1").length() > 0) {
 				sinhVien.setDiemDauVao1(Float.parseFloat(request.getParameter("diemdauvao1")));
 			}
@@ -280,6 +329,10 @@ public class SinhVienProcessController extends HttpServlet {
 		} catch (NumberFormatException e) {
 			System.out.println("An error occur: " + e.getMessage());
 			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
+		} catch (ParseException pe) {
+			System.out.println("An error occur: " + pe.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_025"));
 			request.setAttribute("lsMessage", lsMessage);
 		}
 

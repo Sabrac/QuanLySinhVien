@@ -532,4 +532,35 @@ public class ChuyenNganhDaoImpl extends BaseDaoImpl implements ChuyenNganhDao {
 
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.ChuyenNganhDao#deleteChuyenNganhById(int)
+	 */
+	@Override
+	public boolean deleteChuyenNganhById(int idChuyenNganh) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM chuyennganh ");
+				sqlCommand.append("WHERE chuyennganh_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, idChuyenNganh);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An exception occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
 }

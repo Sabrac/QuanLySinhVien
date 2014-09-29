@@ -1518,7 +1518,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				sqlCommand.append("nghenghiepbo, hotenme, nghenghiepme, hedt_id, lop_id, khoahoc_id, ");
 				sqlCommand.append("ngaynhaphoc, diemdauvao1, diemdauvao2, diemdauvao3, anhsinhvien ");
 				sqlCommand.append("FROM dmsinhvien ");
-				sqlCommand.append("WHERE sinhvien_id = ?");
+				sqlCommand.append("WHERE sinhvien_id = ? ");
 				sqlCommand.append("ORDER BY masv ASC");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
@@ -1527,7 +1527,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 
 				if(rs != null) {
 					while(rs.next()) {
-						sinhVien = new DmSinhVien(rs.getInt("sinhvienid"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
+						sinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
 								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getString("cmtnd"), rs.getString("sodthoai"), rs.getString("noisinh"),
 								rs.getString("quequan"), rs.getString("hokhauthuongtru"), rs.getString("noiohientai"), rs.getString("chedouudai"),
 								rs.getInt("dantoc_id"), rs.getInt("tongiao_id"), rs.getInt("quoctich_id"), rs.getString("hotenbo"), rs.getString("nghenghiepbo"),
@@ -1594,6 +1594,37 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				preparedStatement.setString(27, sinhVien.getAnhSinhVien());
 				preparedStatement.setInt(28, sinhVien.getSinhVienId());
 				preparedStatement.setInt(29, idSinhVien);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+				result = false;
+			}
+			closeConnect();
+		}
+
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DmSinhVienDao#deleteSinhVienById(int)
+	 */
+	@Override
+	public boolean deleteSinhVienById(int idSinhVien) {
+		boolean result = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+
+				sqlCommand.append("DELETE FROM dmsinhvien ");
+				sqlCommand.append("WHERE sinhvien_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, idSinhVien);
 				int count = preparedStatement.executeUpdate();
 
 				if(count > 0) {

@@ -39,17 +39,24 @@ public class NganhProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("nganh") != null) {
 				request.setAttribute("nganh", request.getSession().getAttribute("nganh"));
+				template = Constant.NGANHPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
+				template = Constant.NGANHPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
+				template = Constant.NGANHPROCESS;
+			}
+			if(request.getParameter("id") != null) {
+				request.setAttribute("id", request.getParameter("id"));
+				template = Constant.NGANHPROCESS;
 			}
 
-			template = Constant.NGANHPROCESS;
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -71,6 +78,13 @@ public class NganhProcessController extends HttpServlet {
 			if(request.getParameter("submit") != null) {
 				Nganh nganh = setDefaultData(request, response);
 
+				if(request.getAttribute("lsMessage") != null) {
+					request.setAttribute("nganh", nganh);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.NGANHPROCESS);
+					req.forward(request, response);
+					return;
+				}
+
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
 						lsMessage = ValidateInfor.validateNganhInfor(nganh, true);
@@ -84,6 +98,9 @@ public class NganhProcessController extends HttpServlet {
 					request.setAttribute("nganh", nganh);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
+					}
+					if(request.getParameter("id") != null) {
+						request.setAttribute("id", request.getParameter("id"));
 					}
 					template = Constant.NGANHPROCESS;
 				} else {
@@ -103,25 +120,57 @@ public class NganhProcessController extends HttpServlet {
 								template = Constant.SYSTEM_ERR;
 							}
 						} else if ("update".equals(ref)) {
-							if (request.getParameter("nganhid") != null) {
-								NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
-								nganh = nganhLogics.getNganhById(Integer.parseInt(request.getParameter("nganhid")));
+							if (request.getParameter("id") != null) {
+								try {
+									NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
+									Nganh nganhTemp = nganhLogics.getNganhById(Integer.parseInt(request.getParameter("id")));
 
-								if(nganh != null) {
-									boolean rs = processData(Integer.parseInt(request.getParameter("nganhid")), nganh, false);
+									if(nganhTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), nganh, false);
 
-									if (rs) {
-										//lsMessage.add(MessageProperties.getMessage("msg_002"));
-										response.sendRedirect("Result.do?add=success");
-										return;
+										if (rs) {
+											//lsMessage.add(MessageProperties.getMessage("msg_002"));
+											response.sendRedirect("Result.do?update=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
+									} else {
+										template = Constant.SYSTEM_ERR;
+									}
+								} catch (NumberFormatException e) {
+									System.out.println("An error occur: " + e.getMessage());
+									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+									template = Constant.NGANHPROCESS;
+								}
+							} else {
+								template = Constant.SYSTEM_ERR;
+							}
+						} else if("delete".equals(ref)) {
+							try {
+								if(request.getParameter("id") != null) {
+									NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
+									Nganh nganhTemp = nganhLogics.getNganhById(Integer.parseInt(request.getParameter("id")));
+
+									if(nganhTemp != null) {
+										boolean rs = nganhLogics.deleteNganhById(nganhTemp.getNganhId());
+
+										if(rs) {
+											response.sendRedirect("Result.do?delete=success");
+											return;
+										} else {
+											template = Constant.SYSTEM_ERR;
+										}
 									} else {
 										template = Constant.SYSTEM_ERR;
 									}
 								} else {
 									template = Constant.SYSTEM_ERR;
 								}
-							} else {
-								template = Constant.SYSTEM_ERR;
+							} catch (NumberFormatException e) {
+								System.out.println("An error occur: " + e.getMessage());
+								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+								template = Constant.NGANHPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -153,15 +202,25 @@ public class NganhProcessController extends HttpServlet {
 	 */
 	protected Nganh setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		Nganh nganh = new Nganh();
+		List<String> lsMessage = new ArrayList<String>();
 
-		if(request.getParameter("manganh") != null) {
-			nganh.setMaNganh(request.getParameter("manganh"));
-		}
-		if(request.getParameter("tennganh") != null) {
-			nganh.setTenNganh(request.getParameter("tennganh"));
-		}
-		if(request.getParameter("ghichu") != null) {
-			nganh.setGhiChu(request.getParameter("ghichu"));
+		try {
+			if(request.getParameter("id") != null && request.getParameter("id").length() > 0) {
+				nganh.setNganhId(Integer.parseInt(request.getParameter("id")));
+			}
+			if(request.getParameter("manganh") != null && request.getParameter("manganh").length() > 0) {
+				nganh.setMaNganh(request.getParameter("manganh"));
+			}
+			if(request.getParameter("tennganh") != null && request.getParameter("tennganh").length() > 0) {
+				nganh.setTenNganh(request.getParameter("tennganh"));
+			}
+			if(request.getParameter("ghichu") != null && request.getParameter("ghichu").length() > 0) {
+				nganh.setGhiChu(request.getParameter("ghichu"));
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("An error occur: " + e.getMessage());
+			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
+			request.setAttribute("lsMessage", lsMessage);
 		}
 
 		return nganh;
