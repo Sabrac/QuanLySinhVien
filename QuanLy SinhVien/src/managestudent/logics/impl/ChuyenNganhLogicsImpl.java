@@ -130,4 +130,15 @@ public class ChuyenNganhLogicsImpl implements ChuyenNganhLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.ChuyenNganhLogics#deleteChuyenNganhById(int)
+	 */
+	@Override
+	public boolean deleteChuyenNganhById(int idChuyenNganh) {
+		ChuyenNganhDaoImpl chuyenNganhDao = new ChuyenNganhDaoImpl();
+		boolean rs = chuyenNganhDao.deleteChuyenNganhById(idChuyenNganh);
+
+		return rs;
+	}
+
 }

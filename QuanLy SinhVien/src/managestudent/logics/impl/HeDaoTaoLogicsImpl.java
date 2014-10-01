@@ -118,4 +118,15 @@ public class HeDaoTaoLogicsImpl implements HeDaoTaoLogics {
 		return hdt;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.HeDaoTaoLogics#deleteHeDaoTaoById(int)
+	 */
+	@Override
+	public boolean deleteHeDaoTaoById(int idHeDaoTao) {
+		HeDaoTaoDaoImpl hdtDao = new HeDaoTaoDaoImpl();
+		boolean rs = hdtDao.deleteHeDaoTaoById(idHeDaoTao);
+
+		return rs;
+	}
+
 }

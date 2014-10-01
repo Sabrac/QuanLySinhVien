@@ -65,6 +65,14 @@ public interface NganhLogics {
 	boolean deleteNganhByMaNganh(String maNganh);
 
 	/**
+	 * Xóa thông tin ngành bằng id ngành
+	 *
+	 * @param idNganh int id ngành
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteNganhById(int idNganh);
+
+	/**
 	 * Lấy danh sách tên các column có trong table
 	 *
 	 * @return List<String> Danh sách tên các column có trong table

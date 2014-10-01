@@ -69,6 +69,14 @@ public interface ChuyenNganhLogics {
 	boolean deleteChuyenNganhByMaChuyenNganh(String maChuyenNganh);
 
 	/**
+	 * Xóa chuyên ngành bằng id chuyên ngành
+	 *
+	 * @param idChuyenNganh int id chuyên ngành
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteChuyenNganhById(int idChuyenNganh);
+
+	/**
 	 * Lấy danh sách tên các column có trong table
 	 *
 	 * @return List<String> Danh sách tên các column có trong table

@@ -18,9 +18,12 @@ import managestudent.entities.KhoaHoc;
 import managestudent.entities.LopHoc;
 import managestudent.entities.MonHoc;
 import managestudent.entities.Nganh;
-import managestudent.logics.impl.ChuyenNganhLogicsImpl;
-import managestudent.logics.impl.HeDaoTaoLogicsImpl;
-import managestudent.logics.impl.NganhLogicsImpl;
+import managestudent.entities.QuocTich;
+import managestudent.entities.TonGiao;
+//import managestudent.logics.impl.ChuyenNganhLogicsImpl;
+//import managestudent.logics.impl.DmSinhVienLogicsImpl;
+//import managestudent.logics.impl.HeDaoTaoLogicsImpl;
+//import managestudent.logics.impl.NganhLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.MessageErrorProperties;
 
@@ -38,23 +41,24 @@ public class ValidateInfor {
 	 */
 	public static List<String> validateNganhInfor(Nganh nganh, boolean isAdd) {
 		List<String> lsMessage = new ArrayList<String>();
-		NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
+//		NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
 		String maNganh = nganh.getMaNganh();
 		String tenNganh = nganh.getTenNganh();
 
 		if(Common.checkNull(maNganh)) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_001_manganh"));
-		} else {
-			if(isAdd) {
-				if(nganhLogics.getNganhByMaNganh(maNganh) != null) {
-					lsMessage.add(MessageErrorProperties.getMessage("error_003_manganh"));
-				}
-			} else {
-				if(nganhLogics.getNganhByMaNganh(maNganh) == null) {
-					lsMessage.add(MessageErrorProperties.getMessage("error_004_manganh"));
-				}
-			}
 		}
+//		else {
+//			if(isAdd) {
+//				if(nganhLogics.getNganhByMaNganh(maNganh) != null) {
+//					lsMessage.add(MessageErrorProperties.getMessage("error_003_manganh"));
+//				}
+//			} else {
+//				if(nganhLogics.getNganhByMaNganh(maNganh) == null) {
+//					lsMessage.add(MessageErrorProperties.getMessage("error_004_manganh"));
+//				}
+//			}
+//		}
 		if(Common.checkNull(tenNganh)) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_001_tennganh"));
 		}
@@ -71,28 +75,27 @@ public class ValidateInfor {
 	 */
 	public static List<String> validateChuyenNganhInfor(ChuyenNganh cn, boolean isAdd) {
 		List<String> lsMessage = new ArrayList<String>();
-		ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
+//		ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
 
-		if(isAdd) {
-			if(Common.checkNull(cn.getMaChuyenNganh())) {
-				lsMessage.add(MessageErrorProperties.getMessage("error_001_machuyennganh"));
-			} else {
-				if(isAdd) {
-					if(chuyenNganhLogics.getChuyenNganhByMaCN(cn.getMaChuyenNganh()) != null) {
-						lsMessage.add(MessageErrorProperties.getMessage("error_003_machuyennganh"));
-					}
-				} else {
-					if(chuyenNganhLogics.getChuyenNganhByMaCN(cn.getMaChuyenNganh()) == null) {
-						lsMessage.add(MessageErrorProperties.getMessage("error_004_machuyennganh"));
-					}
-				}
-			}
-			if(Common.checkNull(cn.getTenChuyenNganh())) {
-				lsMessage.add(MessageErrorProperties.getMessage("error_001_tenchuyennganh"));
-			}
-			if(cn.getNganhId() <= 0) {
-				lsMessage.add(MessageErrorProperties.getMessage("error_002_nganh"));
-			}
+		if(Common.checkNull(cn.getMaChuyenNganh())) {
+			lsMessage.add(MessageErrorProperties.getMessage("error_001_machuyennganh"));
+		}
+//		else {
+//			if(isAdd) {
+//				if(chuyenNganhLogics.getChuyenNganhByMaCN(cn.getMaChuyenNganh()) != null) {
+//					lsMessage.add(MessageErrorProperties.getMessage("error_003_machuyennganh"));
+//				}
+//			} else {
+//				if(chuyenNganhLogics.getChuyenNganhByMaCN(cn.getMaChuyenNganh()) == null) {
+//					lsMessage.add(MessageErrorProperties.getMessage("error_004_machuyennganh"));
+//				}
+//			}
+//		}
+		if(Common.checkNull(cn.getTenChuyenNganh())) {
+			lsMessage.add(MessageErrorProperties.getMessage("error_001_tenchuyennganh"));
+		}
+		if(cn.getNganhId() <= 0) {
+			lsMessage.add(MessageErrorProperties.getMessage("error_002_nganh"));
 		}
 
 		return lsMessage;
@@ -129,7 +132,7 @@ public class ValidateInfor {
 	 */
 	public static List<String> validateHeDtInfor(HeDaoTao hdt, boolean isAdd) {
 		List<String> lsMessage = new ArrayList<String>();
-		HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
+//		HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
 
 		if(Common.checkNull(hdt.getMaHeDt())) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_001_mahdt"));
@@ -137,15 +140,15 @@ public class ValidateInfor {
 		if(Common.checkNull(hdt.getTenHeDt())) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_001_tenhdt"));
 		}
-		if(isAdd) {
-			if(hdtLogics.getHeDaoTaoByMaHe(hdt.getMaHeDt()) != null) {
-				lsMessage.add(MessageErrorProperties.getMessage("error_003_mahdt"));
-			}
-		} else {
-			if(hdtLogics.getHeDaoTaoByMaHe(hdt.getMaHeDt()) == null) {
-				lsMessage.add(MessageErrorProperties.getMessage("error_004_mahdt"));
-			}
-		}
+//		if(isAdd) {
+//			if(hdtLogics.getHeDaoTaoByMaHe(hdt.getMaHeDt()) != null) {
+//				lsMessage.add(MessageErrorProperties.getMessage("error_003_mahdt"));
+//			}
+//		} else {
+//			if(hdtLogics.getHeDaoTaoByMaHe(hdt.getMaHeDt()) == null) {
+//				lsMessage.add(MessageErrorProperties.getMessage("error_004_mahdt"));
+//			}
+//		}
 
 		return lsMessage;
 	}
@@ -257,8 +260,16 @@ public class ValidateInfor {
 		return lsMessage;
 	}
 
+	/**
+	 * Kiểm tra thông tin sinh viên
+	 *
+	 * @param sinhVien DmSinhVien đối tượng sinh viên
+	 * @param isAdd boolean
+	 * @return List<String> Danh sách lỗi nếu có
+	 */
 	public static List<String> validateSinhVienInfor(DmSinhVien sinhVien, boolean isAdd) {
 		List<String> lsMessage = new ArrayList<String>();
+//		DmSinhVienLogicsImpl sinhVienLogics = new DmSinhVienLogicsImpl();
 
 		if(!isAdd) {
 			if(sinhVien.getSinhVienId() <= 0) {
@@ -268,6 +279,15 @@ public class ValidateInfor {
 		if(Common.checkNull(sinhVien.getMaSinhVien())) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_001_masinhvien"));
 		}
+//		else if(sinhVienLogics.getSinhVienByMaSinhVien(sinhVien.getMaSinhVien()) != null) {
+//			if(isAdd) {
+//				lsMessage.add(MessageErrorProperties.getMessage("error_003_masinhvien"));
+//			}
+//		} else if(sinhVienLogics.getSinhVienByMaSinhVien(sinhVien.getMaSinhVien()) != null) {
+//			if(!isAdd) {
+//				lsMessage.add(MessageErrorProperties.getMessage("error_004_masinhvien"));
+//			}
+//		}
 		if(Common.checkNull(sinhVien.getHoDem())) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_001_hodem"));
 		}
@@ -333,6 +353,50 @@ public class ValidateInfor {
 		}
 		if(sinhVien.getDiemDauVao3() < 0) {
 			lsMessage.add(MessageErrorProperties.getMessage("error_020_diemdauvao3"));
+		}
+
+		return lsMessage;
+	}
+
+	/**
+	 * Kiểm tra thông tin quốc tịch
+	 *
+	 * @param quocTich QuocTich đối tượng quốc tịch
+	 * @param isAdd boolean
+	 * @return List<String> Danh sách lỗi nếu có
+	 */
+	public static List<String> validateQuocTichInfor(QuocTich quocTich, boolean isAdd) {
+		List<String> lsMessage = new ArrayList<String>();
+
+		if(!isAdd) {
+			if(quocTich.getQuocTichId() <= 0) {
+				lsMessage.add(MessageErrorProperties.getMessage("error_004_quoctichid"));
+			}
+		}
+		if(Common.checkNull(quocTich.getTenQuocTich())) {
+			lsMessage.add(MessageErrorProperties.getMessage("error_001_tenquoctich"));
+		}
+
+		return lsMessage;
+	}
+
+	/**
+	 * Kiểm tra thông tin tôn giáo
+	 *
+	 * @param tonGiao TonGiao đối tượng tôn giáo
+	 * @param isAdd boolean
+	 * @return List<String> Danh sách lỗi nếu có
+	 */
+	public static List<String> validateTonGiaoInfor(TonGiao tonGiao, boolean isAdd) {
+		List<String> lsMessage = new ArrayList<String>();
+
+		if(!isAdd) {
+			if(tonGiao.getTonGiaoId() <= 0) {
+				lsMessage.add(MessageErrorProperties.getMessage("error_004_tongiaoid"));
+			}
+		}
+		if(Common.checkNull(tonGiao.getTenTonGiao())) {
+			lsMessage.add(MessageErrorProperties.getMessage("error_001_tentongiao"));
 		}
 
 		return lsMessage;

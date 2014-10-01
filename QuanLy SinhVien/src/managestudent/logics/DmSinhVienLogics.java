@@ -105,6 +105,14 @@ public interface DmSinhVienLogics {
 	boolean deleteSinhVienByMaSinhVien(String maSinhVien);
 
 	/**
+	 * Xóa thông tin sinh viên
+	 *
+	 * @param idSinhVien int id sinh viên
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteSinhVienById(int idSinhVien);
+
+	/**
 	 * Lấy danh sách tên các column có trong table
 	 *
 	 * @return List<String> Danh sách tên các column có trong table

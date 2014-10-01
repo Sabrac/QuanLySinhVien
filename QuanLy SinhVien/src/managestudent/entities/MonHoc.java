@@ -19,7 +19,6 @@ public class MonHoc {
 	private float heSoGiuaKy;
 	private float heSoHocKy;
 	private int chuyenNganhId;
-	private int soNgayNghi;
 	private String tenChuyenNganh;
 
 	/**
@@ -51,7 +50,6 @@ public class MonHoc {
 		heSoGiuaKy = -1;
 		heSoHocKy = -1;
 		chuyenNganhId = -1;
-		soNgayNghi = -1;
 		tenChuyenNganh = "";
 	}
 
@@ -67,7 +65,7 @@ public class MonHoc {
 	 * @param chuyenNganhId int chuyên ngành id
 	 * @param soNgayNghi int số ngày nghỉ
 	 */
-	public MonHoc(int monHocId, String tenMonHoc, String soTrinh, float heSoChuyenCan, float heSoGiuaKy, float heSoHocKy, int chuyenNganhId, int soNgayNghi) {
+	public MonHoc(int monHocId, String tenMonHoc, String soTrinh, float heSoChuyenCan, float heSoGiuaKy, float heSoHocKy, int chuyenNganhId) {
 		this.monHocId = monHocId;
 		this.tenMonHoc = tenMonHoc;
 		this.soTrinh = soTrinh;
@@ -75,7 +73,6 @@ public class MonHoc {
 		this.heSoGiuaKy = heSoGiuaKy;
 		this.heSoHocKy = heSoHocKy;
 		this.chuyenNganhId = chuyenNganhId;
-		this.soNgayNghi = soNgayNghi;
 		tenChuyenNganh = "";
 	}
 
@@ -98,22 +95,9 @@ public class MonHoc {
 		this.heSoGiuaKy = heSoGiuaKy;
 		this.heSoHocKy = heSoHocKy;
 		this.chuyenNganhId = chuyenNganhId;
-		this.soNgayNghi = soNgayNghi;
 		tenChuyenNganh = "";
 	}
 
-	/**
-	 * @return the soNgayNghi
-	 */
-	public int getSoNgayNghi() {
-		return soNgayNghi;
-	}
-	/**
-	 * @param soNgayNghi the soNgayNghi to set
-	 */
-	public void setSoNgayNghi(int soNgayNghi) {
-		this.soNgayNghi = soNgayNghi;
-	}
 	/**
 	 * @return the chuyenNganhId
 	 */

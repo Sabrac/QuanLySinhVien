@@ -118,4 +118,15 @@ public class NganhLogicsImpl implements NganhLogics {
 		return nganh;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.NganhLogics#deleteNganhById(int)
+	 */
+	@Override
+	public boolean deleteNganhById(int idNganh) {
+		NganhDaoImpl nganhDao = new NganhDaoImpl();
+		boolean rs = nganhDao.deleteNganhById(idNganh);
+
+		return rs;
+	}
+
 }

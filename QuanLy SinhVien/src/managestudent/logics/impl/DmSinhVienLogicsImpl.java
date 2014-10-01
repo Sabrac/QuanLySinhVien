@@ -163,4 +163,15 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#deleteSinhVienById(int)
+	 */
+	@Override
+	public boolean deleteSinhVienById(int idSinhVien) {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		boolean rs = sinhVienDao.deleteSinhVienById(idSinhVien);
+
+		return rs;
+	}
+
 }

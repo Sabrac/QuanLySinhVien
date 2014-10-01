@@ -74,6 +74,14 @@ public interface HeDaoTaoLogics {
 	boolean deleteHeDaoTaoByMaHe(String maHeDaoTao);
 
 	/**
+	 * Xóa thông tin hệ đào tạo
+	 *
+	 * @param maHeDaoTao int id hệ đào tạo
+	 * @return true: thành công / false: thất bại
+	 */
+	boolean deleteHeDaoTaoById(int idHeDaoTao);
+
+	/**
 	 * Lấy danh sách tên các column có trong table
 	 *
 	 * @return List<String> Danh sách tên các column có trong table
