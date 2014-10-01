@@ -42,8 +42,8 @@
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ CHUYÊN NGÀNH </h1>
+				<h2>Danh sách các ngành học </h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
@@ -113,10 +113,11 @@
 			</tr>
 		</table>
 	</form>
-
+	<div class="list-wrapper">
+	<h2>Danh sách chuyên ngành</h2>
 	<form action="ChuyenNganhProcess.do" method="post">
 		<input type="hidden" value="add" name="ref" />
-		<table align="center">
+		<table align="center" class="list-result">
 			<tr>
 				<th>
 					MÃ CHUYÊN NGÀNH
@@ -187,7 +188,7 @@
 				</tr>
 			</table>
 		</div>
-
+	</div>
 
 
 		</div>

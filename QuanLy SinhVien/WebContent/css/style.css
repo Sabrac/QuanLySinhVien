@@ -2042,7 +2042,7 @@ ul.icon-fonts li .html {
     text-align: center;
 }
 
-.list-sinhvien {
+.list-wrapper {
     margin: 50px 0;
 }
 
@@ -2060,23 +2060,23 @@ h2.form-headline {
     top: 8px;
     width: 145px;
 }
-.list-sinhvien-result {
+.list-result {
 	width: 100%;
 }
-.list-sinhvien-result td, .list-sinhvien-result th {
+.list-result td, .list-result th {
 	display: inline-block;
-	width: 10%;
+	width: 12%;
 	text-align: center
 }
-.list-sinhvien-result th {
+.list-result th {
 	background-color: #ccc;
 	padding: 10px 0;
 }
-.list-sinhvien-result tr {
+.list-result tr {
     display: block;
     margin: 5px 0;
 }
-.list-sinhvien > h2 {
+.list-wrapper > h2 {
     font-size: 16px;
     font-weight: bold;
     margin: 10px 0;
