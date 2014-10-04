@@ -40,7 +40,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qlmh.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ MÔN HỌC</h1>
 				<h2>Quản lý các môn học</h2>

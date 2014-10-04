@@ -11,8 +11,20 @@
 	<meta charset="utf-8">
 	<title>Retina Dashboard</title>
 	<link rel="stylesheet" href="css/style.css" media="all" />
+	<script>
+		function redirect(dmName) {
+			window.location.href = "ListDM.do?name=" + dmName;
+		}
+	</script>
 	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
 	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+	<script>
+		function onDelete() {
+			document.getElementsByName('ref')[0].value = "delete";
+			document.getElementById('form').action = "DanTocProcess.do?submit=true";
+			document.getElementById('form').submit();
+		}
+	</script>
 </head>
 <body>
 <div class="testing">
@@ -35,37 +47,38 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qldt.png"></span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ DÂN TỘC</h1>
+				<h2>Danh sách các dân tộc</h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ DÂN TỘC</h1>
 			<c:forEach items="${lsMessage}" var="message">
-				<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
-			</c:forEach>
-			<br />
+		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
+	</c:forEach>
+	<br />
 
-			<form action="TonGiaoProcess.do?submit=true" method="post">
-				<input type="hidden" name="id" value="${id}" />
-				<input type="hidden" name="ref" value="${ref}" />
-				<table align="center">
-					<tr>
-						<td>
-							Tên tôn giáo
-						</td>
-						<td>
-							<input type="text" name="tentongiao" value="${tongiao.tenTonGiao}" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2" valign="middle" align="center">
-							<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
-						</td>
-					</tr>
-				</table>
-			</form>
+	<form action="DanTocProcess.do?submit=true" method="post">
+		<input type="hidden" value="${ref}" name="ref" />
+		<input type="hidden" value="${id}" name="id" />
+		<table align="center">
+			<tr>
+				<td>
+					Tên dân tộc
+				</td>
+				<td>
+					<input type="text" name="tendantoc" value="${dantoc.tenDanToc}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" valign="middle" align="center">
+					<input type="submit" name="btnSubmit" id="btnSubmit" value="Submit" />
+				</td>
+			</tr>
+		</table>
+	</form>
 		</div>
 
 	</section>

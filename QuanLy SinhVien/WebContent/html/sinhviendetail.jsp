@@ -47,7 +47,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qlsv.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ SINH VIÊN</h1>
 				<h2>Quản lý các thông tin của sinh viên</h2>
@@ -58,8 +58,8 @@
 		<form action="SinhVienProcess.do" method="post" id="form">
 		<input type="hidden" name="id" value="${id}" />
 		<input type="hidden" name="ref" value="update" />
-		<table align="center">
-			<tr>
+		<table align="center" class="sv-details">
+			<tr class="anh-sinhvien">
 				<td>
 					Ảnh sinh viên
 				</td>
@@ -74,24 +74,18 @@
 				<td>
 					<c:out value="${sinhvien.maSinhVien}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Họ đệm
 				</td>
 				<td>
 					<c:out value="${sinhvien.hoDem}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên
 				</td>
 				<td>
 					<c:out value="${sinhvien.ten}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Ngày sinh
 				</td>
@@ -114,24 +108,18 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Số chứng minh thư
 				</td>
 				<td>
 					<c:out value="${sinhvien.cmtnd}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Số điện thoại
 				</td>
 				<td>
 					<c:out value="${sinhvien.soDienThoai}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nơi sinh
 				</td>
@@ -146,24 +134,18 @@
 				<td>
 					<c:out value="${sinhvien.queQuan}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Hộ khẩu thường trú
 				</td>
 				<td>
 					<c:out value="${sinhvien.hoKhauThuongTru}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nơi ở hiện tại
 				</td>
 				<td>
 					<c:out value="${sinhvien.noiOHienTai}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Chế độ ưu đãi
 				</td>
@@ -182,8 +164,6 @@
 								</c:if>
 						</c:forEach>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tôn giáo
 				</td>
@@ -194,8 +174,6 @@
 								</c:if>
 						</c:forEach>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Quốc tịch
 				</td>
@@ -206,8 +184,6 @@
 								</c:if>
 						</c:forEach>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Họ tên bố
 				</td>
@@ -222,24 +198,18 @@
 				<td>
 					<c:out value="${sinhvien.ngheNghiepBo}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Họ tên mẹ
 				</td>
 				<td>
 					<c:out value="${sinhvien.hoTenMe}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Nghề nghiệp mẹ
 				</td>
 				<td>
 					<c:out value="${sinhvien.ngheNghiepMe}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Hệ đào tạo
 				</td>
@@ -262,8 +232,6 @@
 								</c:if>
 						</c:forEach>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Tên khóa học
 				</td>
@@ -274,8 +242,6 @@
 								</c:if>
 						</c:forEach>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Ngày nhập học
 				</td>
@@ -291,16 +257,12 @@
 				<td>
 					<c:out value="${sinhvien.diemDauVao1}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Điểm đầu vào 2
 				</td>
 				<td>
 					<c:out value="${sinhvien.diemDauVao2}" />
 				</td>
-			</tr>
-			<tr>
 				<td>
 					Điểm đầu vào 3
 				</td>
@@ -308,18 +270,23 @@
 					<c:out value="${sinhvien.diemDauVao3}" />
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
-				</td>
-				<td>
-					<input type="button" value="Xóa" name="btnDelete" onclick="onDelete();" />
-				</td>
-				<td>
-					<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='SinhVien.do';" />
-				</td>
-			</tr>
 		</table>
+		<div class="btn">
+			<table align="center">
+				<tr>
+					<td>
+						<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
+					</td>
+					<td>
+						<input type="button" value="Xóa" name="btnDelete" onclick="onDelete();" />
+					</td>
+					<td>
+						<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='SinhVien.do';" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
 	</form>
 		</div>
 

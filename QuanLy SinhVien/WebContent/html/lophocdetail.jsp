@@ -42,7 +42,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qllh.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ LỚP HỌC</h1>
 				<h2>Danh sách các lớp học</h2>

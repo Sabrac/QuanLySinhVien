@@ -48,7 +48,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qlsv.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ SINH VIÊN</h1>
 				<h2>Quản lý các thông tin của sinh viên</h2>

@@ -47,7 +47,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qldt.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ DÂN TỘC</h1>
 				<h2>Danh sách các dân tộc</h2>
@@ -58,7 +58,7 @@
 			<form action="DanTocProcess.do" method="post" id="form">
 					<input type="hidden" value="update" name="ref" />
 					<input type="hidden" value="${id}" name="id" />
-					<table align="center">
+					<table align="center" class="form-details">
 						<tr>
 							<td>
 								ID

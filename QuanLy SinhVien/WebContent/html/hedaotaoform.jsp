@@ -35,7 +35,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qlhdt.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ HỆ ĐÀO TẠO</h1>
 				<h2>Danh sách các hệ đào tạo</h2>

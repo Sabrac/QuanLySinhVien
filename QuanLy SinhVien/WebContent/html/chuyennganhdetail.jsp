@@ -47,7 +47,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qlcn.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ CHUYÊN NGÀNH </h1>
 				<h2>Danh sách các ngành học </h2>
@@ -58,10 +58,10 @@
 		<form action="ChuyenNganhProcess.do" method="post" id="form">
 		<input type="hidden" value="update" name="ref" />
 		<input type="hidden" value="${chuyennganh.chuyenNganhId}" name="id" />
-		<table align="center">
+		<table align="center" class="searchbox">
 			<tr>
 				<td>
-					Mã Chuyên Ngành
+					Mã Chuyên Ngành:
 				</td>
 				<td colspan="2">
 					<c:out value="${chuyennganh.maChuyenNganh}" />
@@ -69,7 +69,7 @@
 			</tr>
 			<tr>
 				<td>
-					Tên Chuyên Ngành
+					Tên Chuyên Ngành:
 				</td>
 				<td colspan="2">
 					<c:out value="${chuyennganh.tenChuyenNganh}" />
@@ -77,7 +77,7 @@
 			</tr>
 			<tr>
 				<td>
-					Ngành
+					Ngành:
 				</td>
 				<td colspan="2">
 					<c:forEach items="${lsNganh}" var="nganh">
@@ -87,7 +87,7 @@
 					</c:forEach>
 				</td>
 			</tr>
-			<tr>
+			<tr class="btn">
 				<td>
 					<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 				</td>

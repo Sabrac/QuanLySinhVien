@@ -35,7 +35,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/qltg.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ TÔN GIÁO</h1>
 				<h2>Quản lý các tôn giáo</h2>

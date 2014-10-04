@@ -2085,3 +2085,34 @@ h2.form-headline {
 .paging {
 	margin: 20px 0;
 }
+.icon > img {
+    position: relative;
+    top: -10px;
+    width: 35px;
+}
+.btn td {
+    display: inline-block;
+    margin: 0 10px;
+}
+.btn input {
+    padding: 10px;
+}
+
+
+/* Details Box */
+.sv-details {
+	width: 100%;
+}
+.sv-details td {
+	padding: 20px 0;
+	text-align: left;
+}
+.sv-details tr {
+	margin: 20px 10px;
+    text-align: center;
+	/*border: 1px solid #eeeeee;*/
+}
+.form-details td {
+	padding: 20px  0;
+	width: 200px;
+}

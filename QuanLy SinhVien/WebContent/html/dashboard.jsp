@@ -39,7 +39,7 @@
 <section class="content">
 	<section class="widget">
 		<header>
-			<span class="icon">&#128200;</span>
+			<span class="icon"><img src="./images/icon/dashboard-icon.png"></span>
 			<hgroup>
 				<h1>QUẢN LÝ DANH MỤC</h1>
 				<h2>Danh sách các danh mục</h2>
