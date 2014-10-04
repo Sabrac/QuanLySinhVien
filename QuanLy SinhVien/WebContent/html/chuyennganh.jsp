@@ -47,15 +47,14 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
-
-
+		<h1>QUẢN LÝ CHUYÊN NGÀNH </h1>
 			<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>
 	<br />
 
 	<c:if test="${showTable == null}">
-
+	<h2 class="form-headline"> Tìm kiếm chuyên ngành</h1>
 	<form action="ChuyenNganh.do" name="searchform" id="searchform" method="post">
 		<table align="center" class="searchbox">
 			<tr>

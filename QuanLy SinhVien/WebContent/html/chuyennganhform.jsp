@@ -42,11 +42,12 @@
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ CHUYÊN NGÀNH </h1>
+				<h2>Danh sách các ngành học </h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>CHỈNH SỬA THÔNG TIN CHUYÊN NGÀNH </h1>
 		<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>

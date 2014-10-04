@@ -47,12 +47,14 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ DÂN TỘC</h1>
 			<c:forEach items="${lsMessage}" var="message">
 				<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 			</c:forEach>
 			<br />
 
 			<c:if test="${showTable == null}">
+			<h2 class="form-headline">Quản lý các dân tộc</h2>
 			<form action="DanToc.do" name="searchform" id="searchform" method="post">
 				<table align="center" class="searchbox">
 					<tr>
@@ -76,10 +78,11 @@
 					</tr>
 				</table>
 			</form>
-
-				<form action="DanTocProcess.do" method="post">
+		<div class="list-wrapper">
+		<h2>Danh sách các dân tộc</h2>
+			<form action="DanTocProcess.do" method="post">
 		<input type="hidden" name="ref" value="add" />
-		<table align="center">
+		<table align="center" class="list-result">
 			<tr>
 				<th>
 					ID
@@ -136,6 +139,7 @@
 					</td>
 				</tr>
 			</table>
+		</div>
 		</div>
 		</div>
 	</section>

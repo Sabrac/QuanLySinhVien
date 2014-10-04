@@ -52,18 +52,19 @@
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ NGÀNH HỌC</h1>
+				<h2>Quản lý các ngành học</h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ NGÀNH HỌC</h1>
 		<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>
 	<br />
 
 	<c:if test="${showTable == null}">
-
+	<h2 class="form-headline">Quản lý các ngành học</h2>
 	<form action="Nganh.do" name="searchform" id="searchform" method="post">
 		<table align="center" class="searchbox">
 			<tr>
@@ -87,10 +88,11 @@
 			</tr>
 		</table>
 	</form>
-
+	<div class="list-wrapper">
+	<h2>Danh sách ngành học</h2>
 	<form action="NganhProcess.do" method="post">
 		<input type="hidden" value="add" name="ref" />
-		<table align="center">
+		<table align="center" class="list-result">
 			<tr>
 				<th>
 					MÃ NGÀNH
@@ -147,6 +149,7 @@
 					</td>
 				</tr>
 			</table>
+		</div>
 		</div>
 		</div>
 

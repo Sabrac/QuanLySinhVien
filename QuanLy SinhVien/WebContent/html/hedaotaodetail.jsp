@@ -44,11 +44,13 @@
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ HỆ ĐÀO TẠO</h1>
+				<h2>Danh sách các hệ đào tạo</h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ HỆ ĐÀO TẠO</h1>
+		<h2 class="form-headline"> Chi tiết hệ đào tạo</h2>
 			<form action="HeDaoTaoProcess.do" method="post" id="form">
 				<input type="hidden" value="update" name="ref" />
 				<input type="hidden" value="${id}" name="id" />

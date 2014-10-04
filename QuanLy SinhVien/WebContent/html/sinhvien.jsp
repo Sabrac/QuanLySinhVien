@@ -388,7 +388,7 @@
 		</table>
 	</form>
 	<div class="list-wrapper">
-	<h2>Danh sách kết quả tìm kiếm</h2>
+	<h2>Danh sách kết quả tìm kiếm sinh viên</h2>
 	<form action="SinhVienProcess.do" method="post">
 		<input type="hidden" name="ref" value="add" />
 		<table align="center" class="list-result">

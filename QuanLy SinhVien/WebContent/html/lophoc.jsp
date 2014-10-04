@@ -42,18 +42,19 @@
 		<header>
 			<span class="icon">&#128200;</span>
 			<hgroup>
-				<h1>QUẢN LÝ DANH MỤC</h1>
-				<h2>Danh sách các danh mục</h2>
+				<h1>QUẢN LÝ LỚP HỌC</h1>
+				<h2>Danh sách các lớp học</h2>
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ LỚP HỌC</h1>
 		<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>
 	<br />
 
 	<c:if test="${showTable == null}">
-
+	<h2 class="form-headline">Tìm kiếm các lớp học</h2>
 	<form action="LopHoc.do" name="searchform" id="searchform" method="post">
 		<table align="center" class="searchbox">
 			<tr>
@@ -78,9 +79,11 @@
 		</table>
 	</form>
 
+	<div class="list-wrapper">
+	<h2>Danh sách lớp học</h2>
 	<form action="LopHocProcess.do" method="post">
 		<input type="hidden" name="ref" value="add" />
-		<table align="center">
+		<table align="center" class="list-result">
 			<tr>
 				<th>
 					ID
@@ -137,6 +140,7 @@
 					</td>
 				</tr>
 			</table>
+		</div>
 		</div>
 		</div>
 
