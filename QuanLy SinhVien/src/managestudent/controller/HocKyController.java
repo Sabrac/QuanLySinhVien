@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.HocKy;
 import managestudent.logics.impl.HocKyLogicsImpl;
@@ -44,6 +45,7 @@ public class HocKyController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.HOCKY;
 			HocKyLogicsImpl hocKyLogics = new HocKyLogicsImpl();
 			List<HocKy> lsHocKy = new ArrayList<HocKy>();
@@ -69,7 +71,13 @@ public class HocKyController extends HttpServlet {
 			if(request.getParameter("hockyid") != null) {
 				try {
 					hocKy.setHocKyId(Integer.parseInt(request.getParameter("hockyid")));
-					request.setAttribute("hockyid", hocKy.getHocKyId());
+					session.setAttribute("hockyid", hocKy.getHocKyId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("hockyid") != null) {
+				try {
+					hocKy.setHocKyId(Integer.parseInt(session.getAttribute("hockyid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
@@ -77,6 +85,8 @@ public class HocKyController extends HttpServlet {
 			if(request.getParameter("tenhocky") != null) {
 				hocKy.setTenHocKy(request.getParameter("tenhocky"));
 				request.setAttribute("tenhocky", hocKy.getTenHocKy());
+			} else if(session.getAttribute("tenhocky") != null) {
+				hocKy.setTenHocKy(session.getAttribute("tenhocky").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

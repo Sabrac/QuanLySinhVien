@@ -70,6 +70,7 @@
 
 	<form action="SinhVienProcess.do?submit=true" method="post" id="searchform-sinhvien">
 		<input type="hidden" name="ref" value="${ref}" />
+		<input type="hidden" name="id" value="${id}" />
 		<table align="center" class="add-sinhvien">
 			<tr>
 				<td>
@@ -86,8 +87,8 @@
 				</td>
 				<td>
 					Ngày sinh
-					<fmt:formatDate var="ngaysinh" value="${sinhVien.ngaySinh}" pattern="yyyy-MM-dd" />
-					<input type="text" id="popupDatepicker" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaysinh}" name="ngaysinh" readonly="readonly" />
+					<fmt:formatDate var="ngaysinh" value="${sinhvien.ngaySinh}" pattern="yyyy-MM-dd" />
+					<input type="text" id="popupDatepicker" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${sinhvien.ngaySinh}" name="ngaysinh" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
@@ -304,7 +305,7 @@
 				<td>
 					Ngày nhập học
 					<fmt:formatDate var="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" pattern="yyyy-MM-dd" />
-					<input type="text" id="popupDatepicker2" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${ngaynhaphoc}" name="ngaynhaphoc" readonly="readonly" />
+					<input type="text" id="popupDatepicker2" data-datepick="dateFormat: 'yyyy-mm-dd'" value="${sinhvien.ngayNhapHoc}" name="ngaynhaphoc" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>

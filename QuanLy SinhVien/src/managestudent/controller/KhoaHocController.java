@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.KhoaHoc;
 import managestudent.logics.impl.KhoaHocLogicsImpl;
@@ -44,6 +45,7 @@ public class KhoaHocController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.KHOAHOC;
 			KhoaHocLogicsImpl khoaHocLogics = new KhoaHocLogicsImpl();
 			List<KhoaHoc> lsKhoaHoc = new ArrayList<KhoaHoc>();
@@ -69,14 +71,22 @@ public class KhoaHocController extends HttpServlet {
 			if(request.getParameter("khoahocid") != null) {
 				try {
 					khoaHoc.setKhoaHocId(Integer.parseInt(request.getParameter("khoahocid")));
-					request.setAttribute("khoahocid", khoaHoc.getKhoaHocId());
+					session.setAttribute("khoahocid", khoaHoc.getKhoaHocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("khoahocid") != null) {
+				try {
+					khoaHoc.setKhoaHocId(Integer.parseInt(session.getAttribute("khoahocid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tenkhoahoc") != null) {
 				khoaHoc.setTenKhoaHoc(request.getParameter("tenkhoahoc"));
-				request.setAttribute("tenkhoahoc", khoaHoc.getTenKhoaHoc());
+				session.setAttribute("tenkhoahoc", khoaHoc.getTenKhoaHoc());
+			} else if(session.getAttribute("tenkhoahoc") != null) {
+				khoaHoc.setTenKhoaHoc(session.getAttribute("tenkhoahoc").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

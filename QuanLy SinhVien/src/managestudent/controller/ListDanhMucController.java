@@ -75,13 +75,14 @@ public class ListDanhMucController extends HttpServlet {
 				} else if (danhMuc.equals("tongiao")) {
 					response.sendRedirect("TonGiao.do");
 					return;
-				} else {
-					response.sendRedirect(Constant.SYSTEM_ERR);
+				} else if(danhMuc.equals("diem")) {
+					response.sendRedirect("Diem.do");
 					return;
+				} else {
+					template = Constant.SYSTEM_ERR;
 				}
 			} else {
-				response.sendRedirect(Constant.SYSTEM_ERR);
-				return;
+				template = Constant.SYSTEM_ERR;
 			}
 		} else {
 			template = Constant.LOGIN;

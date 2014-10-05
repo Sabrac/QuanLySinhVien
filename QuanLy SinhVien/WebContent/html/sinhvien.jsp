@@ -88,11 +88,22 @@
 				<td>
 					Giới tính
 					<select name="gioitinh">
-						<option value="-1">
-							Chọn giới tính
-						</option>
 						<c:choose>
-							<c:when test="${gioitinh == 1}">
+							<c:when test="${gioitinh eq -1}" >
+								<option value="-1" SELECTED>
+									Chọn giới tính
+								</option>
+								<option value="1">
+									Nam
+								</option>
+								<option value="0">
+									Nữ
+								</option>
+							</c:when>
+							<c:when test="${gioitinh eq 1}">
+								<option value="-1">
+									Chọn giới tính
+								</option>
 								<option value="1" SELECTED>
 									Nam
 								</option>
@@ -101,6 +112,9 @@
 								</option>
 							</c:when>
 							<c:otherwise>
+								<option value="-1">
+									Chọn giới tính
+								</option>
 								<option value="1">
 									Nam
 								</option>
@@ -434,7 +448,7 @@
 					</td>
 					<td>
 						<c:choose>
-							<c:when test="${sinhVien.gioiTinh}">
+							<c:when test="${sinhVien.gioiTinh eq 1}">
 								Nam
 							</c:when>
 							<c:otherwise>

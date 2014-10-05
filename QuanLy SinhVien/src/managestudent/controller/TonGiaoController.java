@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.TonGiao;
 import managestudent.logics.impl.TonGIaoLogicsImpl;
@@ -44,6 +45,7 @@ public class TonGiaoController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.TONGIAO;
 			TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
 			List<TonGiao> lsTonGiao = new ArrayList<TonGiao>();
@@ -69,14 +71,22 @@ public class TonGiaoController extends HttpServlet {
 			if(request.getParameter("tongiaoid") != null) {
 				try {
 					tonGiao.setTonGiaoId(Integer.parseInt(request.getParameter("tongiaoid")));
-					request.setAttribute("tongiaoid", tonGiao.getTonGiaoId());
+					session.setAttribute("tongiaoid", tonGiao.getTonGiaoId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("tongiaoid") != null) {
+				try {
+					tonGiao.setTonGiaoId(Integer.parseInt(session.getAttribute("tongiaoid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tentongiao") != null) {
 				tonGiao.setTenTonGiao(request.getParameter("tentongiao"));
-				request.setAttribute("tentongiao", tonGiao.getTenTonGiao());
+				session.setAttribute("tentongiao", tonGiao.getTenTonGiao());
+			} else if(session.getAttribute("tentongiao") != null) {
+				tonGiao.setTenTonGiao(session.getAttribute("tentongiao").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

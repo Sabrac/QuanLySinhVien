@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.LopHoc;
 import managestudent.logics.impl.LopHocLogicsImpl;
@@ -44,6 +45,7 @@ public class LopHocController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.LOPHOC;
 			LopHocLogicsImpl lopHocLogics = new LopHocLogicsImpl();
 			List<LopHoc> lsLopHoc = new ArrayList<LopHoc>();
@@ -69,14 +71,22 @@ public class LopHocController extends HttpServlet {
 			if(request.getParameter("lophocid") != null) {
 				try {
 					lopHoc.setLopHocId(Integer.parseInt(request.getParameter("lophocid")));
-					request.setAttribute("lophocid", lopHoc.getLopHocId());
+					session.setAttribute("lophocid", lopHoc.getLopHocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("lophocid") != null) {
+				try {
+					lopHoc.setLopHocId(Integer.parseInt(session.getAttribute("lophocid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tenlophoc") != null) {
 				lopHoc.setTenLopHoc(request.getParameter("tenlophoc"));
-				request.setAttribute("tenlophoc", lopHoc.getTenLopHoc());
+				session.setAttribute("tenlophoc", lopHoc.getTenLopHoc());
+			} else if(session.getAttribute("tenlophoc") != null) {
+				lopHoc.setTenLopHoc(session.getAttribute("tenlophoc").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

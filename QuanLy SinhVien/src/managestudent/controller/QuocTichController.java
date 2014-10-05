@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.QuocTich;
 import managestudent.logics.impl.QuocTichLogicsImpl;
@@ -44,6 +45,7 @@ public class QuocTichController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.QUOCTICH;
 			QuocTichLogicsImpl quocTichLogics = new QuocTichLogicsImpl();
 			List<QuocTich> lsQuocTich = new ArrayList<QuocTich>();
@@ -69,14 +71,22 @@ public class QuocTichController extends HttpServlet {
 			if(request.getParameter("quoctichid") != null) {
 				try {
 					quocTich.setQuocTichId(Integer.parseInt(request.getParameter("quoctichid")));
-					request.setAttribute("quoctichid", quocTich.getQuocTichId());
+					session.setAttribute("quoctichid", quocTich.getQuocTichId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("quoctichid") != null) {
+				try {
+					quocTich.setQuocTichId(Integer.parseInt(session.getAttribute("quoctichid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tenquoctich") != null) {
 				quocTich.setTenQuocTich(request.getParameter("tenquoctich"));
-				request.setAttribute("tenquoctich", quocTich.getTenQuocTich());
+				session.setAttribute("tenquoctich", quocTich.getTenQuocTich());
+			} else if(session.getAttribute("tenquoctich") != null) {
+				quocTich.setTenQuocTich(session.getAttribute("tenquoctich").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

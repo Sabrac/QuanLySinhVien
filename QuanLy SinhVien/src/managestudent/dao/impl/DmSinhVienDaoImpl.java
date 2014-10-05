@@ -70,6 +70,96 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					sqlCommand.append("sv.ten LIKE ? ");
 					conCount++;
 				}
+				if(sinhVien.getNgaySinh().compareTo(new java.util.Date()) == 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.ngaysinh = ? ");
+					conCount++;
+				}
+				if(sinhVien.getGioiTinh() >= 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.gioitinh = ? ");
+					conCount++;
+				}
+				if(sinhVien.getCmtnd().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.cmtnd LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getSoDienThoai().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.sodthoai LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getNoiSinh().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.noisinh LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getQueQuan().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.quequan LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getCheDoUuDai().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.chedouudai LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getDanTocId() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.dantoc_id = ? ");
+					conCount++;
+				}
+				if(sinhVien.getTonGiaoId() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.tongiao_id = ? ");
+					conCount++;
+				}
 				if(sinhVien.getTenHeDaoTao().length() > 0) {
 					if(conCount > 0) {
 						sqlCommand.append("AND ");
@@ -88,6 +178,16 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					}
 
 					sqlCommand.append("hdt.mahedt LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getHeDtId() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.hedt_id = ? ");
 					conCount++;
 				}
 				if(sinhVien.getTenLopHoc().length() > 0) {
@@ -168,6 +268,51 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					countChar = tmp.length() - tmp.replace("?", "").length();
 					preparedStatement.setString(countChar + 1, "%" + sinhVien.getTen() + "%");
 				}
+				if((pos = sqlCommand.indexOf("sv.ngaysinh = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setDate(countChar + 1, new Date(sinhVien.getNgaySinh().getTime()));
+				}
+				if((pos = sqlCommand.indexOf("sv.gioitinh = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setInt(countChar + 1, sinhVien.getGioiTinh());
+				}
+				if((pos = sqlCommand.indexOf("sv.cmtnd LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getCmtnd() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.sodthoai LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getSoDienThoai() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.noisinh LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getNoiSinh() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.quequan LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getQueQuan() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.chedouudai LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getCheDoUuDai() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.dantoc_id = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setInt(countChar + 1, sinhVien.getDanTocId());
+				}
+				if((pos = sqlCommand.indexOf("sv.tongiaoid = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setInt(countChar + 1, sinhVien.getTonGiaoId());
+				}
 				if((pos = sqlCommand.indexOf("sv.hedt_id = ?")) > 0) {
 					tmp = sqlCommand.substring(0, pos);
 					countChar = tmp.length() - tmp.replace("?", "").length();
@@ -204,7 +349,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						DmSinhVien objSinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
 
 						lsSinhVien.add(objSinhVien);
 					}
@@ -349,7 +494,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						DmSinhVien objSinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
 
 						lsSinhVien.add(objSinhVien);
 					}
@@ -494,7 +639,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						DmSinhVien objSinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
 
 						lsSinhVien.add(objSinhVien);
 					}
@@ -639,7 +784,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						DmSinhVien objSinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
 
 						lsSinhVien.add(objSinhVien);
 					}
@@ -682,7 +827,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						sinhVien = new DmSinhVien(rs.getInt("sinhvienid"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getString("cmtnd"), rs.getString("sodthoai"), rs.getString("noisinh"),
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getString("cmtnd"), rs.getString("sodthoai"), rs.getString("noisinh"),
 								rs.getString("quequan"), rs.getString("hokhauthuongtru"), rs.getString("noiohientai"), rs.getString("chedouudai"),
 								rs.getInt("dantoc_id"), rs.getInt("tongiao_id"), rs.getInt("quoctich_id"), rs.getString("hotenbo"), rs.getString("nghenghiepbo"),
 								rs.getString("hotenme"), rs.getString("nghenghiepme"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"),
@@ -724,7 +869,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				preparedStatement.setString(2, sinhVien.getHoDem());
 				preparedStatement.setString(3, sinhVien.getTen());
 				preparedStatement.setDate(4, new Date(sinhVien.getNgaySinh().getTime()));
-				preparedStatement.setBoolean(5, sinhVien.isGioiTinh());
+				preparedStatement.setInt(5, sinhVien.getGioiTinh());
 				preparedStatement.setString(6, sinhVien.getCmtnd());
 				preparedStatement.setString(7, sinhVien.getSoDienThoai());
 				preparedStatement.setString(8, sinhVien.getNoiSinh());
@@ -816,7 +961,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				preparedStatement.setString(2, sinhVien.getHoDem());
 				preparedStatement.setString(3, sinhVien.getTen());
 				preparedStatement.setDate(4, new Date(sinhVien.getNgaySinh().getTime()));
-				preparedStatement.setBoolean(5, sinhVien.isGioiTinh());
+				preparedStatement.setInt(5, sinhVien.getGioiTinh());
 				preparedStatement.setString(6, sinhVien.getCmtnd());
 				preparedStatement.setString(7, sinhVien.getSoDienThoai());
 				preparedStatement.setString(8, sinhVien.getNoiSinh());
@@ -902,6 +1047,96 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					sqlCommand.append("sv.ten LIKE ? ");
 					conCount++;
 				}
+				if(sinhVien.getNgaySinh().compareTo(new java.util.Date()) == 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.ngaysinh = ? ");
+					conCount++;
+				}
+				if(sinhVien.getGioiTinh() >= 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.gioitinh = ? ");
+					conCount++;
+				}
+				if(sinhVien.getCmtnd().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.cmtnd LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getSoDienThoai().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.sodthoai LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getNoiSinh().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.noisinh LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getQueQuan().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.quequan LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getCheDoUuDai().length() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.chedouudai LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getDanTocId() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.dantoc_id = ? ");
+					conCount++;
+				}
+				if(sinhVien.getTonGiaoId() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.tongiao_id = ? ");
+					conCount++;
+				}
 				if(sinhVien.getTenHeDaoTao().length() > 0) {
 					if(conCount > 0) {
 						sqlCommand.append("AND ");
@@ -920,6 +1155,16 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					}
 
 					sqlCommand.append("hdt.mahedt LIKE ? ");
+					conCount++;
+				}
+				if(sinhVien.getHeDtId() > 0) {
+					if(conCount > 0) {
+						sqlCommand.append("AND ");
+					} else {
+						sqlCommand.append("WHERE ");
+					}
+
+					sqlCommand.append("sv.hedt_id = ? ");
 					conCount++;
 				}
 				if(sinhVien.getTenLopHoc().length() > 0) {
@@ -977,6 +1222,51 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					tmp = sqlCommand.substring(0, pos);
 					countChar = tmp.length() - tmp.replace("?", "").length();
 					preparedStatement.setString(countChar + 1, "%" + sinhVien.getTen() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.ngaysinh = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setDate(countChar + 1, new Date(sinhVien.getNgaySinh().getTime()));
+				}
+				if((pos = sqlCommand.indexOf("sv.gioitinh = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setInt(countChar + 1, sinhVien.getGioiTinh());
+				}
+				if((pos = sqlCommand.indexOf("sv.cmtnd LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getCmtnd() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.sodthoai LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getSoDienThoai() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.noisinh LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getNoiSinh() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.quequan LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getQueQuan() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.chedouudai LIKE ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "%" + sinhVien.getCheDoUuDai() + "%");
+				}
+				if((pos = sqlCommand.indexOf("sv.dantoc_id = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setInt(countChar + 1, sinhVien.getDanTocId());
+				}
+				if((pos = sqlCommand.indexOf("sv.tongiaoid = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setInt(countChar + 1, sinhVien.getTonGiaoId());
 				}
 				if((pos = sqlCommand.indexOf("sv.hedt_id = ?")) > 0) {
 					tmp = sqlCommand.substring(0, pos);
@@ -1470,7 +1760,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						DmSinhVien objSinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"));
 						objSinhVien.setCmtnd(rs.getString("cmtnd"));
 						objSinhVien.setSoDienThoai(rs.getString("sodthoai"));
 						objSinhVien.setNoiSinh(rs.getString("noisinh"));
@@ -1528,7 +1818,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(rs != null) {
 					while(rs.next()) {
 						sinhVien = new DmSinhVien(rs.getInt("sinhvien_id"), rs.getString("masv"), rs.getString("hodem"), rs.getString("ten"),
-								rs.getDate("ngaysinh"), rs.getBoolean("gioitinh"), rs.getString("cmtnd"), rs.getString("sodthoai"), rs.getString("noisinh"),
+								rs.getDate("ngaysinh"), rs.getInt("gioitinh"), rs.getString("cmtnd"), rs.getString("sodthoai"), rs.getString("noisinh"),
 								rs.getString("quequan"), rs.getString("hokhauthuongtru"), rs.getString("noiohientai"), rs.getString("chedouudai"),
 								rs.getInt("dantoc_id"), rs.getInt("tongiao_id"), rs.getInt("quoctich_id"), rs.getString("hotenbo"), rs.getString("nghenghiepbo"),
 								rs.getString("hotenme"), rs.getString("nghenghiepme"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"),
@@ -1569,7 +1859,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				preparedStatement.setString(2, sinhVien.getHoDem());
 				preparedStatement.setString(3, sinhVien.getTen());
 				preparedStatement.setDate(4, new Date(sinhVien.getNgaySinh().getTime()));
-				preparedStatement.setBoolean(5, sinhVien.isGioiTinh());
+				preparedStatement.setInt(5, sinhVien.getGioiTinh());
 				preparedStatement.setString(6, sinhVien.getCmtnd());
 				preparedStatement.setString(7, sinhVien.getSoDienThoai());
 				preparedStatement.setString(8, sinhVien.getNoiSinh());

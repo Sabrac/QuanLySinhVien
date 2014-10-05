@@ -398,4 +398,14 @@
     <servlet-name>TonGiaoDetailController</servlet-name>
     <url-pattern>/TonGiaoDetail.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DiemController</display-name>
+    <servlet-name>DiemController</servlet-name>
+    <servlet-class>managestudent.controller.DiemController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DiemController</servlet-name>
+    <url-pattern>/Diem.do</url-pattern>
+  </servlet-mapping>
 </web-app>

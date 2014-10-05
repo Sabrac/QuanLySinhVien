@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.HeDaoTao;
 import managestudent.logics.impl.HeDaoTaoLogicsImpl;
@@ -44,6 +45,7 @@ public class HeDaoTaoController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.HEDAOTAO;
 			HeDaoTaoLogicsImpl hdtLogics = new HeDaoTaoLogicsImpl();
 			List<HeDaoTao> lsHdt = new ArrayList<HeDaoTao>();
@@ -68,11 +70,15 @@ public class HeDaoTaoController extends HttpServlet {
 
 			if(request.getParameter("mahedaotao") != null) {
 				hdt.setMaHeDt(request.getParameter("mahedaotao"));
-				request.setAttribute("mahedaotao", hdt.getMaHeDt());
+				session.setAttribute("mahedaotao", hdt.getMaHeDt());
+			} else if(session.getAttribute("mahedaotao") != null) {
+				hdt.setMaHeDt(session.getAttribute("mahedaotao").toString());
 			}
 			if(request.getParameter("tenhedaotao") != null) {
 				hdt.setTenHeDt(request.getParameter("tenhedaotao"));
-				request.setAttribute("tenhedaotao", hdt.getTenHeDt());
+				session.setAttribute("tenhedaotao", hdt.getTenHeDt());
+			} else if(session.getAttribute("tenhedaotao") != null) {
+				hdt.setTenHeDt(session.getAttribute("tenhedaotao").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

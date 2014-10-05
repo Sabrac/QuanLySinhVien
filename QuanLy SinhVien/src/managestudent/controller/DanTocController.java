@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.DanToc;
 import managestudent.logics.impl.DanTocLogicsImpl;
@@ -38,6 +39,7 @@ public class DanTocController extends HttpServlet {
 		String template = "";
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
 			List<DanToc> lsDanToc = new ArrayList<DanToc>();int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
 			int range = Integer.parseInt(MessageProperties.getMessage("range"));
@@ -61,14 +63,22 @@ public class DanTocController extends HttpServlet {
 			if(request.getParameter("dantocid") != null) {
 				try {
 					danToc.setDanTocId(Integer.parseInt(request.getParameter("dantocid")));
-					request.setAttribute("dantocid", danToc.getDanTocId());
+					session.setAttribute("dantocid", danToc.getDanTocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("dantocid") != null) {
+				try {
+					danToc.setDanTocId(Integer.parseInt(session.getAttribute("dantocid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tendantoc") != null) {
 				danToc.setTenDanToc(request.getParameter("tendantoc"));
-				request.setAttribute("tendantoc", danToc.getTenDanToc());
+				session.setAttribute("tendantoc", danToc.getTenDanToc());
+			} else if(session.getAttribute("tendantoc") != null) {
+				danToc.setTenDanToc(session.getAttribute("tendantoc").toString());
 			}
 			if(request.getParameter("sortcolumn") != null) {
 				if(request.getParameter("sortcolumn").length() > 0) {

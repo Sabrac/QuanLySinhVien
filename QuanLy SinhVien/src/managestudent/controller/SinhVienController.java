@@ -12,14 +12,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import managestudent.entities.DanToc;
 import managestudent.entities.DmSinhVien;
 import managestudent.entities.HeDaoTao;
 import managestudent.entities.KhoaHoc;
 import managestudent.entities.LopHoc;
+import managestudent.entities.TonGiao;
+import managestudent.logics.impl.DanTocLogicsImpl;
 import managestudent.logics.impl.DmSinhVienLogicsImpl;
 import managestudent.logics.impl.HeDaoTaoLogicsImpl;
 import managestudent.logics.impl.KhoaHocLogicsImpl;
 import managestudent.logics.impl.LopHocLogicsImpl;
+import managestudent.logics.impl.TonGIaoLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
@@ -46,10 +52,13 @@ public class SinhVienController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			DmSinhVienLogicsImpl sinhVienLogics = new DmSinhVienLogicsImpl();
 			HeDaoTaoLogicsImpl heDtLogics = new HeDaoTaoLogicsImpl();
 			LopHocLogicsImpl lopHocLogics = new LopHocLogicsImpl();
 			KhoaHocLogicsImpl khoaHocLogics = new KhoaHocLogicsImpl();
+			DanTocLogicsImpl danTocLogics = new DanTocLogicsImpl();
+			TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
 			int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
 			int range = Integer.parseInt(MessageProperties.getMessage("range"));
 			List<Integer> lsPage = new ArrayList<Integer>();
@@ -65,6 +74,8 @@ public class SinhVienController extends HttpServlet {
 			List<HeDaoTao> lsHdt = new ArrayList<HeDaoTao>();
 			List<LopHoc> lsLop = new ArrayList<LopHoc>();
 			List<KhoaHoc> lsKhoaHoc = new ArrayList<KhoaHoc>();
+			List<DanToc> lsDanToc = new ArrayList<DanToc>();
+			List<TonGiao> lsTonGiao = new ArrayList<TonGiao>();
 
 			if(request.getParameter("page") != null) {
 				page = Integer.parseInt(request.getParameter("page"));
@@ -74,75 +85,185 @@ public class SinhVienController extends HttpServlet {
 				page = 1;
 			}
 
-			if(request.getParameter("masv") != null) {
+			if((request.getParameter("masv") != null)) {
 				sinhVien.setMaSinhVien(request.getParameter("masv"));
-				request.setAttribute("masv", sinhVien.getMaSinhVien());
+				session.setAttribute("masv", sinhVien.getMaSinhVien());
+			} else if((session.getAttribute("masv") != null)) {
+				sinhVien.setMaSinhVien(session.getAttribute("masv").toString());
 			}
-			if(request.getParameter("hodem") != null) {
+			if((request.getParameter("hodem") != null)) {
 				sinhVien.setHoDem(request.getParameter("hodem"));
-				request.setAttribute("hodem", sinhVien.getHoDem());
+				session.setAttribute("hodem", sinhVien.getHoDem());
+			} else if((session.getAttribute("hodem") != null)) {
+				sinhVien.setHoDem(session.getAttribute("hodem").toString());
 			}
-			if(request.getParameter("ten") != null) {
+			if((request.getParameter("ten") != null)) {
 				sinhVien.setTen(request.getParameter("ten"));
-				request.setAttribute("ten", sinhVien.getTen());
+				session.setAttribute("ten", sinhVien.getTen());
+			} else if(session.getAttribute("ten") != null) {
+				sinhVien.setTen(session.getAttribute("ten").toString());
 			}
-			if(request.getParameter("ngaysinh") != null) {
+			if((request.getParameter("ngaysinh") != null)) {
 				try {
 					sinhVien.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
-					request.setAttribute("ngaysinh", sinhVien.getNgaySinh());
+					session.setAttribute("ngaysinh", sinhVien.getNgaySinh());
 				} catch (ParseException e) {
 					System.out.println("An error occur: " + e.getMessage());
 					sinhVien.setNgaySinh(new Date());
-					request.setAttribute("ngaysinh", new Date());
+					session.setAttribute("ngaysinh", new Date());
+				}
+			} else if(session.getAttribute("ngaysinh") != null) {
+				try {
+					sinhVien.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(session.getAttribute("ngaysinh").toString()));
+				} catch (ParseException e) {
+					System.out.println("An error occur: " + e.getMessage());
+					sinhVien.setNgaySinh(new Date());
+					session.setAttribute("ngaysinh", new Date());
 				}
 			}
-			if(request.getParameter("hedaotaoid") != null) {
+			if((request.getParameter("gioitinh") != null)) {
+				try {
+					sinhVien.setGioiTinh(Integer.parseInt(request.getParameter("gioitinh")));
+					session.setAttribute("gioitinh", sinhVien.getGioiTinh());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("gioitinh") != null) {
+				try {
+					sinhVien.setGioiTinh(Integer.parseInt(session.getAttribute("gioitinh").toString()));
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			}
+			if((request.getParameter("socmt") != null)) {
+				sinhVien.setCmtnd(request.getParameter("socmt"));
+				session.setAttribute("socmt", sinhVien.getCmtnd());
+			} else if(session.getAttribute("socmt") != null) {
+				sinhVien.setCmtnd(session.getAttribute("socmt").toString());
+			}
+			if((request.getParameter("sodienthoai") != null)) {
+				sinhVien.setSoDienThoai(request.getParameter("sodienthoai"));
+				session.setAttribute("sodienthoai", sinhVien.getSoDienThoai());
+			} else if(session.getAttribute("sodienthoai") != null) {
+				sinhVien.setSoDienThoai(session.getAttribute("sodienthoai").toString());
+			}
+			if((request.getParameter("noisinh") != null)) {
+				sinhVien.setNoiSinh(request.getParameter("noisinh"));
+				session.setAttribute("noisinh", sinhVien.getNoiSinh());
+			} else if(session.getAttribute("noisinh") != null) {
+				sinhVien.setNoiSinh(session.getAttribute("noisinh").toString());
+			}
+			if((request.getParameter("quequan") != null)) {
+				sinhVien.setQueQuan(request.getParameter("quequan"));
+				session.setAttribute("quequan", sinhVien.getQueQuan());
+			} else if(session.getAttribute("quequan") != null) {
+				sinhVien.setQueQuan(session.getAttribute("quequan").toString());
+			}
+			if((request.getParameter("chedo") != null)) {
+				sinhVien.setCheDoUuDai(request.getParameter("chedo"));
+				session.setAttribute("chedo", sinhVien.getCheDoUuDai());
+			} else if(session.getAttribute("chedo") != null) {
+				sinhVien.setCheDoUuDai(session.getAttribute("chedo").toString());
+			}
+			if((request.getParameter("hedaotaoid") != null)) {
 				try {
 					sinhVien.setHeDtId(Integer.parseInt(request.getParameter("hedaotaoid")));
-					request.setAttribute("hedaotaoid", sinhVien.getHeDtId());
+					session.setAttribute("hedaotaoid", sinhVien.getHeDtId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("hedaotaoid") != null) {
+				try {
+					sinhVien.setHeDtId(Integer.parseInt(session.getAttribute("hedaotaoid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
-			if(request.getParameter("tenhedaotao") != null) {
-				sinhVien.setTenHeDaoTao(request.getParameter("tenhedaotao"));
-				request.setAttribute("tenhedaotao", sinhVien.getTenHeDaoTao());
+			if((request.getParameter("dantocid") != null)) {
+				try {
+					sinhVien.setDanTocId(Integer.parseInt(request.getParameter("dantocid")));
+					session.setAttribute("dantocid", sinhVien.getDanTocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("dantocid") != null) {
+				try {
+					sinhVien.setDanTocId(Integer.parseInt(session.getAttribute("dantocid").toString()));
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
 			}
-			if(request.getParameter("lopid") != null) {
+			if((request.getParameter("tongiaoid") != null)) {
+				try {
+					sinhVien.setTonGiaoId(Integer.parseInt(request.getParameter("tongiaoid")));
+					session.setAttribute("tongiaoid", sinhVien.getTonGiaoId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("tongiaoid") != null) {
+				try {
+					sinhVien.setTonGiaoId(Integer.parseInt(session.getAttribute("tongiaoid").toString()));
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			}
+			if((request.getParameter("tenhedaotao") != null)) {
+				sinhVien.setTenHeDaoTao(request.getParameter("tenhedaotao"));
+				session.setAttribute("tenhedaotao", sinhVien.getTenHeDaoTao());
+			} else if(session.getAttribute("tenhedaotao") != null) {
+				sinhVien.setTenHeDaoTao(session.getAttribute("tenhedaotao").toString());
+			}
+			if((request.getParameter("lopid") != null)) {
 				try {
 					sinhVien.setLopId(Integer.parseInt(request.getParameter("lopid")));
-					request.setAttribute("lopid", sinhVien.getLopId());
+					session.setAttribute("lopid", sinhVien.getLopId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("lopid") != null) {
+				try {
+					sinhVien.setLopId(Integer.parseInt(session.getAttribute("lopid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
-			if(request.getParameter("tenlop") != null) {
+			if((request.getParameter("tenlop") != null)) {
 				sinhVien.setTenLopHoc(request.getParameter("tenlop"));
-				request.setAttribute("tenlop", sinhVien.getTenLopHoc());
+				session.setAttribute("tenlop", sinhVien.getTenLopHoc());
+			} else if(session.getAttribute("tenlop") != null) {
+				sinhVien.setTenLopHoc(session.getAttribute("tenlop").toString());
 			}
-			if(request.getParameter("khoahocid") != null) {
+			if((request.getParameter("khoahocid") != null)) {
 				try {
 					sinhVien.setKhoaHocId(Integer.parseInt(request.getParameter("khoahocid")));
-					request.setAttribute("khoahocid", sinhVien.getKhoaHocId());
+					session.setAttribute("khoahocid", sinhVien.getKhoaHocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("khoahocid") != null) {
+				try {
+					sinhVien.setKhoaHocId(Integer.parseInt(session.getAttribute("khoahocid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
-			if(request.getParameter("tenkhoahoc") != null) {
+			if((request.getParameter("tenkhoahoc") != null)) {
 				sinhVien.setTenKhoaHoc(request.getParameter("tenkhoahoc"));
-				request.setAttribute("tenkhoahoc", sinhVien.getTenKhoaHoc());
+				session.setAttribute("tenkhoahoc", sinhVien.getTenKhoaHoc());
+			} else if(session.getAttribute("tenkhoahoc") != null) {
+				sinhVien.setTenKhoaHoc(session.getAttribute("tenkhoahoc").toString());
 			}
 
-			if(request.getParameter("sortcolumn") != null) {
+			if(request.getParameter("sortcolumn") != null && request.getParameter("sortcolumn").length() > 0) {
 				if(request.getParameter("sortcolumn").length() > 0) {
 					sortColumn = Integer.parseInt(request.getParameter("sortcolumn"));
 				}
 
-				request.setAttribute("sortcolumn", sortColumn);
+				session.setAttribute("sortcolumn", sortColumn);
 			}
-			if(request.getParameter("sorttype") != null) {
+			if(request.getParameter("sorttype") != null && request.getParameter("sorttype").length() > 0) {
 				sortType = request.getParameter("sorttype");
-				request.setAttribute("sorttype", sortType);
+				session.setAttribute("sorttype", sortType);
 			}
 
 			totalRecords = sinhVienLogics.getTotalRecords(sinhVien);
@@ -152,6 +273,8 @@ public class SinhVienController extends HttpServlet {
 			lsHdt = heDtLogics.getAllHeDaoTao(new HeDaoTao(), 0, heDtLogics.getTotalRecords(new HeDaoTao()), 1, "ASC");
 			lsLop = lopHocLogics.getAllLopHoc(new LopHoc(), 0, lopHocLogics.getTotalRecords(new LopHoc()), 1, "ASC");
 			lsKhoaHoc = khoaHocLogics.getAllKhoaHoc(new KhoaHoc(), 0, khoaHocLogics.getTotalRecords(new KhoaHoc()), 1, "ASC");
+			lsDanToc = danTocLogics.getAllDanToc(new DanToc(), 0, danTocLogics.getTotalRecords(new DanToc()), 1, "ASC");
+			lsTonGiao = tonGiaoLogics.getAllTonGiao(new TonGiao(), 0, tonGiaoLogics.getTotalRecords(new TonGiao()), 1, "ASC");
 			lsPage = Common.getListPaging(totalRecords, limit, page);
 			totalPage = Common.getTotalPage(totalRecords, limit);
 
@@ -171,6 +294,8 @@ public class SinhVienController extends HttpServlet {
 				request.setAttribute("lsHdt", lsHdt);
 				request.setAttribute("lsLop", lsLop);
 				request.setAttribute("lsKhoaHoc", lsKhoaHoc);
+				request.setAttribute("lsDanToc", lsDanToc);
+				request.setAttribute("lsTonGiao", lsTonGiao);
 			}
 
 			template = Constant.SINHVIEN;

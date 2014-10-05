@@ -91,7 +91,7 @@
 				</td>
 				<td class="td-result">
 					<fmt:formatDate var="ngaysinh" value="${sinhvien.ngaySinh}" pattern="yyyy-MM-dd" />
-					<c:out value="${ngaysinh}" />
+					<c:out value="${sinhvien.ngaySinh}" />
 				</td>
 			</tr>
 			<tr>
@@ -100,7 +100,7 @@
 				</td>
 				<td class="td-result">
 					<c:choose>
-						<c:when test="${sinhvien.gioiTinh}">
+						<c:when test="${sinhvien.gioiTinh eq 1}">
 							Nam
 						</c:when>
 						<c:otherwise>

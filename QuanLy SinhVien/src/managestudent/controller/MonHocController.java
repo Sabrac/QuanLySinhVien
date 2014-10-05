@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.ChuyenNganh;
 import managestudent.entities.MonHoc;
@@ -40,6 +41,7 @@ public class MonHocController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.MONHOC;
 			MonHocLogicsImpl monHocLogics = new MonHocLogicsImpl();
 			ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
@@ -67,26 +69,42 @@ public class MonHocController extends HttpServlet {
 			if(request.getParameter("monhocid") != null && request.getParameter("monhocid").length() > 0) {
 				try {
 					monHoc.setMonHocId(Integer.parseInt(request.getParameter("monhocid")));
-					request.setAttribute("monhocid", monHoc.getMonHocId());
+					session.setAttribute("monhocid", monHoc.getMonHocId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("monhocid") != null) {
+				try {
+					monHoc.setMonHocId(Integer.parseInt(session.getAttribute("monhocid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tenmonhoc") != null) {
 				monHoc.setTenMonHoc(request.getParameter("tenmonhoc"));
-				request.setAttribute("tenmonhoc", monHoc.getTenMonHoc());
+				session.setAttribute("tenmonhoc", monHoc.getTenMonHoc());
+			} else if(session.getAttribute("tenmonhoc") != null) {
+				monHoc.setTenMonHoc(session.getAttribute("tenmonhoc").toString());
 			}
 			if(request.getParameter("chuyennganhid") != null && request.getParameter("chuyennganhid").length() > 0) {
 				try {
 					monHoc.setChuyenNganhId(Integer.parseInt(request.getParameter("chuyennganhid")));
-					request.setAttribute("chuyennganhid", monHoc.getChuyenNganhId());
+					session.setAttribute("chuyennganhid", monHoc.getChuyenNganhId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("chuyennganhid") != null) {
+				try {
+					monHoc.setChuyenNganhId(Integer.parseInt(session.getAttribute("chuyennganhid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tenchuyennganh") != null) {
 				monHoc.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
-				request.setAttribute("tenchuyennganh", monHoc.getTenChuyenNganh());
+				session.setAttribute("tenchuyennganh", monHoc.getTenChuyenNganh());
+			} else if(session.getAttribute("tenchuyennganh") != null) {
+				monHoc.setTenChuyenNganh(session.getAttribute("tenchuyennganh").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {

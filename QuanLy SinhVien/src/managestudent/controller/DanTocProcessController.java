@@ -38,26 +38,22 @@ public class DanTocProcessController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
-			template = Constant.DANTOCPROCESS;
+			template = Constant.SYSTEM_ERR;
 			if(request.getSession().getAttribute("dantoc") != null) {
 				request.setAttribute("dantoc", request.getSession().getAttribute("dantoc"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.DANTOCPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.DANTOCPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.DANTOCPROCESS;
 			}
 			if(request.getParameter("id") != null) {
 				request.setAttribute("id", request.getParameter("id"));
-			} else {
-				template = Constant.SYSTEM_ERR;
+				template = Constant.DANTOCPROCESS;
 			}
 
 		} else {

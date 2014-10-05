@@ -258,7 +258,7 @@ public class SinhVienProcessController extends HttpServlet {
 				sinhVien.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
 			}
 			if(request.getParameter("gioitinh") != null && request.getParameter("gioitinh").length() > 0) {
-				sinhVien.setGioiTinh(Boolean.parseBoolean(request.getParameter("gioitinh")));
+				sinhVien.setGioiTinh(Integer.parseInt(request.getParameter("gioitinh")));
 			}
 			if(request.getParameter("cmtnd") != null && request.getParameter("cmtnd").length() > 0) {
 				sinhVien.setCmtnd(request.getParameter("cmtnd"));

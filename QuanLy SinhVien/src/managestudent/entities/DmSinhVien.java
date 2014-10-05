@@ -19,7 +19,7 @@ public class DmSinhVien {
 	private String hoDem;
 	private String ten;
 	private Date ngaySinh;
-	private boolean gioiTinh; //true: Nam / false: Nu
+	private int gioiTinh; //1: Nam / 0: Nu / -1: Khong chon
 	private String cmtnd;
 	private String soDienThoai;
 	private String noiSinh;
@@ -60,7 +60,7 @@ public class DmSinhVien {
 	 * @param lopId int id lớp học
 	 * @param khoaHocId int id khóa học
 	 */
-	public DmSinhVien(int sinhVienId, String maSinhVien, String hoDem, String ten, Date ngaySinh, boolean gioiTinh, int heDtId, int lopId, int khoaHocId) {
+	public DmSinhVien(int sinhVienId, String maSinhVien, String hoDem, String ten, Date ngaySinh, int gioiTinh, int heDtId, int lopId, int khoaHocId) {
 		super();
 		this.sinhVienId = sinhVienId;
 		this.maSinhVien = maSinhVien;
@@ -84,7 +84,7 @@ public class DmSinhVien {
 		hoDem = "";
 		ten = "";
 		ngaySinh = new Date();
-		gioiTinh = true;
+		gioiTinh = -1;
 		cmtnd = "";
 		soDienThoai = "";
 		noiSinh = "";
@@ -145,7 +145,7 @@ public class DmSinhVien {
 	 * @param diemDauVao3 float điểm đầu vào môn 3
 	 * @param anhSinhVien String đường dẫn ảnh sinh viên
 	 */
-	public DmSinhVien(int sinhVienId, String maSinhVien, String hoDem, String ten, Date ngaySinh, boolean gioiTinh, String cmtnd, String soDienThoai,
+	public DmSinhVien(int sinhVienId, String maSinhVien, String hoDem, String ten, Date ngaySinh, int gioiTinh, String cmtnd, String soDienThoai,
 			String noiSinh, String queQuan, String hoKhauThuongTru, String noiOHienTai, String cheDoUuDai, int danTocId, int tonGiaoId, int quocTichId,
 			String hoTenBo, String ngheNghiepBo, String hoTenMe, String ngheNghiepMe, int heDtId, int lopId, int khoaHocId, Date ngayNhapHoc,
 			float diemDauVao1, float diemDauVao2, float diemDauVao3, String anhSinhVien) {
@@ -258,15 +258,17 @@ public class DmSinhVien {
 	/**
 	 * @return the gioiTinh
 	 */
-	public boolean isGioiTinh() {
+	public int getGioiTinh() {
 		return gioiTinh;
 	}
+
 	/**
 	 * @param gioiTinh the gioiTinh to set
 	 */
-	public void setGioiTinh(boolean gioiTinh) {
+	public void setGioiTinh(int gioiTinh) {
 		this.gioiTinh = gioiTinh;
 	}
+
 	/**
 	 * @return the cmtnd
 	 */

@@ -47,6 +47,7 @@ public class Constant {
 	public static final String TONGIAO = "html/tongiao.jsp";
 	public static final String TONGIAOPROCESS = "html/tongiaoform.jsp";
 	public static final String TONGIAODETAIL = "html/tongiaodetail.jsp";
+	public static final String DIEM = "html/diem.jsp";
 	public static final String SYSTEM_ERR = "html/system_error.jsp";
 	public static final String RESULT = "html/result.jsp";
 }

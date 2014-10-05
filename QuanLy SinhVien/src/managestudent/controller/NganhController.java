@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.Nganh;
 import managestudent.logics.impl.NganhLogicsImpl;
@@ -44,6 +45,7 @@ public class NganhController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			template = Constant.NGANH;
 			NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
 			List<Nganh> lsNganh = new ArrayList<Nganh>();
@@ -68,11 +70,15 @@ public class NganhController extends HttpServlet {
 
 			if(request.getParameter("manganh") != null) {
 				nganh.setMaNganh(request.getParameter("manganh"));
-				request.setAttribute("manganh", nganh.getMaNganh());
+				session.setAttribute("manganh", nganh.getMaNganh());
+			} else if(session.getAttribute("manganh") != null) {
+				nganh.setMaNganh(session.getAttribute("manganh").toString());
 			}
 			if(request.getParameter("tennganh") != null) {
 				nganh.setTenNganh(request.getParameter("tennganh"));
-				request.setAttribute("tennganh", nganh.getTenNganh());
+				session.setAttribute("tennganh", nganh.getTenNganh());
+			} else if(session.getAttribute("tennganh") != null) {
+				nganh.setTenNganh(session.getAttribute("tennganh").toString());
 			}
 			if(request.getParameter("sortcolumn") != null) {
 				if(request.getParameter("sortcolumn").length() > 0) {

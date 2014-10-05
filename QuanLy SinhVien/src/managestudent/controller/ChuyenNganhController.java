@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managestudent.entities.ChuyenNganh;
 import managestudent.entities.Nganh;
@@ -46,6 +47,7 @@ public class ChuyenNganhController extends HttpServlet {
 		List<String> lsMessage = new ArrayList<String>();
 
 		if(Common.checkLogin(request.getSession())) {
+			HttpSession session = request.getSession();
 			ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
 			template = Constant.CHUYENNGANH;
 			int limit = Integer.parseInt(MessageProperties.getMessage("limit"));
@@ -72,23 +74,35 @@ public class ChuyenNganhController extends HttpServlet {
 
 			if(request.getParameter("machuyennganh") != null) {
 				chuyenNganh.setMaChuyenNganh(request.getParameter("machuyennganh"));
-				request.setAttribute("machuyennganh", chuyenNganh.getMaChuyenNganh());
+				session.setAttribute("machuyennganh", chuyenNganh.getMaChuyenNganh());
+			} else if(session.getAttribute("machuyennganh") != null) {
+				chuyenNganh.setMaChuyenNganh(session.getAttribute("machuyennganh").toString());
 			}
 			if(request.getParameter("tenchuyennganh") != null) {
 				chuyenNganh.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
-				request.setAttribute("tenchuyennganh", chuyenNganh.getTenChuyenNganh());
+				session.setAttribute("tenchuyennganh", chuyenNganh.getTenChuyenNganh());
+			} else if(session.getAttribute("tenchuyennganh") != null) {
+				chuyenNganh.setTenChuyenNganh(session.getAttribute("tenchuyennganh").toString());
 			}
 			if(request.getParameter("nganhid") != null) {
 				try {
 					chuyenNganh.setNganhId(Integer.parseInt(request.getParameter("nganhid")));
-					request.setAttribute("nganhid", chuyenNganh.getNganhId());
+					session.setAttribute("nganhid", chuyenNganh.getNganhId());
+				} catch (NumberFormatException e) {
+					System.out.println("An error occur: " + e.getMessage());
+				}
+			} else if(session.getAttribute("nganhid") != null) {
+				try {
+					chuyenNganh.setNganhId(Integer.parseInt(session.getAttribute("nganhid").toString()));
 				} catch (NumberFormatException e) {
 					System.out.println("An error occur: " + e.getMessage());
 				}
 			}
 			if(request.getParameter("tennganh") != null) {
 				chuyenNganh.setTenNganh(request.getParameter("tennganh"));
-				request.setAttribute("tennganh", chuyenNganh.getTenNganh());
+				session.setAttribute("tennganh", chuyenNganh.getTenNganh());
+			} else if(session.getAttribute("tennganh") != null) {
+				chuyenNganh.setTenNganh(session.getAttribute("tennganh").toString());
 			}
 
 			if(request.getParameter("sortcolumn") != null) {
