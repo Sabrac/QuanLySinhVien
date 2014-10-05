@@ -46,40 +46,36 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
-		<h1>Thông tin sinh viên</h1>
-		<table width="269" height="114" border="0">
+		<h1 class="mark-title">Thông tin sinh viên</h1>
+		<table width="269" height="114" border="0" class="mark-table">
 		  <tr>
 		    <td width="108" bgcolor="#CCCCCC">Mã Sinh Viên</td>
-		    <td width="145"><form id="form1" name="form1" method="post" action="">
-		      <label>
-		        <input type="text" name="textfield" />
-		        </label>
+		    <td width="145">
+		     <span>TWICE TWICE</span>
 		   </td>
-		</form>
 		  </tr>
 		  <tr>
 		    <td bgcolor="#CCCCCC">Tên Sinh Viên</td>
-		    <td><input type="text" name="textfield2" /></td>
+		    <td><span>TWICE TWICE</span></td>
 		  </tr>
 		  <tr>
 		    <td bgcolor="#CCCCCC">Lớp</td>
-		    <td><input type="text" name="textfield3" /></td>
+		    <td><span>TWICE TWICE</span></td>
 		  </tr>
 		  <tr>
 		    <td bgcolor="#CCCCCC">Ngành</td>
-		    <td><input type="text" name="textfield43" /></td>
+		    <td><span>TWICE TWICE</span></td>
 		  </tr>
 		  <tr>
 		    <td bgcolor="#CCCCCC">Chuyên ngành</td>
-		    <td><input type="text" name="textfield4" /></td>
+		    <td><span>TWICE TWICE</span></td>
 		  </tr>
 		  <tr>
 		    <td bgcolor="#CCCCCC">Khóa</td>
-		    <td><input type="text" name="textfield42" /></td>
+		    <td><span>TWICE TWICE</span></td>
 		  </tr>
 		</table>
-		<h1>BẢNG ĐIỂM</h1>
-		<form id="form2" name="form2" method="post" action="">
+		<h1 class="mark-title">Bảng điểm</h1>
 		  <label>
 		  <select name="select">
 		    <option>Học kỳ I</option>
@@ -87,8 +83,7 @@
 		    <option>Học kỳ III</option>
 		  </select>
 		  </label>
-		</form>
-		<table width="809" border="1" bordercolor="0">
+		<table width="809" border="1" bordercolor="0" class="mark-table">
 		  <tr>
 		    <td width="199" bgcolor="#CCCCCC">Tên môn học</td>
 		    <td width="144" bgcolor="#CCCCCC">Điểm chuyên cần</td>
@@ -97,35 +92,43 @@
 		    <td width="144" bgcolor="#CCCCCC">Tổng kết</td>
 		  </tr>
 		  <tr>
-		    <td>&nbsp;</td>
-		    <td><form id="form3" name="form3" method="post" action="">
-		      <label>
-		        <input type="text" name="textfield5" />
-		        </label>
-		    </form>    </td>
-		    <td><input type="text" name="textfield52" /></td>
-		    <td><input type="text" name="textfield53" /></td>
-		    <td>&nbsp;</td>
+		    <td>
+		    	<span>TWICE TWICETWICE TWICETWICE TWICE</span>
+		    </td>
+		    <td>
+  		     	<span>TWICE TWICETWICE TWICETWICE TWICE</span>
+   		    </td>
+		    <td>
+		    	<span>TWICE TWICETWICE TWICETWICE TWICE</span>
+		     </td>
+		    <td>
+		    	<span>TWICE TWICETWICE TWICETWICE TWICE</span>
+		    </td>
+		    <td>
+		    	<span>TWICE TWICETWICE TWICETWICE TWICE</span>
+		    </td>
 		  </tr>
 		</table>
-		<p>Tổng kết phẩy của học kỳ này :</p>
-		<p>Xếp loại :</p>
-		<h1>XẾP LOẠI</h1>
-		<table width="481" border="1" bordercolor="#000000" bgcolor="#FFFFFF">
+		<p class="mT20">Tổng kết phẩy của học kỳ này :</p>
+		<p class="mT20">Xếp loại :</p>
+		<h1 class="mark-title">Xếp loại</h1>
+		<table width="481" border="1" bordercolor="#000000" bgcolor="#FFFFFF" class="mark-table">
 		  <tr bgcolor="#CCCCCC">
 		    <td width="155">Tổng kết phẩy cả khóa</td>
 		    <td width="120">Điểm đồ án</td>
 		    <td width="184">Xếp loại tốt nghiệp</td>
 		  </tr>
 		  <tr>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
+		    <td><span>TWICE TWICE</span></td>
+		    <td><span>TWICE TWICE</span></td>
+		    <td><span>TWICE TWICE</span></td>
 		  </tr>
 		</table>
 		<form id="form4" name="form4" method="post" action="">
 		  <label>
-		  <input name="Submit" type="submit" id="Submit" value="Tr&#7903; l&#7841;i" />
+		  <input class="result-btn mT20" name="Submit" type="submit" id="Submit" value="Tr&#7903; l&#7841;i" />
+		  <input class="result-btn mT20" name="Submit" type="submit" id="Submit" value="Tr&#7903; l&#7841;i" />
+		  <input class="result-btn mT20" name="Submit" type="submit" id="Submit" value="Tr&#7903; l&#7841;i" />
 		  </label>
 		</form>
 		<p>&nbsp; </p>

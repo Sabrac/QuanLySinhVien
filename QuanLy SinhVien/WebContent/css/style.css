@@ -2128,3 +2128,19 @@ input.result-btn {
 	text-align: center;
 	padding: 10px;
 }
+select:focus,select{
+	border: 1px solid #000000;
+}
+.mark-table tr {
+	border: 1px solid #3B3E40;
+}
+h1.mark-title {
+	margin: 20px 0;
+}
+.mark-table td {
+	padding: 20px;
+	border-left: 1px solid #000000;
+}
+.mT20 {
+	margin-top: 20px;
+}

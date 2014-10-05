@@ -247,7 +247,7 @@
 				</td>
 				<td class="td-result">
 					<fmt:formatDate var="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" pattern="yyyy-MM-dd" />
-					<c:out value="${ngaynhaphoc}" />
+					<c:out value="${sinhvien.ngayNhapHoc}" />
 				</td>
 			</tr>
 			<tr>
@@ -268,6 +268,9 @@
 				</td>
 				<td class="td-result">
 					<c:out value="${sinhvien.diemDauVao3}" />
+				</td>
+				<td>
+					<a href="">Xem chi tiết điểm của sinh viên này</a>
 				</td>
 			</tr>
 		</table>
