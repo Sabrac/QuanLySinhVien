@@ -42,6 +42,7 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>THÊM MỚI QUỐC TỊCH</h1>
 			<c:forEach items="${lsMessage}" var="message">
 				<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 			</c:forEach>

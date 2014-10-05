@@ -49,15 +49,16 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>CHI TIẾT NGÀNH HỌC</h1>
 			<form action="NganhProcess.do" method="post" id="form">
 				<input type="hidden" value="update" name="ref" />
 				<input type="hidden" value="${id}" name="id" />
-				<table align="center">
+				<table align="center" class="searchbox mar30-0">
 					<tr>
 						<td>
 							Mã ngành
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${nganh.maNganh}" />
 						</td>
 					</tr>
@@ -65,7 +66,7 @@
 						<td>
 							Tên ngành
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${nganh.tenNganh}" />
 						</td>
 					</tr>
@@ -73,11 +74,11 @@
 						<td>
 							Ghi Chú
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${nganh.ghiChu}" />
 						</td>
 					</tr>
-					<tr>
+					<tr class="btn">
 						<td>
 							<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 						</td>

@@ -71,25 +71,25 @@
 				<td>
 					Mã sinh viên
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.maSinhVien}" />
 				</td>
 				<td>
 					Họ đệm
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.hoDem}" />
 				</td>
 				<td>
 					Tên
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.ten}" />
 				</td>
 				<td>
 					Ngày sinh
 				</td>
-				<td>
+				<td class="td-result">
 					<fmt:formatDate var="ngaysinh" value="${sinhvien.ngaySinh}" pattern="yyyy-MM-dd" />
 					<c:out value="${ngaysinh}" />
 				</td>
@@ -98,7 +98,7 @@
 				<td>
 					Giới tính
 				</td>
-				<td>
+				<td class="td-result">
 					<c:choose>
 						<c:when test="${sinhvien.gioiTinh}">
 							Nam
@@ -111,19 +111,19 @@
 				<td>
 					Số chứng minh thư
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.cmtnd}" />
 				</td>
 				<td>
 					Số điện thoại
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.soDienThoai}" />
 				</td>
 				<td>
 					Nơi sinh
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.noiSinh}" />
 				</td>
 			</tr>
@@ -131,25 +131,25 @@
 				<td>
 					Quê quán
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.queQuan}" />
 				</td>
 				<td>
 					Hộ khẩu thường trú
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.hoKhauThuongTru}" />
 				</td>
 				<td>
 					Nơi ở hiện tại
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.noiOHienTai}" />
 				</td>
 				<td>
 					Chế độ ưu đãi
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.cheDoUuDai}" />
 				</td>
 			</tr>
@@ -157,7 +157,7 @@
 				<td>
 					Dân tộc
 				</td>
-				<td>
+				<td class="td-result">
 						<c:forEach items="${lsDanToc}" var="danToc">
 								<c:if test="${danToc.danTocId == sinhvien.danTocId}">
 										<c:out value="${danToc.tenDanToc}" />
@@ -167,7 +167,7 @@
 				<td>
 					Tôn giáo
 				</td>
-				<td>
+				<td class="td-result">
 						<c:forEach items="${lsTonGiao}" var="tonGiao">
 								<c:if test="${tonGiao.tonGiaoId == sinhvien.tonGiaoId}">
 										<c:out value="${tonGiao.tenTonGiao}" />
@@ -177,7 +177,7 @@
 				<td>
 					Quốc tịch
 				</td>
-				<td>
+				<td class="td-result">
 						<c:forEach items="${lsQuocTich}" var="quocTich">
 								<c:if test="${quocTich.quocTichId == sinhvien.quocTichId}">
 										<c:out value="${quocTich.tenQuocTich}" />
@@ -187,7 +187,7 @@
 				<td>
 					Họ tên bố
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.hoTenBo}" />
 				</td>
 			</tr>
@@ -195,25 +195,25 @@
 				<td>
 					Nghề nghiệp bố
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.ngheNghiepBo}" />
 				</td>
 				<td>
 					Họ tên mẹ
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.hoTenMe}" />
 				</td>
 				<td>
 					Nghề nghiệp mẹ
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.ngheNghiepMe}" />
 				</td>
 				<td>
 					Hệ đào tạo
 				</td>
-				<td>
+				<td class="td-result">
 						<c:forEach items="${lsHdt}" var="heDaoTao">
 								<c:if test="${heDaoTao.heDtId == sinhvien.heDtId}">
 										<c:out value="${heDaoTao.tenHeDt}" />
@@ -225,7 +225,7 @@
 				<td>
 					Tên lớp học
 				</td>
-				<td>
+				<td class="td-result">
 						<c:forEach items="${lsLop}" var="lopHoc">
 								<c:if test="${lopHoc.lopHocId == sinhvien.lopId}">
 										<c:out value="${lopHoc.tenLopHoc}" />
@@ -235,7 +235,7 @@
 				<td>
 					Tên khóa học
 				</td>
-				<td>
+				<td class="td-result">
 						<c:forEach items="${lsKhoaHoc}" var="khoaHoc">
 								<c:if test="${khoaHoc.khoaHocId == sinhvien.khoaHocId}">
 										<c:out value="${khoaHoc.tenKhoaHoc}" />
@@ -245,7 +245,7 @@
 				<td>
 					Ngày nhập học
 				</td>
-				<td>
+				<td class="td-result">
 					<fmt:formatDate var="ngaynhaphoc" value="${sinhvien.ngayNhapHoc}" pattern="yyyy-MM-dd" />
 					<c:out value="${ngaynhaphoc}" />
 				</td>
@@ -254,19 +254,19 @@
 				<td>
 					Điểm đầu vào 1
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.diemDauVao1}" />
 				</td>
 				<td>
 					Điểm đầu vào 2
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.diemDauVao2}" />
 				</td>
 				<td>
 					Điểm đầu vào 3
 				</td>
-				<td>
+				<td class="td-result">
 					<c:out value="${sinhvien.diemDauVao3}" />
 				</td>
 			</tr>

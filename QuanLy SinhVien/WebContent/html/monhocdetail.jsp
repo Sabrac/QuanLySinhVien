@@ -12,7 +12,7 @@
 	<title>Retina Dashboard</title>
 	<link rel="stylesheet" href="css/style.css" media="all" />
 	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
-	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->\
+	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
 	<script>
 		function onDelete() {
 			document.getElementsByName('ref')[0].value = "delete";
@@ -49,15 +49,16 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>CHI TIÊT MÔN HỌC</h1>
 			<form action="MonHocProcess.do" method="post" id="form">
 				<input type="hidden" name="ref" value="update" />
 				<input type="hidden" name="id" value="${id}" />
-				<table align="center">
+				<table align="center" class="searchbox mar30-0">
 					<tr>
 						<td>
 							ID
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${monhoc.monHocId}" />
 						</td>
 					</tr>
@@ -65,7 +66,7 @@
 						<td>
 							Tên môn học
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${monhoc.tenMonHoc}" />
 						</td>
 					</tr>
@@ -73,7 +74,7 @@
 						<td>
 							Số trình
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${monhoc.soTrinh}" />
 						</td>
 					</tr>
@@ -81,7 +82,7 @@
 						<td>
 							Hệ số chuyên cần
 						</td>
-						<td>
+						<td class="td-result">
 							<c:choose>
 								<c:when test="${monhoc.heSoChuyenCan > 0}">
 									<c:out value="${monhoc.heSoChuyenCan}" />
@@ -96,7 +97,7 @@
 						<td>
 							Hệ số giữa kỳ
 						</td>
-						<td>
+						<td class="td-result">
 							<c:choose>
 								<c:when test="${monhoc.heSoGiuaKy > 0}">
 									<c:out value="${monhoc.heSoGiuaKy}" />
@@ -111,7 +112,7 @@
 						<td>
 							Hệ số học kỳ
 						</td>
-						<td>
+						<td class="td-result">
 							<c:choose>
 								<c:when test="${monhoc.heSoHocKy > 0}">
 									<c:out value="${monhoc.heSoHocKy}" />
@@ -126,7 +127,7 @@
 						<td>
 							Chuyên ngành
 						</td>
-						<td>
+						<td class="td-result">
 							<c:forEach items="${lsChuyenNganh}" var="chuyenNganh">
 									<c:choose>
 										<c:when test="${chuyenNganh.chuyenNganhId == monhoc.chuyenNganhId}">
@@ -139,7 +140,7 @@
 							</c:forEach>
 						</td>
 					</tr>
-					<tr>
+					<tr class="btn">
 						<td>
 							<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 						</td>

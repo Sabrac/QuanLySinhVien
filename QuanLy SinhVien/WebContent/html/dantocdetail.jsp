@@ -63,7 +63,7 @@
 							<td>
 								ID
 							</td>
-							<td>
+							<td class="td-result">
 								<c:out value="${dantoc.danTocId}" />
 							</td>
 						</tr>
@@ -71,22 +71,26 @@
 							<td>
 								Tên dân tộc
 							</td>
-							<td colspan="2">
+							<td colspan="2" class="td-result">
 								<c:out value="${dantoc.tenDanToc}" />
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
-							</td>
-							<td>
-								<input type="button" value="Xóa" name="btnDelete" onclick="onDelete();" />
-							</td>
-							<td>
-								<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='DanToc.do';" />
-							</td>
-						</tr>
 					</table>
+					<div class="btn">
+						<table>
+							<tr>
+								<td>
+									<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
+								</td>
+								<td>
+									<input type="button" value="Xóa" name="btnDelete" onclick="onDelete();" />
+								</td>
+								<td>
+									<input type="button" value="Trở về" name="btnBack" onclick="window.location.href='DanToc.do';" />
+								</td>
+							</tr>
+						</table>
+					</div>
 			</form>
 		</div>
 

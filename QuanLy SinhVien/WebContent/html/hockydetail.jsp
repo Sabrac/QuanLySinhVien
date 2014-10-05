@@ -53,12 +53,12 @@
 			<form action="HocKyProcess.do" method="post" id="form">
 				<input type="hidden" name="id" value="${id}" />
 				<input type="hidden" value="update" name="ref" />
-				<table align="center">
+				<table align="center" class="searchbox">
 					<tr>
 						<td>
 							ID
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${hocky.hocKyId}" />
 						</td>
 					</tr>
@@ -66,11 +66,11 @@
 						<td>
 							Tên học kỳ
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${hocky.tenHocKy}" />
 						</td>
 					</tr>
-					<tr>
+					<tr class="btn">
 						<td>
 							<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 						</td>

@@ -58,12 +58,12 @@
 		<form action="ChuyenNganhProcess.do" method="post" id="form">
 		<input type="hidden" value="update" name="ref" />
 		<input type="hidden" value="${chuyennganh.chuyenNganhId}" name="id" />
-		<table align="center" class="searchbox">
+		<table align="center" class="searchbox mar30-0">
 			<tr>
 				<td>
 					Mã Chuyên Ngành:
 				</td>
-				<td colspan="2">
+				<td colspan="2" class="td-result">
 					<c:out value="${chuyennganh.maChuyenNganh}" />
 				</td>
 			</tr>
@@ -71,7 +71,7 @@
 				<td>
 					Tên Chuyên Ngành:
 				</td>
-				<td colspan="2">
+				<td colspan="2" class="td-result">
 					<c:out value="${chuyennganh.tenChuyenNganh}" />
 				</td>
 			</tr>
@@ -79,7 +79,7 @@
 				<td>
 					Ngành:
 				</td>
-				<td colspan="2">
+				<td colspan="2" class="td-result">
 					<c:forEach items="${lsNganh}" var="nganh">
 						<c:if test="${nganh.nganhId == chuyennganh.nganhId}">
 							<c:out value="${nganh.tenNganh}" />

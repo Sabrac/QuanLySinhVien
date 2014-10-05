@@ -49,15 +49,16 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>THÔNG TIN CHI TIẾT LỚP HỌC</h1>
 			<form action="LopHocProcess.do" method="post" id="form">
 				<input type="hidden" name="id" value="${id}" />
 				<input type="hidden" name="ref" value="update" />
-				<table align="center">
+				<table align="center" class="searchbox mar30-0">
 					<tr>
 						<td>
 							ID
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${lophoc.lopHocId}" />
 						</td>
 					</tr>
@@ -65,11 +66,11 @@
 						<td>
 							Tên lớp học
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${lophoc.tenLopHoc}" />
 						</td>
 					</tr>
-					<tr>
+					<tr class="btn">
 						<td>
 							<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 						</td>

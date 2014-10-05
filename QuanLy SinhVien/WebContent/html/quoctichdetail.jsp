@@ -49,15 +49,16 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>QUẢN LÝ QUỐC TỊCH</h1>
 			<form action="QuocTichProcess.do" method="post" id="form">
 				<input type="hidden" name="ref" value="update" />
 				<input type="hidden" name="id" value="${id}" />
-				<table align="center">
+				<table align="center" class="searchbox mar30-0">
 					<tr>
 						<td>
 							ID
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${quoctich.quocTichId}" />
 						</td>
 					</tr>
@@ -65,11 +66,11 @@
 						<td>
 							Tên quốc tịch
 						</td>
-						<td>
+						<td class="td-result">
 							<c:out value="${quoctich.tenQuocTich}" />
 						</td>
 					</tr>
-					<tr>
+					<tr class="btn">
 						<td>
 							<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 						</td>

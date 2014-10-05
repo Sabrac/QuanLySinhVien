@@ -59,7 +59,7 @@
 						<td>
 							Mã hệ đào tạo
 						</td>
-						<td colspan="2">
+						<td colspan="2" class="td-result">
 							<c:out value="${hedaotao.maHeDt}" />
 						</td>
 					</tr>
@@ -67,11 +67,11 @@
 						<td>
 							Tên hệ đào tạo
 						</td>
-						<td colspan="2">
+						<td colspan="2" class="td-result">
 							<c:out value="${hedaotao.tenHeDt}" />
 						</td>
 					</tr>
-					<tr>
+					<tr class="btn">
 						<td>
 							<input type="submit" value="Chỉnh Sửa" name="btnUpdate" />
 						</td>

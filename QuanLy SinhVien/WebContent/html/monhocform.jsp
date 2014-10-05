@@ -42,6 +42,7 @@
 			</hgroup>
 		</header>
 		<div class="content cycle">
+		<h1>THÊM MỚI MÔN HỌC</h1>
 			<c:forEach items="${lsMessage}" var="message">
 				<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 			</c:forEach>
@@ -50,7 +51,7 @@
 			<form action="MonHocProcess.do?submit=true" method="post">
 				<input type="hidden" name="ref" value="${ref}" />
 				<input type="hidden" name="id" value="${id}" />
-				<table align="center">
+				<table align="center" class="searchbox">
 					<tr>
 						<td>
 							Tên môn học
