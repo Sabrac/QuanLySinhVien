@@ -230,6 +230,14 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					sqlCommand.append("sv.khoahoc_id = ? ");
 					conCount++;
 				}
+				if(conCount > 0) {
+					sqlCommand.append("AND ");
+				} else {
+					sqlCommand.append("WHERE ");
+				}
+
+				sqlCommand.append("delete_flg = ? ");
+				conCount++;
 
 				sqlCommand.append("ORDER BY ");
 				if(sortColumn == 2) {
@@ -343,6 +351,11 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					countChar = tmp.length() - tmp.replace("?", "").length();
 					preparedStatement.setString(countChar + 1, "%" + sinhVien.getTenKhoaHoc() + "%");
 				}
+				if((pos = sqlCommand.indexOf("delete_flg = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "0");
+				}
 
 				rs = preparedStatement.executeQuery();
 
@@ -417,6 +430,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(sinhVien.getKhoaHocId() > 0) {
 					sqlCommand.append("AND sv.khoahoc_id = ? ");
 				}
+				sqlCommand.append("AND delete_flg = ?");
 
 				sqlCommand.append("ORDER BY ");
 				if(sortColumn == 2) {
@@ -487,6 +501,11 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					tmp = sqlCommand.substring(0, pos);
 					countChar = tmp.length() - tmp.replace("?", "").length();
 					preparedStatement.setString(countChar + 1, "%" + sinhVien.getTenKhoaHoc() + "%");
+				}
+				if((pos = sqlCommand.indexOf("delete_flg = ?")) > 0) {
+					tmp = sqlCommand.substring(0, pos);
+					countChar = tmp.length() - tmp.replace("?", "").length();
+					preparedStatement.setString(countChar + 1, "0");
 				}
 
 				rs = preparedStatement.executeQuery();
@@ -562,6 +581,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(sinhVien.getKhoaHocId() > 0) {
 					sqlCommand.append("AND sv.khoahoc_id = ? ");
 				}
+				sqlCommand.append("AND delete_flg = 0 ");
 
 				sqlCommand.append("ORDER BY ");
 				if(sortColumn == 2) {
@@ -707,6 +727,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				if(sinhVien.getKhoaHocId() > 0) {
 					sqlCommand.append("AND sv.khoahoc_id = ? ");
 				}
+				sqlCommand.append("AND delete_flg = 0 ");
 
 				sqlCommand.append("ORDER BY ");
 				if(sortColumn == 2) {
@@ -817,7 +838,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				sqlCommand.append("nghenghiepbo, hotenme, nghenghiepme, hedt_id, lop_id, khoahoc_id, ");
 				sqlCommand.append("ngaynhaphoc, diemdauvao1, diemdauvao2, diemdauvao3, anhsinhvien ");
 				sqlCommand.append("FROM dmsinhvien ");
-				sqlCommand.append("WHERE masv = ?");
+				sqlCommand.append("WHERE masv = ? AND delete_flg = 0 ");
 				sqlCommand.append("ORDER BY masv ASC");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
@@ -918,7 +939,8 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("DELETE FROM dmsinhvien ");
+				sqlCommand.append("UPDATE dmsinhvien ");
+				sqlCommand.append("SET delete_flg = 1 ");
 				sqlCommand.append("WHERE masv = ?");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
@@ -1207,6 +1229,13 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					sqlCommand.append("sv.khoahoc_id = ? ");
 					conCount++;
 				}
+				if(conCount > 0) {
+					sqlCommand.append("AND ");
+				} else {
+					sqlCommand.append("WHERE ");
+				}
+				sqlCommand.append("delete_flg = 0 ");
+				conCount++;
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
 
@@ -1610,6 +1639,14 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 					sqlCommand.append("sv.diemdauvao3 = ? ");
 					conCount++;
 				}
+				if(conCount > 0) {
+					sqlCommand.append("AND ");
+				} else {
+					sqlCommand.append("WHERE ");
+				}
+
+				sqlCommand.append("delete_flg = 0 ");
+				conCount++;
 
 
 				sqlCommand.append("ORDER BY ");
@@ -1806,9 +1843,9 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				sqlCommand.append("sodthoai, noisinh, quequan, hokhauthuongtru, noiohientai, ");
 				sqlCommand.append("chedouudai, dantoc_id, tongiao_id, quoctich_id, hotenbo, ");
 				sqlCommand.append("nghenghiepbo, hotenme, nghenghiepme, hedt_id, lop_id, khoahoc_id, ");
-				sqlCommand.append("ngaynhaphoc, diemdauvao1, diemdauvao2, diemdauvao3, anhsinhvien ");
+				sqlCommand.append("ngaynhaphoc, diemdauvao1, diemdauvao2, diemdauvao3, anhsinhvien, chuyennganh_id ");
 				sqlCommand.append("FROM dmsinhvien ");
-				sqlCommand.append("WHERE sinhvien_id = ? ");
+				sqlCommand.append("WHERE sinhvien_id = ? AND delete_flg = 0 ");
 				sqlCommand.append("ORDER BY masv ASC");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
@@ -1823,6 +1860,8 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 								rs.getInt("dantoc_id"), rs.getInt("tongiao_id"), rs.getInt("quoctich_id"), rs.getString("hotenbo"), rs.getString("nghenghiepbo"),
 								rs.getString("hotenme"), rs.getString("nghenghiepme"), rs.getInt("hedt_id"), rs.getInt("lop_id"), rs.getInt("khoahoc_id"),
 								rs.getDate("ngaynhaphoc"), rs.getFloat("diemdauvao1"), rs.getFloat("diemdauvao2"), rs.getFloat("diemdauvao3"), rs.getString("anhsinhvien"));
+
+						sinhVien.setChuyenNganhId(rs.getInt("chuyennganh_id"));
 					}
 					rs.close();
 				}
@@ -1847,7 +1886,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("UPDATE dmsinhvien ");
+				sqlCommand.append("UPDATE dmsinhvien SET ");
 				sqlCommand.append("SET masv = ?, hodem = ?, ten = ?, ngaysinh = ?, gioitinh = ?, cmtnd = ?, sodthoai = ?, noisinh = ?, ");
 				sqlCommand.append("quequan = ?, hokhauthuongtru = ?, noiohientai = ?, chedouudai = ?, dantoc_id = ?, tongiao_id = ?, ");
 				sqlCommand.append("quoctich_id = ?, hotenbo = ?, nghenghiepbo = ?, hotenme = ?, nghenghiepme = ?, hedt_id = ?, lop_id = ?, ");
@@ -1884,6 +1923,134 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 				preparedStatement.setString(27, sinhVien.getAnhSinhVien());
 				preparedStatement.setInt(28, sinhVien.getSinhVienId());
 				preparedStatement.setInt(29, idSinhVien);
+
+//				int conCount = 0;
+//				if(sinhVien.getMaSinhVien() != null && sinhVien.getMaSinhVien().length() > 0) {
+//					sqlCommand.append("masv = ? ");
+//					conCount++;
+//				}
+//				if(sinhVien.getHoDem() != null && sinhVien.getHoDem().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getTen() != null && sinhVien.getTen().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getNgaySinh() != new java.util.Date()) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getGioiTinh() >= 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getCmtnd() != null && sinhVien.getCmtnd().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getNoiSinh() != null && sinhVien.getNoiSinh().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getQueQuan() != null && sinhVien.getQueQuan().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getHoKhauThuongTru() != null && sinhVien.getHoKhauThuongTru().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getNoiOHienTai() != null && sinhVien.getNoiOHienTai().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getCheDoUuDai() != null && sinhVien.getCheDoUuDai().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getDanTocId() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getTonGiaoId() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getQuocTichId() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getHoTenBo() != null && sinhVien.getHoTenBo().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getNgheNghiepBo() != null && sinhVien.getNgheNghiepBo().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getHoTenMe() != null && sinhVien.getNgheNghiepMe().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getHeDtId() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getLopId() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getKhoaHocId() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getNgayNhapHoc() != new java.util.Date()) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getDiemDauVao1() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getDiemDauVao2() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getDiemDauVao3() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				if(sinhVien.getAnhSinhVien() != null && sinhVien.getAnhSinhVien().length() > 0) {
+//					if(conCount > 0) {
+//						sqlCommand.append(" = ? ");
+//					}
+//				}
+//				sqlCommand.append("WHERE sinhvien_id = ? ");
+
 				int count = preparedStatement.executeUpdate();
 
 				if(count > 0) {
@@ -1910,7 +2077,8 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("DELETE FROM dmsinhvien ");
+				sqlCommand.append("UPDATE dmsinhvien ");
+				sqlCommand.append("SET delete_flg = 1 ");
 				sqlCommand.append("WHERE sinhvien_id = ?");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
@@ -1928,6 +2096,37 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see managestudent.dao.DmSinhVienDao#updateChuyenNganhSinhVien(int, int)
+	 */
+	@Override
+	public boolean updateChuyenNganhSinhVien(int sinhVienId, int chuyenNganhId) {
+		boolean rs = false;
+
+		if(connectToDB()) {
+			try {
+				StringBuilder sqlCommand = new StringBuilder();
+				sqlCommand.append("UPDATE dmsinhvien ");
+				sqlCommand.append("SET chuyennganh_id = ? ");
+				sqlCommand.append("WHERE sinhvien_id = ?");
+
+				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement.setInt(1, chuyenNganhId);
+				preparedStatement.setInt(2, sinhVienId);
+				int count = preparedStatement.executeUpdate();
+
+				if(count > 0) {
+					rs = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("An error occur: " + e.getMessage());
+			}
+			closeConnect();
+		}
+
+		return rs;
 	}
 
 }

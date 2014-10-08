@@ -20,11 +20,8 @@ public class Diem {
 	private float diemGiuaKy;
 	private int hocKyId;
 	private int sinhVienId;
+	private MonHoc monHoc;
 
-	/**
-	 * Constructor không tham số
-	 *
-	 */
 	public Diem() {
 		diemId = -1;
 		monHocId = -1;
@@ -34,6 +31,8 @@ public class Diem {
 		diemGiuaKy = -1;
 		hocKyId = -1;
 		sinhVienId = -1;
+		monHoc = null;
+		hocKyId = -1;
 	}
 
 	/**
@@ -57,6 +56,7 @@ public class Diem {
 		this.diemGiuaKy = diemGiuaKy;
 		this.hocKyId = hocKyId;
 		this.sinhVienId = sinhVienId;
+		this.monHoc = null;
 	}
 
 	/**
@@ -79,7 +79,27 @@ public class Diem {
 		this.diemGiuaKy = diemGiuaKy;
 		this.hocKyId = hocKyId;
 		this.sinhVienId = sinhVienId;
+		this.monHoc = null;
 	}
+
+	/**
+	 * @return the monHoc
+	 */
+	public MonHoc getMonHoc() {
+		return monHoc;
+	}
+
+	/**
+	 * @param monHoc the monHoc to set
+	 */
+	public void setMonHoc(MonHoc monHoc) {
+		this.monHoc = monHoc;
+	}
+
+	/**
+	 * Constructor không tham số
+	 *
+	 */
 
 	/**
 	 * @return the sinhVienId

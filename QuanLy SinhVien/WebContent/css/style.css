@@ -2128,8 +2128,17 @@ input.result-btn {
 	text-align: center;
 	padding: 10px;
 }
+select option{
+	color: #606060;
+}
+select:FIRST-CHILD{
+	color: #606060;
+}
+select option:disabled {
+	color: green;
+}
 select:focus,select{
-	border: 1px solid #000000;
+	border: 1px solid #e3e3e3;
 }
 .mark-table tr {
 	border: 1px solid #3B3E40;
@@ -2137,9 +2146,15 @@ select:focus,select{
 h1.mark-title {
 	margin: 20px 0;
 }
+.mark-table th {
+	padding: 20px;
+	border-left: 1px solid #000000;
+	text-align: center;
+}
 .mark-table td {
 	padding: 20px;
 	border-left: 1px solid #000000;
+	text-align: center;
 }
 .mT20 {
 	margin-top: 20px;

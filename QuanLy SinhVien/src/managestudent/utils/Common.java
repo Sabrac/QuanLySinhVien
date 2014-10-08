@@ -19,6 +19,9 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
+import managestudent.entities.Diem;
+import managestudent.entities.MonHoc;
+
 /**
  * Common
  *
@@ -693,6 +696,42 @@ public class Common {
 			System.out.println("an exception occur: " + e.getMessage());
 			rs = "";
 		}
+
+		return rs;
+	}
+
+	/**
+	 * Tính điểm trung bình của môn học
+	 * @param diem Diem đối tượng điểm
+	 * return Float điểm TB
+	 */
+	public static float getDiemTBMonHoc(Diem diem) {
+		float rs = 0.0f;
+
+		MonHoc tmp = diem.getMonHoc();
+		rs += diem.getDiemChuyenCan() * tmp.getHeSoChuyenCan();
+		rs += diem.getDiemGiuaKy() * tmp.getHeSoGiuaKy();
+		rs += diem.getDiemThi() * tmp.getHeSoHocKy();
+		rs /= (tmp.getHeSoChuyenCan() + tmp.getHeSoGiuaKy() + tmp.getHeSoHocKy());
+
+		return rs;
+	}
+
+	/**
+	 * Tính điểm trung bình học kỳ
+	 * @param lsDiem List<Diem> danh sách điểm các môn trong học kỳ
+	 * @return Float điểm TB
+	 */
+	public static float getDiemTBHK(List<Diem> lsDiem) {
+		Float rs = 0.0f;
+
+		for (Diem object : lsDiem) {
+			Float diemMonHoc = 0.0f;
+			diemMonHoc = Common.getDiemTBMonHoc(object);
+
+			rs += diemMonHoc;
+		}
+		rs /= lsDiem.size();
 
 		return rs;
 	}

@@ -174,4 +174,15 @@ public class DmSinhVienLogicsImpl implements DmSinhVienLogics {
 		return rs;
 	}
 
+	/* (non-Javadoc)
+	 * @see managestudent.logics.DmSinhVienLogics#updateChuyenNganhSinhVien(int, int)
+	 */
+	@Override
+	public boolean updateChuyenNganhSinhVien(int sinhVienId, int chuyenNganhId) {
+		DmSinhVienDaoImpl sinhVienDao = new DmSinhVienDaoImpl();
+		boolean rs = sinhVienDao.updateChuyenNganhSinhVien(sinhVienId, chuyenNganhId);
+
+		return rs;
+	}
+
 }

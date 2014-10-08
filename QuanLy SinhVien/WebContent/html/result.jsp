@@ -44,7 +44,7 @@
 				<h1>KẾT QUẢ XỬ LÝ DỮ LIỆU</h1>
 			</hgroup>
 		</header>
-		<div class="content cycle">
+		<div class="content cycle" align="center">
 			<c:forEach items="${lsMessage}" var="message">
 		<a style="font: bold; color: red"><c:out value="${message}" /></a><br />
 	</c:forEach>

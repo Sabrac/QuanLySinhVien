@@ -12,6 +12,7 @@ import java.util.List;
 
 import managestudent.dao.DiemDao;
 import managestudent.entities.Diem;
+import managestudent.entities.MonHoc;
 
 /**
  *
@@ -64,27 +65,48 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 	 * @see managestudent.dao.DiemDao#getDiemBySinhVienId(int)
 	 */
 	@Override
-	public List<Diem> getDiemBySinhVienId(int sinhVienId) {
+	public List<Diem> getDiemBySinhVienId(int sinhVienId, int hocKyId) {
 		List<Diem> lsDiem = new ArrayList<Diem>();
 
 		if(connectToDB()) {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("SELECT diem_id, monhoc_id, lanthi, diemthi, ");
-				sqlCommand.append("diemchuyencan, diemgiuaky, hocky_id, sinhvien_id ");
+				sqlCommand.append("SELECT monhoc.monhoc_id, monhoc.tenmonhoc, diem.diemthi, diem.diemchuyencan, diem.diemgiuaky, ");
+				sqlCommand.append("monhoc.hesoChuyenCan, monhoc.hesoGiuaKy, monhoc.hesoHocKy ");
 				sqlCommand.append("FROM diem ");
-				sqlCommand.append("WHERE sinhvien_id = ?");
+				sqlCommand.append("INNER JOIN dmsinhvien ON dmsinhvien.sinhvien_id = diem.sinhvien_id ");
+				sqlCommand.append("INNER JOIN monhoc ON diem.monhoc_id = monhoc.monhoc_id ");
+				sqlCommand.append("INNER JOIN hocky ON hocky.hocky_id = diem.hocky_id ");
+				sqlCommand.append("WHERE dmsinhvien.sinhvien_id = ? ");
+				sqlCommand.append("AND dmsinhvien.delete_flg = 0 ");
+				if(hocKyId > 0) {
+					sqlCommand.append("AND hocky.hocky_id = ? ");
+				}
+				sqlCommand.append("ORDER BY monhoc.monhoc_id ASC");
 
 				preparedStatement = connection.prepareStatement(sqlCommand.toString());
 				preparedStatement.setInt(1, sinhVienId);
+				if(hocKyId > 0) {
+					preparedStatement.setInt(2, hocKyId);
+				}
 				rs = preparedStatement.executeQuery();
 
 				if(rs != null) {
 					while(rs.next()) {
-						Diem diem = new Diem(rs.getInt("diem_id"), rs.getInt("monhoc_id"), rs.getString("lanthi"),
-								rs.getFloat("diemthi"), rs.getFloat("diemchuyencan"), rs.getFloat("diemgiuaky"),
-								rs.getInt("hocky_id"), rs.getInt("sinhvien_id"));
+						Diem diem = new Diem();
+						MonHoc monHoc = new MonHoc();
+
+						diem.setMonHocId(rs.getInt("monhoc_id"));
+						monHoc.setMonHocId(rs.getInt("monhoc_id"));
+						monHoc.setTenMonHoc(rs.getString("tenmonhoc"));
+						diem.setDiemThi(rs.getFloat("diemthi"));
+						diem.setDiemChuyenCan(rs.getFloat("diemchuyencan"));
+						diem.setDiemGiuaKy(rs.getFloat("diemgiuaky"));
+						monHoc.setHeSoChuyenCan(rs.getFloat("hesoChuyenCan"));
+						monHoc.setHeSoGiuaKy(rs.getFloat("hesoGiuaKy"));
+						monHoc.setHeSoHocKy(rs.getFloat("hesoHocKy"));
+						diem.setMonHoc(monHoc);
 
 						lsDiem.add(diem);
 					}

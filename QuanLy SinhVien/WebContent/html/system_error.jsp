@@ -44,8 +44,8 @@
 				<h1>CÓ LỖI XẢY RA</h1>
 			</hgroup>
 		</header>
-		<div class="content cycle">
-			<a style="font: bold; color: red">Lỗi Hệ Thống</a><br/>
+		<div class="content cycle" align="center">
+			<a style="font: bold; color: red">Lỗi Hệ Thống</a><br/><br/>
 			<input class="result-btn" type="button" name="OK" value="OK" onclick="window.location.href='DashBoard.do'" />
 		</div>
 	</section>

@@ -46,6 +46,7 @@ public class DmSinhVien {
 	private String tenLopHoc;
 	private String tenKhoaHoc;
 	private String maHeDaoTao;
+	private int chuyenNganhId;
 
 	/**
 	 * Constructor thông tin tổng quát của sinh viên
@@ -111,6 +112,7 @@ public class DmSinhVien {
 		tenKhoaHoc = "";
 		tenLopHoc = "";
 		maHeDaoTao = "";
+		chuyenNganhId = -1;
 	}
 
 	/**
@@ -177,12 +179,27 @@ public class DmSinhVien {
 		this.diemDauVao2 = diemDauVao2;
 		this.diemDauVao3 = diemDauVao3;
 		this.anhSinhVien = anhSinhVien;
-		tenHeDaoTao = "";
-		tenKhoaHoc = "";
-		tenLopHoc = "";
-		maHeDaoTao = "";
+		this.tenHeDaoTao = "";
+		this.tenKhoaHoc = "";
+		this.tenLopHoc = "";
+		this.maHeDaoTao = "";
+		this.chuyenNganhId = -1;
 	}
 
+
+	/**
+	 * @return the chuyenNganhId
+	 */
+	public int getChuyenNganhId() {
+		return chuyenNganhId;
+	}
+
+	/**
+	 * @param chuyenNganhId the nganhId to set
+	 */
+	public void setChuyenNganhId(int chuyenNganhId) {
+		this.chuyenNganhId = chuyenNganhId;
+	}
 	/**
 	 * @return the anhSinhVien
 	 */

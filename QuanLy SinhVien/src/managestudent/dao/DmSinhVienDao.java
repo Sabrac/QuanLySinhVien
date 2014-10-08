@@ -119,4 +119,12 @@ public interface DmSinhVienDao extends BaseDao {
 	 * @return int tổng số tất cả bản ghi thỏa mãn điều kiện tìm kiếm
 	 */
 	int getTotalRecords(DmSinhVien sinhVien);
+
+	/**
+	 * Cập nhật chuyên ngành cho sinh viên
+	 * @param chuyenNganhId chuyên ngành id
+	 * @param sinhVienId sinh viên id
+	 * @return true: update success / false: update fail
+	 */
+	boolean updateChuyenNganhSinhVien(int sinhVienId, int chuyenNganhId);
 }

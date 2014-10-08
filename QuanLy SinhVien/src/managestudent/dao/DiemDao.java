@@ -20,9 +20,10 @@ public interface DiemDao extends BaseDao {
 	 * Lấy danh sách điểm dựa trên sinh viên id
 	 *
 	 * @param sinhVienId int sinh viên id
+	 * @param hocKyId int học kỳ id
 	 * @return List<Diem> Danh sách điểm
 	 */
-	List<Diem> getDiemBySinhVienId(int sinhVienId);
+	List<Diem> getDiemBySinhVienId(int sinhVienId, int hocKyId);
 
 	/**
 	 * Thêm điểm

@@ -89,14 +89,14 @@
 					Giới tính
 					<select name="gioitinh">
 						<c:choose>
-							<c:when test="${gioitinh eq -1}" >
-								<option value="-1" SELECTED>
+							<c:when test="${gioitinh eq 0}" >
+								<option value="-1">
 									Chọn giới tính
 								</option>
 								<option value="1">
 									Nam
 								</option>
-								<option value="0">
+								<option value="0" SELECTED>
 									Nữ
 								</option>
 							</c:when>
@@ -112,13 +112,13 @@
 								</option>
 							</c:when>
 							<c:otherwise>
-								<option value="-1">
+								<option value="-1" SELECTED>
 									Chọn giới tính
 								</option>
 								<option value="1">
 									Nam
 								</option>
-								<option value="0" SELECTED>
+								<option value="0">
 									Nữ
 								</option>
 							</c:otherwise>

@@ -408,4 +408,24 @@
     <servlet-name>DiemController</servlet-name>
     <url-pattern>/Diem.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HocKyServicesController</display-name>
+    <servlet-name>HocKyServicesController</servlet-name>
+    <servlet-class>managestudent.controller.HocKyServicesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HocKyServicesController</servlet-name>
+    <url-pattern>/HocKyServices.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddDiemServicesController</display-name>
+    <servlet-name>AddDiemServicesController</servlet-name>
+    <servlet-class>managestudent.controller.AddDiemServicesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDiemServicesController</servlet-name>
+    <url-pattern>/AddDiemServices.do</url-pattern>
+  </servlet-mapping>
 </web-app>

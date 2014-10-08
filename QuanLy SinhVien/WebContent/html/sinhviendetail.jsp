@@ -270,7 +270,7 @@
 					<c:out value="${sinhvien.diemDauVao3}" />
 				</td>
 				<td>
-					<a href="">Xem chi tiết điểm của sinh viên này</a>
+					<a href="Diem.do?svid=${sinhvien.sinhVienId}">QUẢN LÝ ĐIỂM SINH VIÊN</a>
 				</td>
 			</tr>
 		</table>

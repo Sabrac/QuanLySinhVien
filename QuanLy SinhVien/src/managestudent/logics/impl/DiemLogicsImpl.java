@@ -45,9 +45,9 @@ public class DiemLogicsImpl implements DiemLogics {
 	 * @see managestudent.logics.DiemLogics#getDiemBySinhVienId(int)
 	 */
 	@Override
-	public List<Diem> getDiemBySinhVienId(int sinhVienId) {
+	public List<Diem> getDiemBySinhVienId(int sinhVienId, int hocKyId) {
 		DiemDaoImpl diemDao = new DiemDaoImpl();
-		List<Diem> lsDiem = diemDao.getDiemBySinhVienId(sinhVienId);
+		List<Diem> lsDiem = diemDao.getDiemBySinhVienId(sinhVienId, hocKyId);
 
 		return lsDiem;
 	}
