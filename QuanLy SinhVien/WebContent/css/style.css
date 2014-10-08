@@ -2159,3 +2159,9 @@ h1.mark-title {
 .mT20 {
 	margin-top: 20px;
 }
+.btn-delete {
+	width: 24px;
+	height: 24px;
+	display: block;
+	background: url('../images/icon/delete-icon.jpg') no-repeat;
+}

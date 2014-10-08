@@ -282,6 +282,7 @@
 		    <th width="144" bgcolor="#CCCCCC">Điểm giữa kỳ</th>
 		    <th width="144" bgcolor="#CCCCCC">Điểm thi</th>
 		    <th width="144" bgcolor="#CCCCCC">Tổng kết</th>
+		    <th width="30" bgcolor="#CCCCCC"></th>
 		  </tr>
 		  	<c:choose>
 			    <c:when test="${diemcount <= 0}">
@@ -303,6 +304,9 @@
 					    </td>
 					    <td>
 					    	<span id="tongket" class="diemTBM"><script>document.write(calculateSumary('${diem.diemChuyenCan}', '${diem.diemGiuaKy}', '${diem.diemThi}', '${diem.monHoc.heSoChuyenCan}', '${diem.monHoc.heSoGiuaKy}', '${diem.monHoc.heSoHocKy}'));</script></span>
+					    </td>
+					    <td>
+					    	<span><a class="btn-delete" href="javascript:void(0)"></a></span>
 					    </td>
 			    	</c:forEach>
 		  </tr>
@@ -337,6 +341,9 @@
 			</td>
 			<td>
 				<span><input id="diemthi" type="text" onkeydown="keyDown()"; name="txtdiemthi" value="" /></span>
+			</td>
+			<td>
+				<span></span>
 			</td>
 			<td>
 				<span></span>
