@@ -73,6 +73,21 @@
 		<input type="hidden" name="id" value="${id}" />
 		<table align="center" class="add-sinhvien">
 			<tr>
+				<td class="pick-image" colspan="2">
+					<span>Ảnh sinh viên</span>
+					<div>
+						<input type="text" name="anhsinhvien" value="${sinhvien.anhSinhVien}" />
+						<input type="button" value="Chọn Ảnh" />
+					</div>
+					<div>
+						<img src="./images/no_img.png" alt=""/>
+					</div>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
 				<td>
 					Mã sinh viên
 					<input type="text" name="masinhvien" value="${sinhvien.maSinhVien}" />
@@ -335,10 +350,7 @@
 					Điểm đầu vào 3
 					<input type="text" name="diemdauvao3" value="${sinhvien.diemDauVao3}" />
 				</td>
-				<td>
-					Ảnh sinh viên
-					<input type="text" name="anhsinhvien" value="${sinhvien.anhSinhVien}" />
-				</td>
+
 			</tr>
 			<tr>
 				<td colspan="2" valign="middle" align="center">

@@ -2165,3 +2165,18 @@ h1.mark-title {
 	display: block;
 	background: url('../images/icon/delete-icon.jpg') no-repeat;
 }
+td.pick-image {
+	width: 390px;
+	margin-left: 95px;
+}
+.pick-image div {
+	float: left;
+}
+.pick-image div input {
+	float: left;
+	margin-top: 20px;
+}
+.pick-image span {
+	display: block;
+	margin: 10px 0 0 -85px;
+}
