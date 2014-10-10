@@ -254,7 +254,7 @@
 		  </tr>
 		  <tr>
 		    <td bgcolor="#CCCCCC">Chuyên ngành</td>
-		    <td>
+		    <td  width="145">
 		    	<span id="tenchuyennganh">
 					${chuyennganh}
 				</span>
@@ -402,14 +402,8 @@
 <script src="../js/cycle.js"></script>
 <script src="../js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
-// Feature slider for graphs
-$('.cycle').cycle({
-	fx: "scrollHorz",
-	timeout: 0,
-    slideResize: 0,
-    prev:    '.left-btn',
-    next:    '.right-btn'
-});
+	var contentHeight = $('.content').height();
+	$('.left-menu').css('height', contentHeight);
 </script>
 </body>
 </html>
