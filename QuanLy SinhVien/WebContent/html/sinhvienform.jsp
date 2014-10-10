@@ -10,6 +10,7 @@
 	<meta charset="utf-8">
 	<title>Retina Dashboard</title>
 	<link rel="stylesheet" href="css/style.css" media="all" />
+	<script src="js/jquery.ajaxfileupload.js"></script>
 	<script>
 		function redirect(dmName) {
 			window.location.href = "ListDM.do?name=" + dmName;
@@ -32,6 +33,30 @@
 	function showDate(date) {
 		alert('The date chosen is ' + date);
 	}
+
+	$(document).ready(function(){
+		$('#fileUpload').ajaxfileupload({
+			'action': 'UploadFile.do',
+			'onComplete': function(response) {
+				$('#upload').hide();
+				alert("File SAVED!!");
+			},
+			'onStart': function() {
+				$('#upload').show();
+			}
+		});
+	});
+
+	function imagepreview(input) {
+		if (input.files && input.files[0]) {
+			var filerdr = new FileReader();
+
+			filerdr.onload = function(e) {
+				$('#imageUpload').attr('src', e.target.result);
+			}
+			filerdr.readAsDataURL(input.files[0]);
+		}
+	}
 </script>
 </head>
 <body>
@@ -51,7 +76,6 @@
 </section>
 </div>
 <jsp:include page="left-menu.jsp"></jsp:include>
-
 <section class="content">
 	<section class="widget">
 		<header>
@@ -76,11 +100,17 @@
 				<td class="pick-image" colspan="2">
 					<span>Ảnh sinh viên</span>
 					<div>
-						<input type="text" name="anhsinhvien" value="${sinhvien.anhSinhVien}" />
-						<input type="button" value="Chọn Ảnh" />
+						<input id="fileUpload" onchange="imagepreview(this)" type="file" name="anhsinhvien" value="" />
 					</div>
 					<div>
-						<img src="./images/no_img.png" alt=""/>
+					<c:choose>
+						<c:when test="${sinhvien.anhSinhVien eq 'img' || sinhvien.anhSinhVien eq '' || sinhvien.anhSinhVien == null}">
+							<img id="imageUpload" src="./images/no_img.png" alt=""/>
+						</c:when>
+						<c:otherwise>
+							<img id="imageUpload" src="${sinhvien.anhSinhVien}" alt=""/>
+						</c:otherwise>
+					</c:choose>
 					</div>
 				</td>
 				<td></td>

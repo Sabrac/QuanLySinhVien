@@ -2180,3 +2180,8 @@ td.pick-image {
 	display: block;
 	margin: 10px 0 0 -85px;
 }
+img#imageUpload {
+	width: 100px;
+	height: 100px;
+	margin-left: 20px;
+}
