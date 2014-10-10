@@ -515,6 +515,20 @@
 					<td>
 						<input type="button" name="btnBack" value="Trở Về" onclick="window.history.back()" />
 					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<select>
+						  <option value="volvo">Chọn Thông tin cần xuất</option>
+						  <option value="saab">Value</option>
+						  <option value="mercedes">Value</option>
+						  <option value="audi">Value</option>
+						</select>
+					</td>
+					<td>
+						<input type="button" name="btnBack" value="In ra" onclick="window.history.back()" />
+					</td>
 				</tr>
 			</table>
 		</div>
