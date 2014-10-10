@@ -23,9 +23,9 @@ public class DiemLogicsImpl implements DiemLogics {
 	 * @see managestudent.logics.DiemLogics#addDiem(managestudent.entities.Diem)
 	 */
 	@Override
-	public boolean addDiem(Diem diem) {
+	public int addDiem(Diem diem) {
 		DiemDaoImpl diemDao = new DiemDaoImpl();
-		boolean rs = diemDao.addDiem(diem);
+		int rs = diemDao.addDiem(diem);
 
 		return rs;
 	}

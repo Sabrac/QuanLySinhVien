@@ -29,9 +29,9 @@ public interface DiemDao extends BaseDao {
 	 * Thêm điểm
 	 *
 	 * @param diem Diem đối tượng điểm
-	 * @return true: thành công / false: thất bại
+	 * @return int > 0: success / < 0: fail
 	 */
-	boolean addDiem(Diem diem);
+	int addDiem(Diem diem);
 
 	/**
 	 * Cập nhật thông tin điểm bằng điểm id

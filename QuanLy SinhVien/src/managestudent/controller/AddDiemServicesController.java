@@ -46,6 +46,69 @@ public class AddDiemServicesController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("action") != null) {
+			String action = request.getParameter("action");
+			if("add".equals(action)) {
+				doAdd(request, response);
+			} else {
+				doDelete(request, response);
+			}
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
+		if(request.getParameter("diemId") != null && request.getParameter("hockyid") != null && request.getParameter("sinhvienid") != null) {
+			try {
+				float diemTBHK = 0.0f;
+				float diemTK = 0.0f;
+				int diemId = Integer.parseInt(request.getParameter("diemId"));
+				int hocKyId = Integer.parseInt(request.getParameter("hockyid"));
+				int sinhVienId = Integer.parseInt(request.getParameter("sinhvienid"));
+
+				DiemLogicsImpl diemLogics = new DiemLogicsImpl();
+				HocKyLogicsImpl hocKyLogics = new HocKyLogicsImpl();
+
+				StringBuilder json = new StringBuilder();
+				if(diemLogics.deleteDiemById(diemId)) {
+					List<HocKy> lsHocKy = hocKyLogics.getAllHocKy(new HocKy(), 0, hocKyLogics.getTotalRecords(new HocKy()), 1, "ASC");
+					List<Diem> lsDiem = new ArrayList<Diem>();
+
+					for (HocKy hocKy : lsHocKy) {
+						lsDiem = diemLogics.getDiemBySinhVienId(sinhVienId, hocKy.getHocKyId());
+						if(hocKy.getHocKyId() == hocKyId) {
+							diemTBHK = Common.getDiemTBHK(lsDiem);
+							diemTK += diemTBHK;
+						} else {
+							diemTK += Common.getDiemTBHK(lsDiem);
+						}
+					}
+					diemTK /= lsHocKy.size();
+
+					json.append("{\"result\": \"success\", \"diemTBHK\": \"");
+					json.append(diemTBHK + "\", \"diemTK\": \"");
+					json.append(diemTK + "\"}");
+				} else {
+					json.append("{\"result\": \"fail\"}");
+				}
+
+				PrintWriter out = response.getWriter();
+				out.println(json);
+			} catch (NumberFormatException e) {
+				System.out.println("An error occur: " + e.getMessage());
+			} catch (IOException e) {
+				System.out.println("An error occur: " + e.getMessage());
+			}
+		}
+	}
+
+	protected void doAdd(HttpServletRequest request, HttpServletResponse response) {
 		if(request.getParameter("monhocid") != null && request.getParameter("hockyid") != null && request.getParameter("diemchuyencan") != null &&
 				request.getParameter("diemgiuaky") != null && request.getParameter("diemthi") != null && request.getParameter("sinhvienid") != null) {
 			try {
@@ -53,6 +116,7 @@ public class AddDiemServicesController extends HttpServlet {
 				String tenNganh = "";
 				float diemTBHK = 0;
 				float diemTK = 0;
+				int insertedDiemId = -1;
 				int monHocId = Integer.parseInt(request.getParameter("monhocid"));
 				int hocKyId = Integer.parseInt(request.getParameter("hockyid"));
 				int sinhVienId = Integer.parseInt(request.getParameter("sinhvienid"));
@@ -103,7 +167,7 @@ public class AddDiemServicesController extends HttpServlet {
 				diemTK /= lsHocKy.size();
 
 				StringBuilder json = new StringBuilder();
-				if (diemLogics.addDiem(diem)) {
+				if ((insertedDiemId = diemLogics.addDiem(diem)) > 0) {
 					sinhVienLogics.updateChuyenNganhSinhVien(sinhVienId, diem.getMonHoc().getChuyenNganhId());
 					json.append("{\"tenMonHoc\": \"");
 					json.append(monHoc.getTenMonHoc() + "\", \"hscc\": \"");
@@ -113,22 +177,17 @@ public class AddDiemServicesController extends HttpServlet {
 					json.append(tenChuyenNganh + "\", \"tenNganh\": \"");
 					json.append(tenNganh + "\", \"diemTBHK\": \"");
 					json.append(diemTBHK + "\", \"diemTK\": \"");
-					json.append(diemTK + "\"}");
+					json.append(diemTK + "\", \"insertedId\" : \"");
+					json.append(insertedDiemId + "\"}");
 				}
 
 				PrintWriter out = response.getWriter();
 				out.println(json);
 			} catch (NumberFormatException e) {
 				System.out.println("An error occur: " + e.getMessage());
+			} catch (IOException e) {
+				System.out.println("An error occur: " + e.getMessage());
 			}
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }

@@ -78,6 +78,8 @@ public class HocKyServicesController extends HttpServlet {
 					json.append(diem.getMonHoc().getHeSoGiuaKy());
 					json.append("\",\"hshk\": \"");
 					json.append(diem.getMonHoc().getHeSoHocKy());
+					json.append("\", \"diemId\": \"");
+					json.append(diem.getDiemId());
 					json.append("\"}");
 				}
 				json.append("]");

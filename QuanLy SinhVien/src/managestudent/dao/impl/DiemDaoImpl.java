@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import managestudent.dao.DiemDao;
 import managestudent.entities.Diem;
 import managestudent.entities.MonHoc;
@@ -25,8 +27,8 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 	 * @see managestudent.dao.DiemDao#addDiem(managestudent.entities.Diem)
 	 */
 	@Override
-	public boolean addDiem(Diem diem) {
-		boolean result = false;
+	public int addDiem(Diem diem) {
+		int result = -1;
 
 		if(connectToDB()) {
 			try {
@@ -38,7 +40,7 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 				sqlCommand.append("VALUES");
 				sqlCommand.append("(?, ?, ?, ?, ?, ?, ?)");
 
-				preparedStatement = connection.prepareStatement(sqlCommand.toString());
+				preparedStatement = connection.prepareStatement(sqlCommand.toString(), Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, diem.getMonHocId());
 				preparedStatement.setString(2, diem.getLanThi());
 				preparedStatement.setFloat(3, diem.getDiemThi());
@@ -49,11 +51,16 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 				int count = preparedStatement.executeUpdate();
 
 				if(count > 0) {
-					result = true;
+					rs =  preparedStatement.getGeneratedKeys();
+					if(rs != null) {
+						while(rs.next()) {
+							result = rs.getInt(1);
+						}
+					}
 				}
 			} catch (SQLException e) {
 				System.out.println("An exception occur: " + e.getMessage());
-				result = false;
+				result = -1;
 			}
 			closeConnect();
 		}
@@ -72,7 +79,7 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("SELECT monhoc.monhoc_id, monhoc.tenmonhoc, diem.diemthi, diem.diemchuyencan, diem.diemgiuaky, ");
+				sqlCommand.append("SELECT diem.diem_id, monhoc.monhoc_id, monhoc.tenmonhoc, diem.diemthi, diem.diemchuyencan, diem.diemgiuaky, ");
 				sqlCommand.append("monhoc.hesoChuyenCan, monhoc.hesoGiuaKy, monhoc.hesoHocKy ");
 				sqlCommand.append("FROM diem ");
 				sqlCommand.append("INNER JOIN dmsinhvien ON dmsinhvien.sinhvien_id = diem.sinhvien_id ");
@@ -97,6 +104,7 @@ public class DiemDaoImpl extends BaseDaoImpl implements DiemDao {
 						Diem diem = new Diem();
 						MonHoc monHoc = new MonHoc();
 
+						diem.setDiemId(rs.getInt("diem_id"));
 						diem.setMonHocId(rs.getInt("monhoc_id"));
 						monHoc.setMonHocId(rs.getInt("monhoc_id"));
 						monHoc.setTenMonHoc(rs.getString("tenmonhoc"));

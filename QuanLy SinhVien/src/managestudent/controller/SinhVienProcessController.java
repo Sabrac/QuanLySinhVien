@@ -1,9 +1,8 @@
 package managestudent.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -28,6 +27,7 @@ import managestudent.logics.impl.QuocTichLogicsImpl;
 import managestudent.logics.impl.TonGIaoLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
+import managestudent.utils.Global;
 import managestudent.utils.MessageErrorProperties;
 import managestudent.validates.ValidateInfor;
 
@@ -255,7 +255,9 @@ public class SinhVienProcessController extends HttpServlet {
 				sinhVien.setTen(request.getParameter("ten"));
 			}
 			if(request.getParameter("ngaysinh") != null && request.getParameter("ngaysinh").length() > 0) {
-				sinhVien.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
+				sinhVien.setNgaySinh(Global.ngaySinh);
+				Global.ngaySinh = new Date();
+				//sinhVien.setNgaySinh(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaysinh")));
 			}
 			if(request.getParameter("gioitinh") != null && request.getParameter("gioitinh").length() > 0) {
 				sinhVien.setGioiTinh(Integer.parseInt(request.getParameter("gioitinh")));
@@ -312,7 +314,9 @@ public class SinhVienProcessController extends HttpServlet {
 				sinhVien.setKhoaHocId(Integer.parseInt(request.getParameter("khoahoc")));
 			}
 			if(request.getParameter("ngaynhaphoc") != null && request.getParameter("ngaynhaphoc").length() > 0) {
-				sinhVien.setNgayNhapHoc(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaynhaphoc")));
+				sinhVien.setNgayNhapHoc(Global.ngayNhapHoc);
+				Global.ngayNhapHoc = new Date();
+				//sinhVien.setNgayNhapHoc(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ngaynhaphoc")));
 			}
 			if(request.getParameter("diemdauvao1") != null && request.getParameter("diemdauvao1").length() > 0) {
 				sinhVien.setDiemDauVao1(Float.parseFloat(request.getParameter("diemdauvao1")));
@@ -329,10 +333,6 @@ public class SinhVienProcessController extends HttpServlet {
 		} catch (NumberFormatException e) {
 			System.out.println("An error occur: " + e.getMessage());
 			lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-			request.setAttribute("lsMessage", lsMessage);
-		} catch (ParseException pe) {
-			System.out.println("An error occur: " + pe.getMessage());
-			lsMessage.add(MessageErrorProperties.getMessage("error_025"));
 			request.setAttribute("lsMessage", lsMessage);
 		}
 

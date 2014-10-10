@@ -1886,7 +1886,7 @@ public class DmSinhVienDaoImpl extends BaseDaoImpl implements DmSinhVienDao {
 			try {
 				StringBuilder sqlCommand = new StringBuilder();
 
-				sqlCommand.append("UPDATE dmsinhvien SET ");
+				sqlCommand.append("UPDATE dmsinhvien ");
 				sqlCommand.append("SET masv = ?, hodem = ?, ten = ?, ngaysinh = ?, gioitinh = ?, cmtnd = ?, sodthoai = ?, noisinh = ?, ");
 				sqlCommand.append("quequan = ?, hokhauthuongtru = ?, noiohientai = ?, chedouudai = ?, dantoc_id = ?, tongiao_id = ?, ");
 				sqlCommand.append("quoctich_id = ?, hotenbo = ?, nghenghiepbo = ?, hotenme = ?, nghenghiepme = ?, hedt_id = ?, lop_id = ?, ");

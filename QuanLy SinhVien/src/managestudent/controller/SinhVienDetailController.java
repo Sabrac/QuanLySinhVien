@@ -26,6 +26,7 @@ import managestudent.logics.impl.QuocTichLogicsImpl;
 import managestudent.logics.impl.TonGIaoLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
+import managestudent.utils.Global;
 import managestudent.utils.MessageErrorProperties;
 
 /**
@@ -69,6 +70,8 @@ public class SinhVienDetailController extends HttpServlet {
 					DmSinhVien sinhVien = null;
 
 					if((sinhVien = sinhVienLogics.getSinhVienById(sinhVienId)) != null) {
+						Global.ngayNhapHoc = sinhVien.getNgayNhapHoc();
+						Global.ngaySinh = sinhVien.getNgaySinh();
 						request.getSession().setAttribute("sinhvien", sinhVien);
 						request.setAttribute("id", request.getParameter("id"));
 						request.setAttribute("ref", request.getParameter("ref"));
